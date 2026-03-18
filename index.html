@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AtuAgendaPontual — A agenda para o teu negócio</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700;9..40,800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --blue:#2563eb;--blue2:#1d4ed8;--blue-light:#eff6ff;
+  --green:#16a34a;--green-light:#f0fdf4;
+  --tx:#0f172a;--tx2:#475569;--tx3:#94a3b8;
+  --bd:#e2e8f0;--bg:#ffffff;--bg2:#f8fafc;
+  --gp:linear-gradient(135deg,#2563eb,#1d4ed8);
+  --gp2:linear-gradient(135deg,#1e40af,#1d4ed8,#2563eb);
+}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;color:var(--tx);background:var(--bg);overflow-x:hidden}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(255,255,255,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--bd);padding:0 24px}
+.nav-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:64px}
+.nav-logo{display:flex;align-items:center;gap:10px;font-size:1.2rem;font-weight:700;color:var(--tx);text-decoration:none}
+.nav-logo i{background:var(--gp);-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-size:1.4rem}
+.nav-links{display:flex;align-items:center;gap:8px}
+.nav-link{padding:8px 16px;border-radius:10px;font-size:.9rem;font-weight:500;color:var(--tx2);text-decoration:none;transition:all .2s}
+.nav-link:hover{background:var(--blue-light);color:var(--blue)}
+.nav-cta{padding:9px 20px;background:var(--gp);color:#fff;border-radius:10px;font-size:.9rem;font-weight:600;text-decoration:none;transition:all .2s;box-shadow:0 2px 8px rgba(37,99,235,.3)}
+.nav-cta:hover{transform:translateY(-1px);box-shadow:0 4px 16px rgba(37,99,235,.4)}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;align-items:center;padding:100px 24px 60px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 0%,rgba(37,99,235,.07) 0%,transparent 70%);pointer-events:none}
+.hero-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+.hero-badge{display:inline-flex;align-items:center;gap:6px;background:var(--blue-light);color:var(--blue);padding:6px 14px;border-radius:20px;font-size:.82rem;font-weight:600;margin-bottom:20px;border:1px solid rgba(37,99,235,.2)}
+.hero-title{font-size:3.2rem;font-weight:800;line-height:1.1;letter-spacing:-.03em;margin-bottom:20px;color:var(--tx)}
+.hero-title span{background:var(--gp);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hero-sub{font-size:1.1rem;color:var(--tx2);line-height:1.7;margin-bottom:36px;max-width:480px}
+.hero-btns{display:flex;gap:12px;flex-wrap:wrap}
+.btn-hero-p{display:inline-flex;align-items:center;gap:8px;padding:14px 28px;background:var(--gp);color:#fff;border-radius:12px;font-size:1rem;font-weight:700;text-decoration:none;transition:all .2s;box-shadow:0 4px 20px rgba(37,99,235,.35)}
+.btn-hero-p:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(37,99,235,.4)}
+.btn-hero-g{display:inline-flex;align-items:center;gap:8px;padding:14px 28px;background:#fff;color:var(--tx);border-radius:12px;font-size:1rem;font-weight:600;text-decoration:none;border:2px solid var(--bd);transition:all .2s}
+.btn-hero-g:hover{border-color:var(--blue);color:var(--blue);transform:translateY(-2px)}
+.hero-trust{display:flex;align-items:center;gap:16px;margin-top:28px;font-size:.82rem;color:var(--tx3)}
+.hero-trust-item{display:flex;align-items:center;gap:5px}
+.hero-trust-item i{color:var(--green)}
+
+/* PHONE MOCKUP */
+.phone-wrap{position:relative;display:flex;justify-content:center}
+.phone{width:280px;background:#fff;border-radius:40px;box-shadow:0 32px 80px rgba(0,0,0,.18),0 0 0 2px rgba(0,0,0,.08);overflow:hidden;border:8px solid #1a1a2e;position:relative}
+.phone-notch{width:100px;height:28px;background:#1a1a2e;border-radius:0 0 18px 18px;margin:0 auto;position:relative;z-index:10}
+.phone-screen{background:#f8fafc;min-height:520px}
+.phone-status{background:#fff;padding:8px 16px 6px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #e2e8f0}
+.phone-logo{font-size:.85rem;font-weight:700;color:#1e40af}
+.phone-cal-header{background:linear-gradient(135deg,#2563eb,#1d4ed8);padding:10px 14px 8px;color:#fff}
+.phone-month{font-size:.9rem;font-weight:700}
+.phone-wdays{display:grid;grid-template-columns:repeat(7,1fr);text-align:center;font-size:.58rem;opacity:.8;margin-top:6px;font-weight:600}
+.phone-days{display:grid;grid-template-columns:repeat(7,1fr);gap:3px;padding:8px;background:#fff}
+.pd{height:30px;display:flex;align-items:center;justify-content:center;border-radius:8px;font-size:.72rem;font-weight:500;color:#475569;border:1px solid #e2e8f0;position:relative;cursor:default}
+.pd.tod{background:linear-gradient(135deg,#16a34a,#15803d);color:#fff;border-color:transparent}
+.pd.sel{background:linear-gradient(135deg,#2563eb,#1d4ed8);color:#fff;border-color:transparent}
+.pd-dot{position:absolute;bottom:2px;left:50%;transform:translateX(-50%);width:4px;height:4px;background:#2563eb;border-radius:50%}
+.pd.sel .pd-dot,.pd.tod .pd-dot{background:#fff}
+.phone-appt{margin:0 8px 4px;background:#eff6ff;border-left:3px solid #2563eb;border-radius:8px;padding:7px 8px}
+.phone-appt-name{font-size:.72rem;font-weight:700;color:#1e40af}
+.phone-appt-meta{font-size:.62rem;color:#60a5fa;margin-top:2px}
+.phone-appt-val{font-size:.65rem;font-weight:700;color:#16a34a;float:right;margin-top:-18px}
+.phone-glow{position:absolute;top:-20px;right:-30px;width:200px;height:200px;background:radial-gradient(circle,rgba(37,99,235,.15),transparent 70%);pointer-events:none}
+
+/* FEATURES */
+.features{padding:100px 24px;background:var(--bg2)}
+.section-inner{max-width:1100px;margin:0 auto}
+.section-label{text-align:center;font-size:.82rem;font-weight:700;color:var(--blue);text-transform:uppercase;letter-spacing:.1em;margin-bottom:12px}
+.section-title{text-align:center;font-size:2.4rem;font-weight:800;letter-spacing:-.03em;margin-bottom:14px}
+.section-sub{text-align:center;font-size:1rem;color:var(--tx2);max-width:560px;margin:0 auto 56px;line-height:1.7}
+.features-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.feat-card{background:#fff;border-radius:20px;padding:28px;border:1px solid var(--bd);transition:all .3s;position:relative;overflow:hidden}
+.feat-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(37,99,235,.03),transparent);pointer-events:none}
+.feat-card:hover{transform:translateY(-4px);box-shadow:0 16px 48px rgba(0,0,0,.1);border-color:rgba(37,99,235,.2)}
+.feat-icon{width:48px;height:48px;background:var(--blue-light);border-radius:14px;display:flex;align-items:center;justify-content:center;margin-bottom:16px;font-size:1.3rem}
+.feat-icon i{color:var(--blue)}
+.feat-title{font-size:1rem;font-weight:700;margin-bottom:8px}
+.feat-desc{font-size:.88rem;color:var(--tx2);line-height:1.65}
+
+/* PRICING */
+.pricing{padding:100px 24px;background:#fff}
+.price-card{max-width:460px;margin:0 auto;background:#fff;border-radius:28px;padding:48px;border:2px solid var(--blue);box-shadow:0 20px 60px rgba(37,99,235,.12);position:relative;overflow:hidden;text-align:center}
+.price-card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:var(--gp)}
+.price-badge{display:inline-block;background:var(--gp);color:#fff;padding:5px 14px;border-radius:20px;font-size:.78rem;font-weight:700;margin-bottom:20px}
+.price-amount{font-size:5rem;font-weight:800;letter-spacing:-.04em;background:var(--gp);-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1}
+.price-once{font-size:.95rem;color:var(--tx2);margin:6px 0 28px;font-weight:500}
+.price-features{text-align:left;margin-bottom:32px;display:flex;flex-direction:column;gap:12px}
+.pf{display:flex;align-items:center;gap:10px;font-size:.9rem}
+.pf i{color:var(--green);font-size:.9rem;flex-shrink:0}
+.btn-price{display:block;padding:16px;background:var(--gp);color:#fff;border-radius:14px;font-size:1rem;font-weight:700;text-decoration:none;transition:all .2s;box-shadow:0 4px 20px rgba(37,99,235,.3)}
+.btn-price:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(37,99,235,.4)}
+.price-note{font-size:.78rem;color:var(--tx3);margin-top:14px}
+
+/* HOW */
+.how{padding:100px 24px;background:var(--bg2)}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:32px;margin-top:56px;position:relative}
+.steps::before{content:'';position:absolute;top:32px;left:12%;right:12%;height:2px;background:linear-gradient(90deg,var(--blue),rgba(37,99,235,.2));z-index:0}
+.step{text-align:center;position:relative;z-index:1}
+.step-num{width:64px;height:64px;background:var(--gp);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.4rem;font-weight:800;margin:0 auto 16px;box-shadow:0 4px 20px rgba(37,99,235,.3)}
+.step-title{font-size:.95rem;font-weight:700;margin-bottom:6px}
+.step-desc{font-size:.82rem;color:var(--tx2);line-height:1.6}
+
+/* TESTIMONIAL */
+.testimonials{padding:100px 24px;background:#fff}
+.test-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:56px}
+.test-card{background:var(--bg2);border-radius:20px;padding:28px;border:1px solid var(--bd)}
+.test-stars{color:#f59e0b;font-size:.9rem;margin-bottom:12px}
+.test-text{font-size:.9rem;color:var(--tx);line-height:1.7;margin-bottom:16px;font-style:italic}
+.test-author{display:flex;align-items:center;gap:10px}
+.test-avatar{width:38px;height:38px;border-radius:50%;background:var(--gp);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.9rem;flex-shrink:0}
+.test-name{font-weight:700;font-size:.88rem}
+.test-job{font-size:.78rem;color:var(--tx3)}
+
+/* FAQ */
+.faq{padding:100px 24px;background:var(--bg2)}
+.faq-list{max-width:700px;margin:48px auto 0;display:flex;flex-direction:column;gap:12px}
+.faq-item{background:#fff;border-radius:14px;border:1px solid var(--bd);overflow:hidden}
+.faq-q{padding:18px 20px;font-weight:600;font-size:.95rem;cursor:pointer;display:flex;justify-content:space-between;align-items:center;transition:background .2s}
+.faq-q:hover{background:var(--blue-light)}
+.faq-q i{color:var(--tx3);font-size:.8rem;transition:transform .3s}
+.faq-item.open .faq-q i{transform:rotate(180deg)}
+.faq-a{padding:0 20px 18px;font-size:.88rem;color:var(--tx2);line-height:1.7;display:none}
+.faq-item.open .faq-a{display:block}
+
+/* CTA */
+.cta-section{padding:100px 24px;background:var(--gp2);color:#fff;text-align:center;position:relative;overflow:hidden}
+.cta-section::before{content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");pointer-events:none}
+.cta-title{font-size:2.8rem;font-weight:800;letter-spacing:-.03em;margin-bottom:14px;position:relative}
+.cta-sub{font-size:1.1rem;opacity:.85;margin-bottom:40px;max-width:500px;margin-left:auto;margin-right:auto;line-height:1.7;position:relative}
+.btn-cta{display:inline-flex;align-items:center;gap:8px;padding:16px 36px;background:#fff;color:var(--blue);border-radius:14px;font-size:1rem;font-weight:700;text-decoration:none;transition:all .2s;box-shadow:0 4px 20px rgba(0,0,0,.2);position:relative}
+.btn-cta:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(0,0,0,.25)}
+
+/* FOOTER */
+footer{padding:40px 24px;background:#0f172a;color:#94a3b8;text-align:center}
+.footer-logo{font-size:1.1rem;font-weight:700;color:#fff;margin-bottom:8px;display:flex;align-items:center;justify-content:center;gap:8px}
+.footer-logo i{background:var(--gp);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.footer-links{display:flex;justify-content:center;gap:24px;margin:16px 0;flex-wrap:wrap}
+.footer-links a{color:#94a3b8;text-decoration:none;font-size:.85rem;transition:color .2s}
+.footer-links a:hover{color:#fff}
+.footer-copy{font-size:.78rem;opacity:.6;margin-top:8px}
+
+/* PLAY BADGE */
+.play-badge{display:inline-flex;align-items:center;gap:10px;background:#000;color:#fff;padding:10px 20px;border-radius:12px;text-decoration:none;transition:all .2s;border:1px solid rgba(255,255,255,.1)}
+.play-badge:hover{background:#1a1a1a;transform:translateY(-1px)}
+.play-badge i{font-size:1.6rem}
+.play-badge-txt{text-align:left}
+.play-badge-txt small{display:block;font-size:.6rem;opacity:.7;text-transform:uppercase;letter-spacing:.05em}
+.play-badge-txt span{font-size:.9rem;font-weight:700}
+
+@media(max-width:768px){
+  .hero-inner{grid-template-columns:1fr;gap:40px}
+  .phone-wrap{order:-1}
+  .hero-title{font-size:2.2rem}
+  .features-grid,.test-grid{grid-template-columns:1fr}
+  .steps{grid-template-columns:repeat(2,1fr)}
+  .steps::before{display:none}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a class="nav-logo" href="#">
+      <i class="fas fa-calendar-check"></i>
+      AtuAgendaPontual
+    </a>
+    <div class="nav-links">
+      <a class="nav-link" href="#features">Funcionalidades</a>
+      <a class="nav-link" href="#pricing">Preço</a>
+      <a class="nav-link" href="#faq">FAQ</a>
+      <a class="nav-cta" href="#pricing"><i class="fas fa-download"></i> Descarregar</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div>
+      <div class="hero-badge"><i class="fas fa-star"></i> A agenda para profissionais portugueses</div>
+      <h1 class="hero-title">Gere o teu negócio com <span>precisão e conforto</span></h1>
+      <p class="hero-sub">A AtuAgendaPontual é uma app Android para quem vive de agendamentos — cabeleireiros, esteticistas, personal trainers, e muito mais. Tudo num só lugar, sempre a funcionar.</p>
+      <div class="hero-btns">
+        <a class="btn-hero-p" href="#pricing"><i class="fas fa-download"></i> Descarregar na Play Store</a>
+        <a class="btn-hero-g" href="#features"><i class="fas fa-play-circle"></i> Ver funcionalidades</a>
+      </div>
+      <div class="hero-trust">
+        <div class="hero-trust-item"><i class="fas fa-check-circle"></i> Pagamento único</div>
+        <div class="hero-trust-item"><i class="fas fa-check-circle"></i> Sem subscrições</div>
+        <div class="hero-trust-item"><i class="fas fa-check-circle"></i> Dados na cloud</div>
+      </div>
+    </div>
+    <div class="phone-wrap">
+      <div class="phone-glow"></div>
+      <div class="phone">
+        <div class="phone-notch"></div>
+        <div class="phone-screen">
+          <div class="phone-status">
+            <span class="phone-logo"><i class="fas fa-calendar-check" style="color:#2563eb"></i> AtuAgendaPontual</span>
+            <span style="font-size:.6rem;color:#94a3b8">18 Mar</span>
+          </div>
+          <div class="phone-cal-header">
+            <div class="phone-month">Março 2026</div>
+            <div class="phone-wdays"><div>D</div><div>S</div><div>T</div><div>Q</div><div>Q</div><div>S</div><div>S</div></div>
+          </div>
+          <div class="phone-days">
+            <div class="pd" style="opacity:.3"></div><div class="pd" style="opacity:.3"></div><div class="pd" style="opacity:.3"></div><div class="pd" style="opacity:.3"></div><div class="pd" style="opacity:.3"></div><div class="pd" style="opacity:.3"></div><div class="pd">1</div>
+            <div class="pd">2</div><div class="pd">3</div><div class="pd">4</div><div class="pd">5</div><div class="pd">6</div><div class="pd">7</div><div class="pd">8<div class="pd-dot"></div></div>
+            <div class="pd">9</div><div class="pd">10</div><div class="pd">11<div class="pd-dot"></div></div><div class="pd">12</div><div class="pd">13</div><div class="pd">14</div><div class="pd">15</div>
+            <div class="pd">16</div><div class="pd">17</div><div class="pd tod">18</div><div class="pd sel">19<div class="pd-dot"></div></div><div class="pd">20</div><div class="pd">21</div><div class="pd">22<div class="pd-dot"></div></div>
+          </div>
+          <div style="padding:6px 8px 4px;font-size:.65rem;font-weight:700;color:#475569;text-transform:uppercase;letter-spacing:.05em">Quarta, 19 Março</div>
+          <div class="phone-appt">
+            <div class="phone-appt-name">Ana Silva</div>
+            <div class="phone-appt-meta"><i class="far fa-clock"></i> 09:00–10:00 · Extensão de Gel</div>
+            <div class="phone-appt-val">35,00€</div>
+          </div>
+          <div class="phone-appt" style="background:#f0fdf4;border-color:#16a34a">
+            <div class="phone-appt-name" style="color:#15803d">Joana Costa</div>
+            <div class="phone-appt-meta" style="color:#4ade80"><i class="far fa-clock"></i> 11:00–12:00 · Verniz de Gel</div>
+            <div class="phone-appt-val">20,00€</div>
+          </div>
+          <div class="phone-appt">
+            <div class="phone-appt-name">Maria Santos</div>
+            <div class="phone-appt-meta"><i class="far fa-clock"></i> 14:30–16:00 · Manutenção</div>
+            <div class="phone-appt-val">28,00€</div>
+          </div>
+          <div style="text-align:right;padding:6px 12px;font-size:.72rem;font-weight:700;color:#16a34a">Total: 83,00 €</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="features" id="features">
+  <div class="section-inner">
+    <div class="section-label">Funcionalidades</div>
+    <h2 class="section-title">Tudo o que precisas, nada do que não precisas</h2>
+    <p class="section-sub">Desenvolvida por profissionais, para profissionais. Simples, rápida e sem distrações.</p>
+    <div class="features-grid">
+      <div class="feat-card">
+        <div class="feat-icon"><i class="fas fa-calendar-alt"></i></div>
+        <div class="feat-title">Calendário mensal completo</div>
+        <div class="feat-desc">Visualiza todos os teus compromissos num calendário intuitivo. Feriados portugueses incluídos automaticamente.</div>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon"><i class="fas fa-clock"></i></div>
+        <div class="feat-title">Agenda horária detalhada</div>
+        <div class="feat-desc">Grelha hora a hora com deteção automática de sobreposições. Adiciona compromissos tocando num slot livre.</div>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon"><i class="fas fa-users"></i></div>
+        <div class="feat-title">Histórico de clientes</div>
+        <div class="feat-desc">Regista notas, alergias e preferências por cliente. Vê o historial completo de visitas e faturação.</div>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon"><i class="fas fa-layer-group"></i></div>
+        <div class="feat-title">Serviços personalizáveis</div>
+        <div class="feat-desc">Cria e gere os teus próprios serviços. Associa serviços a compromissos com chips coloridos.</div>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon"><i class="fas fa-chart-bar"></i></div>
+        <div class="feat-title">Balanço anual</div>
+        <div class="feat-desc">Acompanha a tua faturação mês a mês. Exporta relatórios em PDF ou texto para partilhar com o teu contabilista.</div>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon"><i class="fas fa-cloud"></i></div>
+        <div class="feat-title">Backup automático na cloud</div>
+        <div class="feat-desc">Os teus dados ficam guardados em segurança no Firebase. Nunca perdes informação, mesmo que mudes de telemóvel.</div>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon"><i class="fas fa-search"></i></div>
+        <div class="feat-title">Pesquisa rápida</div>
+        <div class="feat-desc">Encontra qualquer cliente instantaneamente. Acede ao histórico e agenda nova visita com um toque.</div>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon"><i class="fas fa-moon"></i></div>
+        <div class="feat-title">Modo escuro</div>
+        <div class="feat-desc">Interface adaptada ao teu ambiente. Alterna entre modo claro e escuro com um toque.</div>
+      </div>
+      <div class="feat-card">
+        <div class="feat-icon"><i class="fas fa-mobile-alt"></i></div>
+        <div class="feat-title">Feita para Android</div>
+        <div class="feat-desc">Interface fluida e responsiva. Teclado numérico nativo para inserir horas rapidamente.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how" id="how">
+  <div class="section-inner">
+    <div class="section-label">Como funciona</div>
+    <h2 class="section-title">Em 4 passos simples</h2>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-title">Descarrega a app</div>
+        <div class="step-desc">Disponível na Google Play Store para Android.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-title">Cria a tua conta</div>
+        <div class="step-desc">Registo simples com email e palavra-passe.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-title">Configura os serviços</div>
+        <div class="step-desc">Adiciona os teus serviços e começa a agendar.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-title">Gere o teu negócio</div>
+        <div class="step-desc">Agenda, fatura e analisa — tudo numa app.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing" id="pricing">
+  <div class="section-inner">
+    <div class="section-label">Preço</div>
+    <h2 class="section-title">Sem surpresas, sem subscrições</h2>
+    <p class="section-sub">Paga uma vez, usa para sempre. Sem mensalidades, sem limites.</p>
+    <div class="price-card">
+      <div class="price-badge">⚡ Acesso completo</div>
+      <div class="price-amount">9<span style="font-size:2.5rem">,99€</span></div>
+      <div class="price-once">pagamento único · acesso vitalício</div>
+      <div class="price-features">
+        <div class="pf"><i class="fas fa-check-circle"></i> Agendamentos ilimitados</div>
+        <div class="pf"><i class="fas fa-check-circle"></i> Backup automático na cloud (Firebase)</div>
+        <div class="pf"><i class="fas fa-check-circle"></i> Histórico completo de clientes</div>
+        <div class="pf"><i class="fas fa-check-circle"></i> Balanço anual com exportação PDF</div>
+        <div class="pf"><i class="fas fa-check-circle"></i> Serviços personalizáveis</div>
+        <div class="pf"><i class="fas fa-check-circle"></i> Pesquisa avançada de clientes</div>
+        <div class="pf"><i class="fas fa-check-circle"></i> Modo escuro</div>
+        <div class="pf"><i class="fas fa-check-circle"></i> Atualizações futuras incluídas</div>
+      </div>
+      <a class="btn-price" href="#"><i class="fab fa-google-play"></i> Comprar na Google Play — 2,99€</a>
+      <div class="price-note">Processado com segurança pela Google Play. Reembolso em 48h se não ficares satisfeito.</div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials" id="reviews">
+  <div class="section-inner">
+    <div class="section-label">Avaliações</div>
+    <h2 class="section-title">O que dizem os utilizadores</h2>
+    <div class="test-grid">
+      <div class="test-card">
+        <div class="test-stars">★★★★★</div>
+        <div class="test-text">"Finalmente uma agenda que funciona como eu preciso. Simples, rápida e os dados ficam todos guardados. Vale cada cêntimo."</div>
+        <div class="test-author">
+          <div class="test-avatar">CS</div>
+          <div><div class="test-name">Catarina S.</div><div class="test-job">Esteticista · Porto</div></div>
+        </div>
+      </div>
+      <div class="test-card">
+        <div class="test-stars">★★★★★</div>
+        <div class="test-text">"Uso todos os dias no meu salão. O balanço mensal ajuda-me a perceber quanto faturei sem ter de calcular manualmente."</div>
+        <div class="test-author">
+          <div class="test-avatar">MR</div>
+          <div><div class="test-name">Miguel R.</div><div class="test-job">Cabeleireiro · Lisboa</div></div>
+        </div>
+      </div>
+      <div class="test-card">
+        <div class="test-stars">★★★★★</div>
+        <div class="test-text">"O histórico de clientes é incrível. Sei sempre o que cada cliente pediu na última visita. Super profissional."</div>
+        <div class="test-author">
+          <div class="test-avatar">AF</div>
+          <div><div class="test-name">Ana F.</div><div class="test-job">Personal Trainer · Braga</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq" id="faq">
+  <div class="section-inner">
+    <div class="section-label">Perguntas frequentes</div>
+    <h2 class="section-title">Tens dúvidas?</h2>
+    <div class="faq-list">
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">O que acontece aos meus dados se mudar de telemóvel? <i class="fas fa-chevron-down"></i></div>
+        <div class="faq-a">Os teus dados ficam guardados na cloud (Firebase). Basta fazer login com o teu email na app num telemóvel novo e tudo volta automaticamente.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">A app funciona sem internet? <i class="fas fa-chevron-down"></i></div>
+        <div class="faq-a">Sim! Podes consultar e adicionar compromissos offline. Os dados sincronizam automaticamente quando voltares a ter ligação.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">Posso usar a app em vários dispositivos? <i class="fas fa-chevron-down"></i></div>
+        <div class="faq-a">Sim. Como os dados ficam na cloud, podes usar a mesma conta em vários telemóveis Android e os dados ficam sempre sincronizados.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">Há alguma taxa mensal ou anual? <i class="fas fa-chevron-down"></i></div>
+        <div class="faq-a">Não. O pagamento é único de 2,99€ e inclui todas as funcionalidades e atualizações futuras para sempre.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">Para que tipo de negócios funciona? <i class="fas fa-chevron-down"></i></div>
+        <div class="faq-a">A AtuAgendaPontual foi desenhada para qualquer negócio baseado em agendamentos: cabeleireiros, esteticistas, spas, personal trainers, fotógrafos, massagistas, e muito mais.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">Posso obter reembolso? <i class="fas fa-chevron-down"></i></div>
+        <div class="faq-a">A Google Play oferece reembolso automático nas primeiras 48 horas após a compra. Após esse período, podes contactar o suporte.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <h2 class="cta-title">Pronto para organizar o teu negócio?</h2>
+  <p class="cta-sub">Junta-te a centenas de profissionais que já usam a AtuAgendaPontual todos os dias.</p>
+  <a class="btn-cta" href="#"><i class="fab fa-google-play"></i> Descarregar agora — 2,99€</a>
+  <div style="margin-top:16px;font-size:.82rem;opacity:.7">Pagamento único · Sem subscrições · Atualizações incluídas</div>
+</section>
+
+<footer>
+  <div class="footer-logo"><i class="fas fa-calendar-check"></i> AtuAgendaPontual</div>
+  <div class="footer-links">
+    <a href="#">Política de Privacidade</a>
+    <a href="#">Termos de Uso</a>
+    <a href="#">Suporte</a>
+    <a href="mailto:atuagendapontual@gmail.com">atuagendapontual@gmail.com</a>
+  </div>
+  <div class="footer-copy">© 2026 AtuAgendaPontual · Feito em Portugal 🇵🇹</div>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+function toggleFaq(el){
+  const item=el.parentElement;
+  item.classList.toggle('open');
+}
+// Smooth nav highlight
+const sections=document.querySelectorAll('section[id]');
+const navLinks=document.querySelectorAll('.nav-link');
+window.addEventListener('scroll',()=>{
+  let current='';
+  sections.forEach(s=>{if(window.scroll

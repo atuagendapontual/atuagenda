@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guia de Publicação — AtuAgendaPontual</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'DM Sans',sans-serif;background:#f8fafc;color:#0f172a;line-height:1.7}
+.wrap{max-width:860px;margin:0 auto;padding:40px 24px 80px}
+h1{font-size:2rem;font-weight:800;letter-spacing:-.03em;margin-bottom:6px}
+.subtitle{color:#64748b;margin-bottom:40px;font-size:.95rem}
+.phase{background:#fff;border:1px solid #e2e8f0;border-radius:20px;padding:28px;margin-bottom:24px;position:relative}
+.phase-header{display:flex;align-items:center;gap:14px;margin-bottom:20px;padding-bottom:16px;border-bottom:2px solid #e2e8f0}
+.phase-num{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:1.1rem;flex-shrink:0;color:#fff}
+.ph-blue{background:linear-gradient(135deg,#2563eb,#1d4ed8)}
+.ph-green{background:linear-gradient(135deg,#16a34a,#15803d)}
+.ph-purple{background:linear-gradient(135deg,#7c3aed,#6d28d9)}
+.ph-orange{background:linear-gradient(135deg,#ea580c,#c2410c)}
+.ph-teal{background:linear-gradient(135deg,#0d9488,#0f766e)}
+.phase-title{font-size:1.15rem;font-weight:700}
+.phase-sub{font-size:.82rem;color:#64748b;margin-top:2px}
+.step{display:flex;gap:14px;margin-bottom:16px;padding-bottom:16px;border-bottom:1px solid #f1f5f9}
+.step:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
+.step-num{width:28px;height:28px;border-radius:50%;background:#eff6ff;color:#2563eb;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.82rem;flex-shrink:0;margin-top:2px}
+.step-content{}
+.step-title{font-weight:600;font-size:.92rem;margin-bottom:3px}
+.step-desc{font-size:.85rem;color:#475569;line-height:1.6}
+.step-desc a{color:#2563eb;font-weight:600}
+.step-desc code{background:#f1f5f9;padding:1px 6px;border-radius:4px;font-family:monospace;font-size:.82rem;color:#1e40af}
+.tip{background:#fefce8;border:1px solid #fde68a;border-radius:10px;padding:10px 14px;font-size:.83rem;color:#92400e;margin-top:8px}
+.tip i{margin-right:4px}
+.warn{background:#fef2f2;border:1px solid #fecaca;border-radius:10px;padding:10px 14px;font-size:.83rem;color:#991b1b;margin-top:8px}
+.success{background:#f0fdf4;border:1px solid #bbf7d0;border-radius:10px;padding:10px 14px;font-size:.83rem;color:#166534;margin-top:8px}
+.cost-table{width:100%;border-collapse:collapse;margin-top:12px;font-size:.88rem}
+.cost-table th{text-align:left;padding:8px 12px;background:#f8fafc;font-weight:600;border-bottom:2px solid #e2e8f0}
+.cost-table td{padding:8px 12px;border-bottom:1px solid #f1f5f9}
+.cost-free{color:#16a34a;font-weight:600}
+.cost-paid{color:#dc2626;font-weight:600}
+.checklist{list-style:none;display:flex;flex-direction:column;gap:8px;margin-top:12px}
+.checklist li{display:flex;align-items:center;gap:10px;font-size:.88rem}
+.checklist li::before{content:'☐';font-size:1.1rem;color:#64748b;flex-shrink:0}
+.checklist li.done::before{content:'☑';color:#16a34a}
+.badge{display:inline-block;padding:2px 10px;border-radius:20px;font-size:.72rem;font-weight:700;margin-left:8px}
+.badge-free{background:#dcfce7;color:#166534}
+.badge-paid{background:#fee2e2;color:#991b1b}
+.badge-req{background:#fef3c7;color:#92400e}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>🚀 Guia de Publicação</h1>
+  <p class="subtitle">AtuAgendaPontual — tudo o que precisas fazer, por ordem, para lançar a app</p>
+
+  <!-- FASE 1 -->
+  <div class="phase">
+    <div class="phase-header">
+      <div class="phase-num ph-blue">1</div>
+      <div>
+        <div class="phase-title">Preparar os ficheiros <span class="badge badge-free">Gratuito</span></div>
+        <div class="phase-sub">Tens todos os ficheiros prontos — só precisas de os organizar</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-content">
+        <div class="step-title">Cria uma pasta chamada <code>atuagendapontual</code> no teu computador</div>
+        <div class="step-desc">Dentro desta pasta, coloca os seguintes ficheiros que já tens:<br>
+        • <code>index.html</code> → a landing page<br>
+        • <code>politica-privacidade.html</code> → política de privacidade<br>
+        • <code>termos-uso.html</code> → termos de uso
+        </div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-content">
+        <div class="step-title">Cria o Gmail dedicado</div>
+        <div class="step-desc">Vai a <a href="https://gmail.com" target="_blank">gmail.com</a> e cria uma conta nova: <strong>atuagendapontual@gmail.com</strong> (ou similar se já estiver tomado). Este email vai aparecer na Play Store.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FASE 2 -->
+  <div class="phase">
+    <div class="phase-header">
+      <div class="phase-num ph-green">2</div>
+      <div>
+        <div class="phase-title">Publicar o site no GitHub Pages <span class="badge badge-free">Gratuito</span></div>
+        <div class="phase-sub">O teu site fica em teuuser.github.io/atuagendapontual — necessário para a Política de Privacidade</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-content">
+        <div class="step-title">Cria conta no GitHub</div>
+        <div class="step-desc">Vai a <a href="https://github.com" target="_blank">github.com</a> → Sign up → usa o teu Gmail pessoal (não o novo). Username sugerido: <strong>atuagendapontual</strong></div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-content">
+        <div class="step-title">Cria um repositório novo</div>
+        <div class="step-desc">No GitHub: <strong>New repository</strong> → nome: <code>atuagendapontual</code> → marca "Public" → clica "Create repository"</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-content">
+        <div class="step-title">Faz upload dos ficheiros</div>
+        <div class="step-desc">Na página do repositório → <strong>"uploading an existing file"</strong> → arrasta os 3 ficheiros HTML → escreve "Primeiro upload" → clica <strong>"Commit changes"</strong></div>
+        <div class="tip"><i class="fas fa-lightbulb"></i> Certifica-te que a landing page se chama exatamente <code>index.html</code></div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-content">
+        <div class="step-title">Ativar GitHub Pages</div>
+        <div class="step-desc">No repositório → <strong>Settings</strong> → <strong>Pages</strong> (menu lateral) → Source: <strong>"Deploy from a branch"</strong> → Branch: <strong>main</strong> → pasta: <strong>/ (root)</strong> → <strong>Save</strong></div>
+        <div class="success"><i class="fas fa-check-circle"></i> Após 2-3 minutos o site fica disponível em <strong>https://atuatuagenda.github.io/atuagendapontual/</strong></div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">5</div>
+      <div class="step-content">
+        <div class="step-title">Guarda os URLs importantes</div>
+        <div class="step-desc">
+          • Site: <code>https://atuatuagenda.github.io/atuagendapontual/</code><br>
+          • Política Privacidade: <code>https://atuatuagenda.github.io/atuagendapontual/politica-privacidade.html</code><br>
+          • Termos: <code>https://atuatuagenda.github.io/atuagendapontual/termos-uso.html</code>
+        </div>
+        <div class="warn"><i class="fas fa-exclamation-triangle"></i> O URL da Política de Privacidade é <strong>obrigatório</strong> para submeter a app na Google Play.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FASE 3 -->
+  <div class="phase">
+    <div class="phase-header">
+      <div class="phase-num ph-purple">3</div>
+      <div>
+        <div class="phase-title">Configurar Firebase <span class="badge badge-free">Gratuito</span></div>
+        <div class="phase-sub">Autenticação e base de dados na cloud</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-content">
+        <div class="step-title">Criar projeto Firebase</div>
+        <div class="step-desc">Vai a <a href="https://console.firebase.google.com" target="_blank">console.firebase.google.com</a> → "Adicionar projeto" → nome: <strong>atuagendapontual</strong> → desativa Google Analytics → Criar</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-content">
+        <div class="step-title">Ativar Authentication</div>
+        <div class="step-desc">Build → Authentication → "Começar" → Método de login → <strong>E-mail/palavra-passe</strong> → Ativar → Guardar</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-content">
+        <div class="step-title">Criar Firestore Database</div>
+        <div class="step-desc">Build → Firestore Database → "Criar base de dados" → Modo de produção → Região: <strong>europe-west1</strong> → Concluído</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-content">
+        <div class="step-title">Configurar regras de segurança do Firestore</div>
+        <div class="step-desc">Firestore → separador "Regras" → substitui o conteúdo por:<br><br>
+        <code>rules_version = '2';<br>
+        service cloud.firestore {<br>
+        &nbsp;&nbsp;match /databases/{database}/documents {<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;match /users/{uid}/{doc=**} {<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;allow read, write: if request.auth.uid == uid;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;}<br>
+        &nbsp;&nbsp;}<br>
+        }</code><br><br>
+        → Clica <strong>"Publicar"</strong></div>
+        <div class="warn"><i class="fas fa-exclamation-triangle"></i> Sem estas regras os dados de todos os utilizadores ficam expostos!</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">5</div>
+      <div class="step-content">
+        <div class="step-title">Obter as credenciais da app</div>
+        <div class="step-desc">Definições do projeto (ícone ⚙️) → "Adicionar app" → Web (<strong>&lt;/&gt;</strong>) → Nome: "AtuAgendaPontual" → Registar → <strong>Copia o objeto firebaseConfig</strong> e envia aqui na conversa</div>
+        <div class="tip"><i class="fas fa-lightbulb"></i> O firebaseConfig parece-se com isto:<br><code>{ apiKey: "AIza...", authDomain: "...", projectId: "..." }</code></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FASE 4 -->
+  <div class="phase">
+    <div class="phase-header">
+      <div class="phase-num ph-orange">4</div>
+      <div>
+        <div class="phase-title">Google Play Console <span class="badge badge-paid">25€ único</span></div>
+        <div class="phase-sub">Necessário para publicar a app</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-content">
+        <div class="step-title">Criar conta na Google Play Console</div>
+        <div class="step-desc">Vai a <a href="https://play.google.com/console" target="_blank">play.google.com/console</a> → "Começar" → paga os 25€ → preenche os dados de developer</div>
+        <div class="tip"><i class="fas fa-lightbulb"></i> Usa o teu Gmail pessoal (não o atuagendapontual@gmail.com) para a conta de developer</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-content">
+        <div class="step-title">Criar a ficha da app</div>
+        <div class="step-desc">"Criar app" → nome: <strong>AtuAgendaPontual</strong> → português → App gratuita: <strong>Não</strong> → Aceitar políticas → Criar</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-content">
+        <div class="step-title">Criar o produto in-app (pagamento)</div>
+        <div class="step-desc">Monetização → Produtos in-app → Criar produto:<br>
+        • ID do produto: <code>atuagendapontual_pro</code><br>
+        • Nome: <strong>AtuAgendaPontual — Acesso Completo</strong><br>
+        • Descrição: <em>Pagamento único com acesso vitalício a todas as funcionalidades</em><br>
+        • Preço: <strong>2,99€</strong><br>
+        • Estado: <strong>Ativo</strong></div>
+        <div class="warn"><i class="fas fa-exclamation-triangle"></i> O ID do produto <code>atuagendapontual_pro</code> tem de ser <strong>exatamente igual</strong> ao que está no código Android!</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-content">
+        <div class="step-title">Preencher a ficha completa da app</div>
+        <div class="step-desc">
+          • <strong>Título:</strong> AtuAgendaPontual — Gestão de Agendamentos<br>
+          • <strong>Descrição curta:</strong> A agenda simples e completa para o teu negócio. Compromissos, clientes e faturação num só lugar.<br>
+          • <strong>Descrição completa:</strong> (usa o texto da landing page)<br>
+          • <strong>Screenshots:</strong> mínimo 2 capturas de ecrã da app (tira do teu telemóvel)<br>
+          • <strong>Ícone:</strong> 512×512 px<br>
+          • <strong>URL Política Privacidade:</strong> o URL do GitHub Pages que criaste
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FASE 5 -->
+  <div class="phase">
+    <div class="phase-header">
+      <div class="phase-num ph-teal">5</div>
+      <div>
+        <div class="phase-title">Gerar e publicar a APK <span class="badge badge-free">Android Studio</span></div>
+        <div class="phase-sub">Último passo antes do lançamento</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-content">
+        <div class="step-title">Abrir o projeto no Android Studio</div>
+        <div class="step-desc">Descomprime o ZIP <code>AtuAgendaPontual_Android.zip</code> → Android Studio → "Open" → seleciona a pasta → aguarda Gradle sincronizar</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-content">
+        <div class="step-title">Adicionar o ícone da app</div>
+        <div class="step-desc">No Android Studio: botão direito em <code>res</code> → New → Image Asset → escolhe o teu ícone → Finish</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-content">
+        <div class="step-title">Gerar o AAB assinado</div>
+        <div class="step-desc">Build → Generate Signed Bundle/APK → <strong>Android App Bundle</strong> → Next → "Create new..." (cria a keystore) → preenche os campos → Next → Release → Finish</div>
+        <div class="warn"><i class="fas fa-exclamation-triangle"></i> Guarda o ficheiro da keystore num lugar <strong>muito seguro</strong>! Se o perderes não podes atualizar a app.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-content">
+        <div class="step-title">Fazer upload na Play Console</div>
+        <div class="step-desc">Play Console → Produção → "Criar nova versão" → faz upload do ficheiro <code>.aab</code> → adiciona notas de versão → "Rever versão" → "Iniciar lançamento"</div>
+        <div class="tip"><i class="fas fa-lightbulb"></i> A primeira revisão da Google pode demorar 1 a 7 dias. As atualizações seguintes são mais rápidas.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CUSTOS -->
+  <div class="phase">
+    <div class="phase-header">
+      <div class="phase-num ph-blue">€</div>
+      <div>
+        <div class="phase-title">Resumo de custos</div>
+        <div class="phase-sub">Para lançar a AtuAgendaPontual</div>
+      </div>
+    </div>
+    <table class="cost-table">
+      <tr><th>Item</th><th>Custo</th><th>Observação</th></tr>
+      <tr><td>Gmail dedicado</td><td class="cost-free">Gratuito</td><td>atuagendapontual@gmail.com</td></tr>
+      <tr><td>GitHub Pages (site + política)</td><td class="cost-free">Gratuito</td><td>teuuser.github.io/atuagendapontual</td></tr>
+      <tr><td>Firebase (Auth + Firestore)</td><td class="cost-free">Gratuito</td><td>Plano Spark — suficiente para centenas de utilizadores</td></tr>
+      <tr><td>Android Studio</td><td class="cost-free">Gratuito</td><td>developer.android.com/studio</td></tr>
+      <tr><td>Google Play Console</td><td class="cost-paid">25€ único</td><td>Taxa única de registo de developer</td></tr>
+      <tr><td>Domínio .pt (opcional)</td><td class="cost-paid">~10€/ano</td><td>Só se quiseres atuagendapontual.pt</td></tr>
+      <tr style="font-weight:700"><td>Total mínimo para lançar</td><td class="cost-paid">25€</td><td>Recuperas com 9 vendas a 2,99€</td></tr>
+    </table>
+  </div>
+
+  <!-- CHECKLIST FINAL -->
+  <div class="phase">
+    <div class="phase-header">
+      <div class="phase-num ph-green">✓</div>
+      <div>
+        <div class="phase-title">Checklist de lançamento</div>
+        <div class="phase-sub">Marca cada item quando estiver feito</div>
+      </div>
+    </div>
+    <ul class="checklist">
+      <li>Gmail dedicado criado (atuagendapontual@gmail.com)</li>
+      <li>Conta GitHub criada</li>
+      <li>Site publicado no GitHub Pages (index.html + politica + termos)</li>
+      <li>URL da Política de Privacidade funcional</li>
+      <li>Projeto Firebase criado (atuagendapontual)</li>
+      <li>Firebase Authentication ativado (email/password)</li>
+      <li>Firestore criado (europe-west1)</li>
+      <li>Regras de segurança do Firestore configuradas</li>
+      <li>firebaseConfig copiado e enviado ao assistente</li>
+      <li>App HTML atualizada com Firebase (pelo assistente
