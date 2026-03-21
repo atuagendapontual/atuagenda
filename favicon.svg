@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#7C5CFC"/>
+      <stop offset="100%" stop-color="#5530CC"/>
+    </linearGradient>
+    <clipPath id="clip">
+      <rect width="64" height="64" rx="14"/>
+    </clipPath>
+  </defs>
+
+  <!-- Fundo com gradiente -->
+  <rect width="64" height="64" rx="14" fill="url(#g)"/>
+
+  <!-- Ícone de calendário -->
+  <!-- Corpo do calendário -->
+  <rect x="12" y="20" width="40" height="32" rx="5" fill="white" opacity="0.95"/>
+
+  <!-- Cabeçalho do calendário -->
+  <rect x="12" y="20" width="40" height="13" rx="5" fill="white" opacity="0.3"/>
+  <rect x="12" y="27" width="40" height="6" fill="white" opacity="0.3"/>
+
+  <!-- Argolas -->
+  <rect x="21" y="14" width="4" height="10" rx="2" fill="white" opacity="0.9"/>
+  <rect x="39" y="14" width="4" height="10" rx="2" fill="white" opacity="0.9"/>
+
+  <!-- Grelha de dias -->
+  <rect x="17" y="38" width="5" height="5" rx="1.5" fill="url(#g)" opacity="0.7"/>
+  <rect x="25" y="38" width="5" height="5" rx="1.5" fill="url(#g)" opacity="0.7"/>
+  <rect x="33" y="38" width="5" height="5" rx="1.5" fill="url(#g)" opacity="0.7"/>
+  <rect x="41" y="38" width="5" height="5" rx="1.5" fill="url(#g)" opacity="0.7"/>
+
+  <rect x="17" y="46" width="5" height="5" rx="1.5" fill="url(#g)" opacity="0.5"/>
+  <rect x="25" y="46" width="5" height="5" rx="1.5" fill="url(#g)" opacity="0.9"/>
+  <rect x="33" y="46" width="5" height="5" rx="1.5" fill="url(#g)" opacity="0.5"/>
+</svg>
