@@ -1,453 +1,527 @@
 <!DOCTYPE html>
 <html lang="pt">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AtuAgendaPontual — A agenda para o teu negócio</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700;9..40,800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-<link rel="icon" type="image/x-icon" href="favicon.ico">
-<style>
-*{margin:0;padding:0;box-sizing:border-box}
-:root{
-  --blue:#2563eb;--blue2:#1d4ed8;--blue-light:#eff6ff;
-  --green:#16a34a;--green-light:#f0fdf4;
-  --tx:#0f172a;--tx2:#475569;--tx3:#94a3b8;
-  --bd:#e2e8f0;--bg:#ffffff;--bg2:#f8fafc;
-  --gp:linear-gradient(135deg,#2563eb,#1d4ed8);
-  --gp2:linear-gradient(135deg,#1e40af,#1d4ed8,#2563eb);
-}
-html{scroll-behavior:smooth}
-body{font-family:'DM Sans',sans-serif;color:var(--tx);background:var(--bg);overflow-x:hidden}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Política de Privacidade — AtuAgenda</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6941E8;
+            --primary-light: #7C5CFC;
+            --primary-dark: #5530CC;
+            --primary-50: #F3F0FF;
+            --primary-100: #E4DEFF;
+            --text: #1a1a2e;
+            --text-secondary: #4a4a6a;
+            --text-muted: #8888aa;
+            --border: #e8e4ff;
+            --bg: #fafafa;
+            --white: #ffffff;
+            --gradient: linear-gradient(135deg, #6941E8, #5530CC);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+            font-size: 1rem;
+        }
 
-/* NAV */
-nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(255,255,255,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--bd);padding:0 24px}
-.nav-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:64px}
-.nav-logo{display:flex;align-items:center;gap:10px;font-size:1.2rem;font-weight:700;color:var(--tx);text-decoration:none}
-.nav-logo i{background:var(--gp);-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-size:1.4rem}
-.nav-links{display:flex;align-items:center;gap:8px}
-.nav-link{padding:8px 16px;border-radius:10px;font-size:.9rem;font-weight:500;color:var(--tx2);text-decoration:none;transition:all .2s}
-.nav-link:hover{background:var(--blue-light);color:var(--blue)}
-.nav-cta{padding:9px 20px;background:var(--gp);color:#fff;border-radius:10px;font-size:.9rem;font-weight:600;text-decoration:none;transition:all .2s;box-shadow:0 2px 8px rgba(37,99,235,.3)}
-.nav-cta:hover{transform:translateY(-1px);box-shadow:0 4px 16px rgba(37,99,235,.4)}
+        /* NAV */
+        nav {
+            background: var(--white);
+            border-bottom: 1px solid var(--border);
+            padding: 0 24px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .nav-inner {
+            max-width: 900px;
+            margin: 0 auto;
+            height: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+        .nav-logo-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            background: var(--gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+        }
+        .nav-back {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            text-decoration: none;
+            color: var(--text-muted);
+            font-size: 0.88rem;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        .nav-back:hover { color: var(--primary); }
 
-/* HERO */
-.hero{min-height:100vh;display:flex;align-items:center;padding:100px 24px 60px;position:relative;overflow:hidden}
-.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 0%,rgba(37,99,235,.07) 0%,transparent 70%);pointer-events:none}
-.hero-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
-.hero-badge{display:inline-flex;align-items:center;gap:6px;background:var(--blue-light);color:var(--blue);padding:6px 14px;border-radius:20px;font-size:.82rem;font-weight:600;margin-bottom:20px;border:1px solid rgba(37,99,235,.2)}
-.hero-title{font-size:3.2rem;font-weight:800;line-height:1.1;letter-spacing:-.03em;margin-bottom:20px;color:var(--tx)}
-.hero-title span{background:var(--gp);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.hero-sub{font-size:1.1rem;color:var(--tx2);line-height:1.7;margin-bottom:36px;max-width:480px}
-.hero-btns{display:flex;gap:12px;flex-wrap:wrap}
-.btn-hero-p{display:inline-flex;align-items:center;gap:8px;padding:14px 28px;background:var(--gp);color:#fff;border-radius:12px;font-size:1rem;font-weight:700;text-decoration:none;transition:all .2s;box-shadow:0 4px 20px rgba(37,99,235,.35)}
-.btn-hero-p:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(37,99,235,.4)}
-.btn-hero-g{display:inline-flex;align-items:center;gap:8px;padding:14px 28px;background:#fff;color:var(--tx);border-radius:12px;font-size:1rem;font-weight:600;text-decoration:none;border:2px solid var(--bd);transition:all .2s}
-.btn-hero-g:hover{border-color:var(--blue);color:var(--blue);transform:translateY(-2px)}
-.hero-trust{display:flex;align-items:center;gap:16px;margin-top:28px;font-size:.82rem;color:var(--tx3)}
-.hero-trust-item{display:flex;align-items:center;gap:5px}
-.hero-trust-item i{color:var(--green)}
+        /* HERO */
+        .hero {
+            background: var(--white);
+            border-bottom: 1px solid var(--border);
+            padding: 56px 24px 48px;
+        }
+        .hero-inner {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: var(--primary-50);
+            color: var(--primary);
+            border: 1px solid var(--primary-100);
+            border-radius: 20px;
+            padding: 5px 14px;
+            font-size: 0.78rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            letter-spacing: 0.03em;
+        }
+        .hero h1 {
+            font-size: clamp(1.8rem, 4vw, 2.6rem);
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            color: var(--text);
+            margin-bottom: 12px;
+            line-height: 1.15;
+        }
+        .hero h1 span {
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .hero-meta {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            flex-wrap: wrap;
+        }
+        .hero-meta-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .hero-meta-item svg { opacity: 0.5; }
 
-/* PHONE MOCKUP */
-.phone-wrap{position:relative;display:flex;justify-content:center}
-.phone{width:280px;background:#fff;border-radius:40px;box-shadow:0 32px 80px rgba(0,0,0,.18),0 0 0 2px rgba(0,0,0,.08);overflow:hidden;border:8px solid #1a1a2e;position:relative}
-.phone-notch{width:100px;height:28px;background:#1a1a2e;border-radius:0 0 18px 18px;margin:0 auto;position:relative;z-index:10}
-.phone-screen{background:#f8fafc;min-height:520px}
-.phone-status{background:#fff;padding:8px 16px 6px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #e2e8f0}
-.phone-logo{font-size:.85rem;font-weight:700;color:#1e40af}
-.phone-cal-header{background:linear-gradient(135deg,#2563eb,#1d4ed8);padding:10px 14px 8px;color:#fff}
-.phone-month{font-size:.9rem;font-weight:700}
-.phone-wdays{display:grid;grid-template-columns:repeat(7,1fr);text-align:center;font-size:.58rem;opacity:.8;margin-top:6px;font-weight:600}
-.phone-days{display:grid;grid-template-columns:repeat(7,1fr);gap:3px;padding:8px;background:#fff}
-.pd{height:30px;display:flex;align-items:center;justify-content:center;border-radius:8px;font-size:.72rem;font-weight:500;color:#475569;border:1px solid #e2e8f0;position:relative;cursor:default}
-.pd.tod{background:linear-gradient(135deg,#16a34a,#15803d);color:#fff;border-color:transparent}
-.pd.sel{background:linear-gradient(135deg,#2563eb,#1d4ed8);color:#fff;border-color:transparent}
-.pd-dot{position:absolute;bottom:2px;left:50%;transform:translateX(-50%);width:4px;height:4px;background:#2563eb;border-radius:50%}
-.pd.sel .pd-dot,.pd.tod .pd-dot{background:#fff}
-.phone-appt{margin:0 8px 4px;background:#eff6ff;border-left:3px solid #2563eb;border-radius:8px;padding:7px 8px}
-.phone-appt-name{font-size:.72rem;font-weight:700;color:#1e40af}
-.phone-appt-meta{font-size:.62rem;color:#60a5fa;margin-top:2px}
-.phone-appt-val{font-size:.65rem;font-weight:700;color:#16a34a;float:right;margin-top:-18px}
-.phone-glow{position:absolute;top:-20px;right:-30px;width:200px;height:200px;background:radial-gradient(circle,rgba(37,99,235,.15),transparent 70%);pointer-events:none}
+        /* LAYOUT */
+        .layout {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 48px 24px 80px;
+            display: grid;
+            grid-template-columns: 220px 1fr;
+            gap: 48px;
+            align-items: start;
+        }
+        @media (max-width: 700px) {
+            .layout { grid-template-columns: 1fr; gap: 32px; }
+            .sidebar { display: none; }
+        }
 
-/* FEATURES */
-.features{padding:100px 24px;background:var(--bg2)}
-.section-inner{max-width:1100px;margin:0 auto}
-.section-label{text-align:center;font-size:.82rem;font-weight:700;color:var(--blue);text-transform:uppercase;letter-spacing:.1em;margin-bottom:12px}
-.section-title{text-align:center;font-size:2.4rem;font-weight:800;letter-spacing:-.03em;margin-bottom:14px}
-.section-sub{text-align:center;font-size:1rem;color:var(--tx2);max-width:560px;margin:0 auto 56px;line-height:1.7}
-.features-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
-.feat-card{background:#fff;border-radius:20px;padding:28px;border:1px solid var(--bd);transition:all .3s;position:relative;overflow:hidden}
-.feat-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(37,99,235,.03),transparent);pointer-events:none}
-.feat-card:hover{transform:translateY(-4px);box-shadow:0 16px 48px rgba(0,0,0,.1);border-color:rgba(37,99,235,.2)}
-.feat-icon{width:48px;height:48px;background:var(--blue-light);border-radius:14px;display:flex;align-items:center;justify-content:center;margin-bottom:16px;font-size:1.3rem}
-.feat-icon i{color:var(--blue)}
-.feat-title{font-size:1rem;font-weight:700;margin-bottom:8px}
-.feat-desc{font-size:.88rem;color:var(--tx2);line-height:1.65}
+        /* SIDEBAR */
+        .sidebar {
+            position: sticky;
+            top: 88px;
+        }
+        .sidebar-title {
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 12px;
+        }
+        .sidebar-nav {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+        .sidebar-nav a {
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            font-weight: 500;
+            padding: 6px 10px;
+            border-radius: 8px;
+            border-left: 2px solid transparent;
+            transition: all 0.15s;
+        }
+        .sidebar-nav a:hover {
+            color: var(--primary);
+            background: var(--primary-50);
+            border-left-color: var(--primary);
+        }
 
-/* PRICING */
-.pricing{padding:100px 24px;background:#fff}
-.price-card{max-width:460px;margin:0 auto;background:#fff;border-radius:28px;padding:48px;border:2px solid var(--blue);box-shadow:0 20px 60px rgba(37,99,235,.12);position:relative;overflow:hidden;text-align:center}
-.price-card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:var(--gp)}
-.price-badge{display:inline-block;background:var(--gp);color:#fff;padding:5px 14px;border-radius:20px;font-size:.78rem;font-weight:700;margin-bottom:20px}
-.price-amount{font-size:5rem;font-weight:800;letter-spacing:-.04em;background:var(--gp);-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1}
-.price-once{font-size:.95rem;color:var(--tx2);margin:6px 0 28px;font-weight:500}
-.price-features{text-align:left;margin-bottom:32px;display:flex;flex-direction:column;gap:12px}
-.pf{display:flex;align-items:center;gap:10px;font-size:.9rem}
-.pf i{color:var(--green);font-size:.9rem;flex-shrink:0}
-.btn-price{display:block;padding:16px;background:var(--gp);color:#fff;border-radius:14px;font-size:1rem;font-weight:700;text-decoration:none;transition:all .2s;box-shadow:0 4px 20px rgba(37,99,235,.3)}
-.btn-price:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(37,99,235,.4)}
-.price-note{font-size:.78rem;color:var(--tx3);margin-top:14px}
+        /* CONTENT */
+        .content { min-width: 0; }
 
-/* HOW */
-.how{padding:100px 24px;background:var(--bg2)}
-.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:32px;margin-top:56px;position:relative}
-.steps::before{content:'';position:absolute;top:32px;left:12%;right:12%;height:2px;background:linear-gradient(90deg,var(--blue),rgba(37,99,235,.2));z-index:0}
-.step{text-align:center;position:relative;z-index:1}
-.step-num{width:64px;height:64px;background:var(--gp);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.4rem;font-weight:800;margin:0 auto 16px;box-shadow:0 4px 20px rgba(37,99,235,.3)}
-.step-title{font-size:.95rem;font-weight:700;margin-bottom:6px}
-.step-desc{font-size:.82rem;color:var(--tx2);line-height:1.6}
+        .section {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 32px;
+            margin-bottom: 20px;
+        }
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 20px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--border);
+        }
+        .section-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            background: var(--primary-50);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-size: 1.1rem;
+        }
+        .section h2 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text);
+            letter-spacing: -0.01em;
+        }
+        .section p {
+            color: var(--text-secondary);
+            font-size: 0.93rem;
+            margin-bottom: 12px;
+            line-height: 1.75;
+        }
+        .section p:last-child { margin-bottom: 0; }
+        .section ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin: 12px 0;
+        }
+        .section ul li {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            color: var(--text-secondary);
+            font-size: 0.93rem;
+            line-height: 1.6;
+        }
+        .section ul li::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--primary);
+            flex-shrink: 0;
+            margin-top: 8px;
+        }
 
-/* TESTIMONIAL */
-.testimonials{padding:100px 24px;background:#fff}
-.test-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:56px}
-.test-card{background:var(--bg2);border-radius:20px;padding:28px;border:1px solid var(--bd)}
-.test-stars{color:#f59e0b;font-size:.9rem;margin-bottom:12px}
-.test-text{font-size:.9rem;color:var(--tx);line-height:1.7;margin-bottom:16px;font-style:italic}
-.test-author{display:flex;align-items:center;gap:10px}
-.test-avatar{width:38px;height:38px;border-radius:50%;background:var(--gp);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.9rem;flex-shrink:0}
-.test-name{font-weight:700;font-size:.88rem}
-.test-job{font-size:.78rem;color:var(--tx3)}
+        .highlight-box {
+            background: var(--primary-50);
+            border: 1px solid var(--primary-100);
+            border-radius: 10px;
+            padding: 14px 16px;
+            font-size: 0.88rem;
+            color: var(--primary-dark);
+            font-weight: 500;
+            margin: 16px 0;
+            display: flex;
+            gap: 10px;
+            align-items: flex-start;
+        }
+        .highlight-box .icon { font-size: 1rem; flex-shrink: 0; margin-top: 1px; }
 
-/* FAQ */
-.faq{padding:100px 24px;background:var(--bg2)}
-.faq-list{max-width:700px;margin:48px auto 0;display:flex;flex-direction:column;gap:12px}
-.faq-item{background:#fff;border-radius:14px;border:1px solid var(--bd);overflow:hidden}
-.faq-q{padding:18px 20px;font-weight:600;font-size:.95rem;cursor:pointer;display:flex;justify-content:space-between;align-items:center;transition:background .2s}
-.faq-q:hover{background:var(--blue-light)}
-.faq-q i{color:var(--tx3);font-size:.8rem;transition:transform .3s}
-.faq-item.open .faq-q i{transform:rotate(180deg)}
-.faq-a{padding:0 20px 18px;font-size:.88rem;color:var(--tx2);line-height:1.7;display:none}
-.faq-item.open .faq-a{display:block}
+        .contact-box {
+            background: var(--gradient);
+            border-radius: 14px;
+            padding: 24px;
+            color: white;
+            text-align: center;
+            margin-top: 8px;
+        }
+        .contact-box h3 { font-size: 1rem; font-weight: 700; margin-bottom: 6px; }
+        .contact-box p { font-size: 0.85rem; opacity: 0.85; margin-bottom: 16px; }
+        .contact-box a {
+            display: inline-block;
+            background: rgba(255,255,255,0.15);
+            border: 1px solid rgba(255,255,255,0.3);
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.88rem;
+            transition: background 0.2s;
+        }
+        .contact-box a:hover { background: rgba(255,255,255,0.25); }
 
-/* CTA */
-.cta-section{padding:100px 24px;background:var(--gp2);color:#fff;text-align:center;position:relative;overflow:hidden}
-.cta-section::before{content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");pointer-events:none}
-.cta-title{font-size:2.8rem;font-weight:800;letter-spacing:-.03em;margin-bottom:14px;position:relative}
-.cta-sub{font-size:1.1rem;opacity:.85;margin-bottom:40px;max-width:500px;margin-left:auto;margin-right:auto;line-height:1.7;position:relative}
-.btn-cta{display:inline-flex;align-items:center;gap:8px;padding:16px 36px;background:#fff;color:var(--blue);border-radius:14px;font-size:1rem;font-weight:700;text-decoration:none;transition:all .2s;box-shadow:0 4px 20px rgba(0,0,0,.2);position:relative}
-.btn-cta:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(0,0,0,.25)}
-
-/* FOOTER */
-footer{padding:40px 24px;background:#0f172a;color:#94a3b8;text-align:center}
-.footer-logo{font-size:1.1rem;font-weight:700;color:#fff;margin-bottom:8px;display:flex;align-items:center;justify-content:center;gap:8px}
-.footer-logo i{background:var(--gp);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.footer-links{display:flex;justify-content:center;gap:24px;margin:16px 0;flex-wrap:wrap}
-.footer-links a{color:#94a3b8;text-decoration:none;font-size:.85rem;transition:color .2s}
-.footer-links a:hover{color:#fff}
-.footer-copy{font-size:.78rem;opacity:.6;margin-top:8px}
-
-/* PLAY BADGE */
-.play-badge{display:inline-flex;align-items:center;gap:10px;background:#000;color:#fff;padding:10px 20px;border-radius:12px;text-decoration:none;transition:all .2s;border:1px solid rgba(255,255,255,.1)}
-.play-badge:hover{background:#1a1a1a;transform:translateY(-1px)}
-.play-badge i{font-size:1.6rem}
-.play-badge-txt{text-align:left}
-.play-badge-txt small{display:block;font-size:.6rem;opacity:.7;text-transform:uppercase;letter-spacing:.05em}
-.play-badge-txt span{font-size:.9rem;font-weight:700}
-
-@media(max-width:768px){
-  .hero-inner{grid-template-columns:1fr;gap:40px}
-  .phone-wrap{order:-1}
-  .hero-title{font-size:2.2rem}
-  .features-grid,.test-grid{grid-template-columns:1fr}
-  .steps{grid-template-columns:repeat(2,1fr)}
-  .steps::before{display:none}
-}
-</style>
+        /* FOOTER */
+        footer {
+            background: var(--text);
+            color: rgba(255,255,255,0.5);
+            padding: 32px 24px;
+            text-align: center;
+            font-size: 0.82rem;
+        }
+        footer .footer-inner { max-width: 900px; margin: 0 auto; }
+        footer .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 12px;
+            flex-wrap: wrap;
+        }
+        footer .footer-links a {
+            color: rgba(255,255,255,0.6);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        footer .footer-links a:hover { color: white; }
+        footer .footer-links a.active { color: var(--primary-light); }
+    </style>
 </head>
 <body>
 
 <nav>
-  <div class="nav-inner">
-    <a class="nav-logo" href="#">
-      <i class="fas fa-calendar-check"></i>
-      AtuAgendaPontual
-    </a>
-    <div class="nav-links">
-      <a class="nav-link" href="#features">Funcionalidades</a>
-      <a class="nav-link" href="#pricing">Preço</a>
-      <a class="nav-link" href="#faq">FAQ</a>
-      <a class="nav-cta" href="#pricing"><i class="fas fa-download"></i> Descarregar</a>
+    <div class="nav-inner">
+        <a href="index.html" class="nav-logo">
+            <div class="nav-logo-icon">📅</div>
+            AtuAgenda
+        </a>
+        <a href="index.html" class="nav-back">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+            Voltar ao site
+        </a>
     </div>
-  </div>
 </nav>
 
-<!-- HERO -->
-<section class="hero">
-  <div class="hero-inner">
-    <div>
-      <div class="hero-badge"><i class="fas fa-star"></i> A agenda para profissionais portugueses</div>
-      <h1 class="hero-title">Gere o teu negócio com <span>precisão e conforto</span></h1>
-      <p class="hero-sub">A AtuAgendaPontual é uma app Android para quem vive de agendamentos — cabeleireiros, esteticistas, personal trainers, e muito mais. Tudo num só lugar, sempre a funcionar.</p>
-      <div class="hero-btns">
-        <a class="btn-hero-p" href="#pricing"><i class="fas fa-download"></i> Descarregar na Play Store</a>
-        <a class="btn-hero-g" href="#features"><i class="fas fa-play-circle"></i> Ver funcionalidades</a>
-      </div>
-      <div class="hero-trust">
-        <div class="hero-trust-item"><i class="fas fa-check-circle"></i> Pagamento único</div>
-        <div class="hero-trust-item"><i class="fas fa-check-circle"></i> Sem subscrições</div>
-        <div class="hero-trust-item"><i class="fas fa-check-circle"></i> Dados na cloud</div>
-      </div>
-    </div>
-    <div class="phone-wrap">
-      <div class="phone-glow"></div>
-      <div class="phone">
-        <div class="phone-notch"></div>
-        <div class="phone-screen">
-          <div class="phone-status">
-            <span class="phone-logo"><i class="fas fa-calendar-check" style="color:#2563eb"></i> AtuAgendaPontual</span>
-            <span style="font-size:.6rem;color:#94a3b8">18 Mar</span>
-          </div>
-          <div class="phone-cal-header">
-            <div class="phone-month">Março 2026</div>
-            <div class="phone-wdays"><div>D</div><div>S</div><div>T</div><div>Q</div><div>Q</div><div>S</div><div>S</div></div>
-          </div>
-          <div class="phone-days">
-            <div class="pd" style="opacity:.3"></div><div class="pd" style="opacity:.3"></div><div class="pd" style="opacity:.3"></div><div class="pd" style="opacity:.3"></div><div class="pd" style="opacity:.3"></div><div class="pd" style="opacity:.3"></div><div class="pd">1</div>
-            <div class="pd">2</div><div class="pd">3</div><div class="pd">4</div><div class="pd">5</div><div class="pd">6</div><div class="pd">7</div><div class="pd">8<div class="pd-dot"></div></div>
-            <div class="pd">9</div><div class="pd">10</div><div class="pd">11<div class="pd-dot"></div></div><div class="pd">12</div><div class="pd">13</div><div class="pd">14</div><div class="pd">15</div>
-            <div class="pd">16</div><div class="pd">17</div><div class="pd tod">18</div><div class="pd sel">19<div class="pd-dot"></div></div><div class="pd">20</div><div class="pd">21</div><div class="pd">22<div class="pd-dot"></div></div>
-          </div>
-          <div style="padding:6px 8px 4px;font-size:.65rem;font-weight:700;color:#475569;text-transform:uppercase;letter-spacing:.05em">Quarta, 19 Março</div>
-          <div class="phone-appt">
-            <div class="phone-appt-name">Ana Silva</div>
-            <div class="phone-appt-meta"><i class="far fa-clock"></i> 09:00–10:00 · Extensão de Gel</div>
-            <div class="phone-appt-val">35,00€</div>
-          </div>
-          <div class="phone-appt" style="background:#f0fdf4;border-color:#16a34a">
-            <div class="phone-appt-name" style="color:#15803d">Joana Costa</div>
-            <div class="phone-appt-meta" style="color:#4ade80"><i class="far fa-clock"></i> 11:00–12:00 · Verniz de Gel</div>
-            <div class="phone-appt-val">20,00€</div>
-          </div>
-          <div class="phone-appt">
-            <div class="phone-appt-name">Maria Santos</div>
-            <div class="phone-appt-meta"><i class="far fa-clock"></i> 14:30–16:00 · Manutenção</div>
-            <div class="phone-appt-val">28,00€</div>
-          </div>
-          <div style="text-align:right;padding:6px 12px;font-size:.72rem;font-weight:700;color:#16a34a">Total: 83,00 </div>
+<div class="hero">
+    <div class="hero-inner">
+        <div class="hero-badge">🔒 Privacidade</div>
+        <h1>Política de <span>Privacidade</span></h1>
+        <div class="hero-meta">
+            <div class="hero-meta-item">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                Última atualização: 21 de março de 2026
+            </div>
+            <div class="hero-meta-item">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                Leitura: ~3 minutos
+            </div>
+            <div class="hero-meta-item">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                RGPD Conforme
+            </div>
         </div>
-      </div>
     </div>
-  </div>
-</section>
+</div>
 
-<!-- FEATURES -->
-<section class="features" id="features">
-  <div class="section-inner">
-    <div class="section-label">Funcionalidades</div>
-    <h2 class="section-title">Tudo o que precisas, nada do que não precisas</h2>
-    <p class="section-sub">Desenvolvida por profissionais, para profissionais. Simples, rápida e sem distrações.</p>
-    <div class="features-grid">
-      <div class="feat-card">
-        <div class="feat-icon"><i class="fas fa-calendar-alt"></i></div>
-        <div class="feat-title">Calendário mensal completo</div>
-        <div class="feat-desc">Visualiza todos os teus compromissos num calendário intuitivo. Feriados portugueses incluídos automaticamente.</div>
-      </div>
-      <div class="feat-card">
-        <div class="feat-icon"><i class="fas fa-clock"></i></div>
-        <div class="feat-title">Agenda horária detalhada</div>
-        <div class="feat-desc">Grelha hora a hora com deteção automática de sobreposições. Adiciona compromissos tocando num slot livre.</div>
-      </div>
-      <div class="feat-card">
-        <div class="feat-icon"><i class="fas fa-users"></i></div>
-        <div class="feat-title">Histórico de clientes</div>
-        <div class="feat-desc">Regista notas, alergias e preferências por cliente. Vê o historial completo de visitas e faturação.</div>
-      </div>
-      <div class="feat-card">
-        <div class="feat-icon"><i class="fas fa-layer-group"></i></div>
-        <div class="feat-title">Serviços personalizáveis</div>
-        <div class="feat-desc">Cria e gere os teus próprios serviços. Associa serviços a compromissos com chips coloridos.</div>
-      </div>
-      <div class="feat-card">
-        <div class="feat-icon"><i class="fas fa-chart-bar"></i></div>
-        <div class="feat-title">Balanço anual</div>
-        <div class="feat-desc">Acompanha a tua faturação mês a mês. Exporta relatórios em PDF ou texto para partilhar com o teu contabilista.</div>
-      </div>
-      <div class="feat-card">
-        <div class="feat-icon"><i class="fas fa-cloud"></i></div>
-        <div class="feat-title">Backup automático na cloud</div>
-        <div class="feat-desc">Os teus dados ficam guardados em segurança no Firebase. Nunca perdes informação, mesmo que mudes de telemóvel.</div>
-      </div>
-      <div class="feat-card">
-        <div class="feat-icon"><i class="fas fa-search"></i></div>
-        <div class="feat-title">Pesquisa rápida</div>
-        <div class="feat-desc">Encontra qualquer cliente instantaneamente. Acede ao histórico e agenda nova visita com um toque.</div>
-      </div>
-      <div class="feat-card">
-        <div class="feat-icon"><i class="fas fa-moon"></i></div>
-        <div class="feat-title">Modo escuro</div>
-        <div class="feat-desc">Interface adaptada ao teu ambiente. Alterna entre modo claro e escuro com um toque.</div>
-      </div>
-      <div class="feat-card">
-        <div class="feat-icon"><i class="fas fa-mobile-alt"></i></div>
-        <div class="feat-title">Feita para Android</div>
-        <div class="feat-desc">Interface fluida e responsiva. Teclado numérico nativo para inserir horas rapidamente.</div>
-      </div>
-    </div>
-  </div>
-</section>
+<div class="layout">
+    <aside class="sidebar">
+        <div class="sidebar-title">Nesta página</div>
+        <nav class="sidebar-nav">
+            <a href="#quem-somos">Quem somos</a>
+            <a href="#dados-recolhidos">Dados recolhidos</a>
+            <a href="#como-usamos">Como usamos</a>
+            <a href="#onde-guardamos">Onde guardamos</a>
+            <a href="#partilha">Partilha de dados</a>
+            <a href="#direitos">Os teus direitos</a>
+            <a href="#retencao">Retenção</a>
+            <a href="#seguranca">Segurança</a>
+            <a href="#menores">Menores</a>
+            <a href="#alteracoes">Alterações</a>
+            <a href="#contacto">Contacto</a>
+        </nav>
+    </aside>
 
-<!-- HOW IT WORKS -->
-<section class="how" id="how">
-  <div class="section-inner">
-    <div class="section-label">Como funciona</div>
-    <h2 class="section-title">Em 4 passos simples</h2>
-    <div class="steps">
-      <div class="step">
-        <div class="step-num">1</div>
-        <div class="step-title">Descarrega a app</div>
-        <div class="step-desc">Disponível na Google Play Store para Android.</div>
-      </div>
-      <div class="step">
-        <div class="step-num">2</div>
-        <div class="step-title">Cria a tua conta</div>
-        <div class="step-desc">Registo simples com email e palavra-passe.</div>
-      </div>
-      <div class="step">
-        <div class="step-num">3</div>
-        <div class="step-title">Configura os serviços</div>
-        <div class="step-desc">Adiciona os teus serviços e começa a agendar.</div>
-      </div>
-      <div class="step">
-        <div class="step-num">4</div>
-        <div class="step-title">Gere o teu negócio</div>
-        <div class="step-desc">Agenda, fatura e analisa — tudo numa app.</div>
-      </div>
-    </div>
-  </div>
-</section>
+    <main class="content">
 
-<!-- PRICING -->
-<section class="pricing" id="pricing">
-  <div class="section-inner">
-    <div class="section-label">Preço</div>
-    <h2 class="section-title">Sem surpresas, sem subscrições</h2>
-    <p class="section-sub">Paga uma vez, usa para sempre. Sem mensalidades, sem limites.</p>
-    <div class="price-card">
-      <div class="price-badge">⚡ Acesso completo</div>
-      <div class="price-amount">3<span style="font-size:2.5rem">,99€</span></div>
-      <div class="price-once">pagamento único · acesso vitalício</div>
-      <div class="price-features">
-        <div class="pf"><i class="fas fa-check-circle"></i> Agendamentos ilimitados</div>
-        <div class="pf"><i class="fas fa-check-circle"></i> Backup automático na cloud (Firebase)</div>
-        <div class="pf"><i class="fas fa-check-circle"></i> Histórico completo de clientes</div>
-        <div class="pf"><i class="fas fa-check-circle"></i> Balanço anual com exportação PDF</div>
-        <div class="pf"><i class="fas fa-check-circle"></i> Serviços personalizáveis</div>
-        <div class="pf"><i class="fas fa-check-circle"></i> Pesquisa avançada de clientes</div>
-        <div class="pf"><i class="fas fa-check-circle"></i> Modo escuro</div>
-        <div class="pf"><i class="fas fa-check-circle"></i> Atualizações futuras incluídas</div>
-      </div>
-      <a class="btn-price" href="#"><i class="fab fa-google-play"></i> Comprar na Google Play — 3,99€</a>
-      <div class="price-note">Processado com segurança pela Google Play. Reembolso em 48h se não ficares satisfeito.</div>
-    </div>
-  </div>
-</section>
-
-<!-- TESTIMONIALS -->
-<section class="testimonials" id="reviews">
-  <div class="section-inner">
-    <div class="section-label">Avaliações</div>
-    <h2 class="section-title">O que dizem os utilizadores</h2>
-    <div class="test-grid">
-      <div class="test-card">
-        <div class="test-stars">★★★★★</div>
-        <div class="test-text">"Finalmente uma agenda que funciona como eu preciso. Simples, rápida e os dados ficam todos guardados. Vale cada cêntimo."</div>
-        <div class="test-author">
-          <div class="test-avatar">CS</div>
-          <div><div class="test-name">Catarina S.</div><div class="test-job">Esteticista · Porto</div></div>
+        <div class="section" id="quem-somos">
+            <div class="section-header">
+                <div class="section-icon">🏢</div>
+                <h2>Quem somos</h2>
+            </div>
+            <p>A <strong>AtuAgenda</strong> é uma aplicação Android de gestão de agendamentos desenvolvida para profissionais independentes portugueses — cabeleireiros, esteticistas, barbeiros, personal trainers e outros prestadores de serviços baseados em marcações.</p>
+            <p>O responsável pelo tratamento de dados é o desenvolvedor da aplicação, contactável através do email <strong>atuagendapontual@gmail.com</strong>.</p>
         </div>
-      </div>
-      <div class="test-card">
-        <div class="test-stars">★★★★★</div>
-        <div class="test-text">"Uso todos os dias no meu salão. O balanço mensal ajuda-me a perceber quanto faturei sem ter de calcular manualmente."</div>
-        <div class="test-author">
-          <div class="test-avatar">MR</div>
-          <div><div class="test-name">Miguel R.</div><div class="test-job">Cabeleireiro · Lisboa</div></div>
-        </div>
-      </div>
-      <div class="test-card">
-        <div class="test-stars">★★★★★</div>
-        <div class="test-text">"O histórico de clientes é incrível. Sei sempre o que cada cliente pediu na última visita. Super profissional."</div>
-        <div class="test-author">
-          <div class="test-avatar">AF</div>
-          <div><div class="test-name">Ana F.</div><div class="test-job">Personal Trainer · Braga</div></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
 
-<!-- FAQ -->
-<section class="faq" id="faq">
-  <div class="section-inner">
-    <div class="section-label">Perguntas frequentes</div>
-    <h2 class="section-title">Tens dúvidas?</h2>
-    <div class="faq-list">
-      <div class="faq-item">
-        <div class="faq-q" onclick="toggleFaq(this)">O que acontece aos meus dados se mudar de telemóvel? <i class="fas fa-chevron-down"></i></div>
-        <div class="faq-a">Os teus dados ficam guardados na cloud (Firebase). Basta fazer login com o teu email na app num telemóvel novo e tudo volta automaticamente.</div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q" onclick="toggleFaq(this)">A app funciona sem internet? <i class="fas fa-chevron-down"></i></div>
-        <div class="faq-a">Sim! Podes consultar e adicionar compromissos offline. Os dados sincronizam automaticamente quando voltares a ter ligação.</div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q" onclick="toggleFaq(this)">Posso usar a app em vários dispositivos? <i class="fas fa-chevron-down"></i></div>
-        <div class="faq-a">Sim. Como os dados ficam na cloud, podes usar a mesma conta em vários telemóveis Android e os dados ficam sempre sincronizados.</div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q" onclick="toggleFaq(this)">Há alguma taxa mensal ou anual? <i class="fas fa-chevron-down"></i></div>
-        <div class="faq-a">Não. O pagamento é único de 2,99€ e inclui todas as funcionalidades e atualizações futuras para sempre.</div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q" onclick="toggleFaq(this)">Para que tipo de negócios funciona? <i class="fas fa-chevron-down"></i></div>
-        <div class="faq-a">A AtuAgendaPontual foi desenhada para qualquer negócio baseado em agendamentos: cabeleireiros, esteticistas, spas, personal trainers, fotógrafos, massagistas, e muito mais.</div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q" onclick="toggleFaq(this)">Posso obter reembolso? <i class="fas fa-chevron-down"></i></div>
-        <div class="faq-a">A Google Play oferece reembolso automático nas primeiras 48 horas após a compra. Após esse período, podes contactar o suporte.</div>
-      </div>
-    </div>
-  </div>
-</section>
+        <div class="section" id="dados-recolhidos">
+            <div class="section-header">
+                <div class="section-icon">📋</div>
+                <h2>Dados recolhidos</h2>
+            </div>
+            <p>A AtuAgenda recolhe apenas os dados estritamente necessários para o funcionamento da aplicação:</p>
+            <ul>
+                <li><strong>Dados da conta Google:</strong> email e nome associados à conta usada para autenticação. Não acedemos a contactos, emails, calendários ou qualquer outro dado da conta Google.</li>
+                <li><strong>Dados de agenda:</strong> nomes de clientes, números de telefone (opcionais), datas, horas, serviços e valores que tu próprio introduzes na app.</li>
+                <li><strong>Notas e preferências:</strong> notas internas sobre clientes e preferências de serviço que decides registar.</li>
+                <li><strong>Preferências da app:</strong> tema de cor escolhido e ativação do modo escuro.</li>
+            </ul>
+            <div class="highlight-box">
+                <span class="icon">ℹ️</span>
+                Não recolhemos dados de localização, não acedemos à câmara, microfone, contactos do telemóvel, nem a qualquer sensor do dispositivo.
+            </div>
+        </div>
 
-<!-- CTA -->
-<section class="cta-section">
-  <h2 class="cta-title">Pronto para organizar o teu negócio?</h2>
-  <p class="cta-sub">Junta-te a centenas de profissionais que já usam a AtuAgendaPontual todos os dias.</p>
-  <a class="btn-cta" href="#"><i class="fab fa-google-play"></i> Descarregar agora — 2,99€</a>
-  <div style="margin-top:16px;font-size:.82rem;opacity:.7">Pagamento único · Sem subscrições · Atualizações incluídas</div>
-</section>
+        <div class="section" id="como-usamos">
+            <div class="section-header">
+                <div class="section-icon">⚙️</div>
+                <h2>Como usamos os dados</h2>
+            </div>
+            <p>Os dados recolhidos são usados exclusivamente para:</p>
+            <ul>
+                <li>Permitir o funcionamento da app — mostrar a tua agenda, histórico de clientes e balanço financeiro.</li>
+                <li>Sincronizar os dados entre dispositivos através da cloud Firebase.</li>
+                <li>Enviar notificações de lembretes de compromissos, caso atives esta funcionalidade.</li>
+                <li>Preservar as tuas preferências de interface (tema, modo escuro).</li>
+            </ul>
+            <p><strong>Não usamos os teus dados para fins publicitários, análise de comportamento, machine learning, nem para qualquer outro propósito comercial.</strong></p>
+        </div>
+
+        <div class="section" id="onde-guardamos">
+            <div class="section-header">
+                <div class="section-icon">☁️</div>
+                <h2>Onde guardamos os dados</h2>
+            </div>
+            <p>Os dados são guardados em dois locais:</p>
+            <ul>
+                <li><strong>Firebase Firestore (Google Cloud):</strong> os dados da tua agenda, clientes e notas são guardados na cloud Firebase, associados ao teu UID de utilizador. Os servidores Firebase estão localizados na União Europeia ou nos EUA, conforme a configuração do projeto.</li>
+                <li><strong>Dispositivo local:</strong> uma cópia em cache é guardada no armazenamento local do teu telemóvel para permitir o funcionamento offline. Esta cache é protegida pelas políticas de segurança do Android.</li>
+            </ul>
+            <div class="highlight-box">
+                <span class="icon">🔐</span>
+                Cada utilizador só consegue aceder aos seus próprios dados. As regras de segurança do Firebase garantem que nenhum utilizador pode ler ou modificar dados de outro utilizador.
+            </div>
+        </div>
+
+        <div class="section" id="partilha">
+            <div class="section-header">
+                <div class="section-icon">🤝</div>
+                <h2>Partilha de dados</h2>
+            </div>
+            <p><strong>Não vendemos, não alugamos e não partilhamos os teus dados com terceiros.</strong></p>
+            <p>Os únicos serviços de terceiros que têm acesso técnico aos dados são:</p>
+            <ul>
+                <li><strong>Google Firebase:</strong> plataforma de base de dados e autenticação. Política de privacidade disponível em <a href="https://firebase.google.com/support/privacy" target="_blank" style="color:var(--primary);">firebase.google.com/support/privacy</a>.</li>
+                <li><strong>Google Sign-In:</strong> usado para autenticação. A Google apenas confirma a identidade — não partilha dados da conta com a app além do email e nome.</li>
+            </ul>
+            <p>Estes serviços são utilizados exclusivamente para o funcionamento técnico da app, não para fins de marketing ou análise.</p>
+        </div>
+
+        <div class="section" id="direitos">
+            <div class="section-header">
+                <div class="section-icon">⚖️</div>
+                <h2>Os teus direitos (RGPD)</h2>
+            </div>
+            <p>Ao abrigo do Regulamento Geral sobre a Proteção de Dados (RGPD), tens os seguintes direitos:</p>
+            <ul>
+                <li><strong>Acesso:</strong> podes consultar todos os dados que guardaste na app a qualquer momento, diretamente na interface.</li>
+                <li><strong>Exportação:</strong> podes exportar todos os teus dados em formato JSON através da função <em>Backup</em> nas definições da app.</li>
+                <li><strong>Retificação:</strong> podes editar ou corrigir qualquer dado diretamente na app.</li>
+                <li><strong>Eliminação:</strong> podes eliminar qualquer compromisso, nota ou cliente diretamente na app. Para eliminar a conta completa e todos os dados associados, contacta-nos por email.</li>
+                <li><strong>Portabilidade:</strong> os dados exportados via Backup estão em formato JSON legível, podendo ser importados para outros sistemas.</li>
+                <li><strong>Oposição:</strong> podes deixar de usar a app e solicitar a eliminação de todos os dados a qualquer momento.</li>
+            </ul>
+        </div>
+
+        <div class="section" id="retencao">
+            <div class="section-header">
+                <div class="section-icon">🗓️</div>
+                <h2>Retenção de dados</h2>
+            </div>
+            <p>Os dados são mantidos enquanto tiveres uma conta ativa na app. Se solicitares a eliminação da conta, todos os dados associados ao teu UID serão eliminados permanentemente da base de dados Firebase no prazo de 30 dias.</p>
+            <p>A cache local no teu dispositivo pode ser eliminada a qualquer momento através das definições do Android em <em>Definições → Apps → AtuAgenda → Armazenamento → Limpar dados</em>.</p>
+        </div>
+
+        <div class="section" id="seguranca">
+            <div class="section-header">
+                <div class="section-icon">🛡️</div>
+                <h2>Segurança</h2>
+            </div>
+            <p>Implementámos as seguintes medidas de segurança para proteger os teus dados:</p>
+            <ul>
+                <li>Autenticação obrigatória — nenhum dado é acessível sem login.</li>
+                <li>Regras de segurança Firebase que isolam cada utilizador — nenhum utilizador acede a dados de outro.</li>
+                <li>Comunicação encriptada HTTPS entre a app e os servidores Firebase.</li>
+                <li>Sem armazenamento de passwords — a autenticação é delegada inteiramente à Google.</li>
+            </ul>
+        </div>
+
+        <div class="section" id="menores">
+            <div class="section-header">
+                <div class="section-icon">👶</div>
+                <h2>Menores de idade</h2>
+            </div>
+            <p>A AtuAgenda é uma aplicação destinada a uso profissional e não é direcionada a menores de 16 anos. Não recolhemos conscientemente dados de menores. Se tomares conhecimento de que um menor nos forneceu dados pessoais, contacta-nos para que possamos proceder à sua eliminação imediata.</p>
+        </div>
+
+        <div class="section" id="alteracoes">
+            <div class="section-header">
+                <div class="section-icon">📝</div>
+                <h2>Alterações a esta política</h2>
+            </div>
+            <p>Podemos atualizar esta política de privacidade ocasionalmente para refletir alterações na app ou na legislação aplicável. Quando o fizermos, atualizaremos a data de "última atualização" no topo desta página.</p>
+            <p>Para alterações significativas, notificaremos os utilizadores ativos através de um aviso dentro da app. Recomendamos que consultes esta página periodicamente.</p>
+        </div>
+
+        <div class="section" id="contacto">
+            <div class="section-header">
+                <div class="section-icon">✉️</div>
+                <h2>Contacto</h2>
+            </div>
+            <p>Para qualquer questão relacionada com privacidade, pedidos de eliminação de dados ou exercício dos teus direitos ao abrigo do RGPD:</p>
+            <div class="contact-box">
+                <h3>AtuAgenda — Privacidade</h3>
+                <p>Respondemos a todos os pedidos no prazo máximo de 72 horas.</p>
+                <a href="mailto:atuagendapontual@gmail.com">atuagendapontual@gmail.com</a>
+            </div>
+        </div>
+
+    </main>
+</div>
 
 <footer>
-  <div class="footer-logo"><i class="fas fa-calendar-check"></i> AtuAgendaPontual</div>
-  <div class="footer-links">
-    <a href="#">Política de Privacidade</a>
-    <a href="#">Termos de Uso</a>
-    <a href="#">Suporte</a>
-    <a href="mailto:atuagendapontual@gmail.com">atuagendapontual@gmail.com</a>
-  </div>
-  <div class="footer-copy">© 2026 AtuAgendaPontual · Feito em Portugal 🇵🇹</div>
+    <div class="footer-inner">
+        <div class="footer-links">
+            <a href="index.html">Início</a>
+            <a href="privacy.html" class="active">Política de Privacidade</a>
+            <a href="terms.html">Termos de Uso</a>
+            <a href="mailto:atuagendapontual@gmail.com">Suporte</a>
+        </div>
+        <p>© 2026 AtuAgenda · Feito em Portugal 🇵🇹 · Todos os direitos reservados</p>
+    </div>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-function toggleFaq(el){
-  const item=el.parentElement;
-  item.classList.toggle('open');
-}
-// Smooth nav highlight
-const sections=document.querySelectorAll('section[id]');
-const navLinks=document.querySelectorAll('.nav-link');
-window.addEventListener('scroll',()=>{
-  let current='';
-  sections.forEach(s=>{if(window.scroll
+</body>
+</html>
