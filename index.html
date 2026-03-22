@@ -230,7 +230,31 @@
 
         /* ── PRICING ── */
         #pricing { background: var(--white); }
-        .pricing-wrap { max-width: 480px; margin: 0 auto; }
+        .pricing-wrap { max-width: 860px; margin: 0 auto; }
+        .pricing-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+        @media(max-width:640px){ .pricing-grid { grid-template-columns: 1fr; } }
+        .pricing-card-free { opacity: 0.92; }
+        .pricing-tag-free {
+            display: inline-block; background: #f3f4f6; color: #6b7280;
+            border: 1px solid #e5e7eb; border-radius: 20px;
+            padding: 5px 14px; font-size: 0.78rem; font-weight: 700;
+            margin-bottom: 20px; letter-spacing: 0.04em; text-transform: uppercase;
+        }
+        .pricing-tag-paid {
+            display: inline-block; background: var(--primary-50); color: var(--primary);
+            border: 1px solid var(--primary-100); border-radius: 20px;
+            padding: 5px 14px; font-size: 0.78rem; font-weight: 700;
+            margin-bottom: 20px; letter-spacing: 0.04em; text-transform: uppercase;
+        }
+        .pricing-feature-locked { color: #d1d5db !important; text-decoration: line-through; }
+        .pricing-btn-free {
+            display: flex; align-items: center; justify-content: center; gap: 8px;
+            width: 100%; padding: 16px; border-radius: 14px;
+            background: #f3f4f6; color: #374151;
+            border: 2px solid #e5e7eb; font-size: 1rem; font-weight: 700;
+            text-decoration: none; transition: all 0.2s;
+        }
+        .pricing-btn-free:hover { background: #e5e7eb; }
         .pricing-card {
             background: var(--white); border: 2px solid var(--primary-200);
             border-radius: 24px; padding: 40px; text-align: center;
@@ -337,7 +361,7 @@
             <li><a href="#features">Funcionalidades</a></li>
             <li><a href="#pricing">Preço</a></li>
             <li><a href="#faq">FAQ</a></li>
-            <li><a href="#pricing" class="nav-cta">Descarregar</a></li>
+            <li><a href="#pricing" class="nav-cta">Grátis</a></li>
         </ul>
     </div>
 </nav>
@@ -358,9 +382,9 @@
             </a>
         </div>
         <div class="hero-pills">
-            <div class="hero-pill">✓ <span>Pagamento único</span></div>
-            <div class="hero-pill">✓ <span>Sem subscrições</span></div>
-            <div class="hero-pill">✓ <span>Backup automático</span></div>
+            <div class="hero-pill">✓ <span>Grátis para começar</span></div>
+            <div class="hero-pill">✓ <span>Premium sem subscrição</span></div>
+            <div class="hero-pill">✓ <span>Backup na cloud</span></div>
             <div class="hero-pill">✓ <span>Login com Google</span></div>
         </div>
     </div>
@@ -515,7 +539,7 @@
             <div class="step">
                 <div class="step-num">1</div>
                 <div class="step-title">Descarrega a app</div>
-                <p class="step-desc">Disponível na Google Play Store para Android. Um pagamento único, sem mensalidades.</p>
+                <p class="step-desc">Disponível na Google Play Store para Android. Gratuito para começar, sem necessidade de cartão.</p>
             </div>
             <div class="step">
                 <div class="step-num">2</div>
@@ -541,29 +565,59 @@
     <div class="section-inner">
         <div class="section-header" style="text-align:center;">
             <div class="section-label">Preço</div>
-            <h2 class="section-title">Sem surpresas, sem subscrições</h2>
-            <p class="section-sub" style="margin:0 auto;">Paga uma vez, usa para sempre. Sem mensalidades, sem limites de utilização.</p>
+            <h2 class="section-title">Começa grátis, cresce quando precisares</h2>
+            <p class="section-sub" style="margin:0 auto;">Experimenta sem compromisso. Quando quiseres mais, paga uma vez e tens tudo para sempre.</p>
         </div>
         <div class="pricing-wrap">
-            <div class="pricing-card">
-                <div class="pricing-badge">⚡ Acesso completo vitalício</div>
-                <div class="pricing-price"><sup>€</sup>3,99</div>
-                <div class="pricing-period">pagamento único · sem renovações</div>
-                <ul class="pricing-features">
-                    <li>Agendamentos ilimitados</li>
-                    <li>Backup automático na cloud</li>
-                    <li>Histórico completo de clientes</li>
-                    <li>Balanço anual com exportação PDF e Excel</li>
-                    <li>Serviços personalizáveis</li>
-                    <li>Lembretes de compromissos</li>
-                    <li>Modo escuro e 6 temas de cor</li>
-                    <li>Todas as atualizações futuras incluídas</li>
-                </ul>
-                <!-- SUBSTITUI O # PELO LINK DA PLAY STORE QUANDO PUBLICARES -->
-                <a href="#" class="pricing-btn">
-                    Comprar na Google Play — 3,99€
-                </a>
-                <p class="pricing-note">Processado com segurança pela Google Play · Reembolso em 48h se não ficares satisfeito</p>
+            <div class="pricing-grid">
+
+                <!-- PLANO FREE -->
+                <div class="pricing-card pricing-card-free">
+                    <div class="pricing-tag-free">Gratuito</div>
+                    <div class="pricing-price"><sup>€</sup>0</div>
+                    <div class="pricing-period">para sempre · sem cartão</div>
+                    <ul class="pricing-features">
+                        <li>Agenda diária e calendário</li>
+                        <li>Até 30 compromissos por mês</li>
+                        <li>Até 10 clientes</li>
+                        <li>Serviços personalizáveis</li>
+                        <li>Modo escuro e 6 temas de cor</li>
+                        <li class="pricing-feature-locked">Backup automático na cloud</li>
+                        <li class="pricing-feature-locked">Histórico completo de clientes</li>
+                        <li class="pricing-feature-locked">Balanço anual PDF e Excel</li>
+                        <li class="pricing-feature-locked">Lembretes de compromissos</li>
+                        <li class="pricing-feature-locked">Estatísticas do negócio</li>
+                    </ul>
+                    <!-- SUBSTITUI O # PELO LINK DA PLAY STORE QUANDO PUBLICARES -->
+                    <a href="#" class="pricing-btn-free">
+                        Descarregar grátis
+                    </a>
+                    <p class="pricing-note">Sem cartão. Sem compromisso.</p>
+                </div>
+
+                <!-- PLANO PREMIUM -->
+                <div class="pricing-card">
+                    <div class="pricing-tag-paid">⚡ Premium</div>
+                    <div class="pricing-price"><sup>€</sup>4,99</div>
+                    <div class="pricing-period">pagamento único · acesso vitalício</div>
+                    <ul class="pricing-features">
+                        <li>Tudo do plano gratuito</li>
+                        <li><strong>Compromissos ilimitados</strong></li>
+                        <li><strong>Clientes ilimitados</strong></li>
+                        <li><strong>Backup automático na cloud</strong></li>
+                        <li><strong>Histórico completo de clientes</strong></li>
+                        <li><strong>Balanço anual PDF e Excel</strong></li>
+                        <li><strong>Lembretes de compromissos</strong></li>
+                        <li><strong>Estatísticas do negócio</strong></li>
+                        <li>Todas as atualizações futuras incluídas</li>
+                    </ul>
+                    <!-- SUBSTITUI O # PELO LINK DA PLAY STORE QUANDO PUBLICARES -->
+                    <a href="#" class="pricing-btn">
+                        Comprar na Google Play — 4,99€
+                    </a>
+                    <p class="pricing-note">Processado com segurança pela Google Play · Reembolso em 48h</p>
+                </div>
+
             </div>
         </div>
     </div>
@@ -591,8 +645,8 @@
                 <p class="faq-a">Sim. Como os dados ficam na cloud, podes usar a mesma conta em vários telemóveis Android e os dados ficam sempre sincronizados.</p>
             </div>
             <div class="faq-item">
-                <div class="faq-q">Há alguma taxa mensal ou anual?</div>
-                <p class="faq-a">Não. O pagamento é único de 3,99€ e inclui todas as funcionalidades e atualizações futuras para sempre. Sem surpresas.</p>
+                <div class="faq-q">A versão gratuita tem limites?</div>
+                <p class="faq-a">Sim. A versão gratuita inclui até 30 compromissos por mês e até 10 clientes. Para uso ilimitado com backup, histórico completo, balanço e lembretes, o upgrade Premium custa 4,99€ — pagamento único, sem mensalidades.</p>
             </div>
             <div class="faq-item">
                 <div class="faq-q">Para que tipo de negócios funciona?</div>
@@ -609,13 +663,13 @@
 <!-- CTA -->
 <div class="cta-section">
     <div class="cta-inner">
-        <h2>Pronto para organizar o teu negócio?</h2>
-        <p>Junta-te a profissionais que já usam a AtuAgenda todos os dias para gerir a sua agenda, clientes e faturação.</p>
+        <h2>Começa grátis hoje mesmo</h2>
+        <p>Descarrega grátis e começa a usar hoje. Quando precisares de mais, o upgrade é um pagamento único de 4,99€ — sem mensalidades, sem surpresas.</p>
         <!-- SUBSTITUI O # PELO LINK DA PLAY STORE QUANDO PUBLICARES -->
         <a href="#" class="cta-btn">
-            Descarregar agora — 3,99€
+            Descarregar grátis
         </a>
-        <p class="cta-sub">Pagamento único · Sem subscrições · Atualizações incluídas</p>
+        <p class="cta-sub">Grátis para sempre · Premium 4,99€ único · Sem mensalidades</p>
     </div>
 </div>
 
@@ -629,12 +683,5 @@
         <div class="footer-links">
             <a href="privacy.html">Política de Privacidade</a>
             <a href="terms.html">Termos de Uso</a>
-            <a href="mailto:atuagendapontual@gmail.com">Suporte</a>
-            <a href="mailto:atuagendapontual@gmail.com">atuagendapontual@gmail.com</a>
-        </div>
-        <div class="footer-copy">© 2026 AtuAgenda · Feito em Portugal 🇵🇹 · Todos os direitos reservados</div>
-    </div>
-</footer>
-
-</body>
-</html>
+            <a href="/cdn-cgi/l/email-protection#1f7e6b6a7e787a717b7e6f70716b6a7e735f78727e7673317c7072">Suporte</a>
+            <a href="/cdn-cgi/l/email-protection#442530312523212a2025342b2a30312528042329252d286a272b29"><span class="__cf_email__" data-cfemail="412035342026242f2520312e2f3534202d01262c20282d6f222e2c">[email&#
