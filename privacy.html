@@ -354,6 +354,7 @@
             <a href="#quem-somos">Quem somos</a>
             <a href="#dados-recolhidos">Dados recolhidos</a>
             <a href="#como-usamos">Como usamos</a>
+            <a href="#planos">Planos</a>
             <a href="#onde-guardamos">Onde guardamos</a>
             <a href="#partilha">Partilha de dados</a>
             <a href="#direitos">Os teus direitos</a>
@@ -373,7 +374,7 @@
                 <h2>Quem somos</h2>
             </div>
             <p>A <strong>AtuAgenda</strong> é uma aplicação Android de gestão de agendamentos desenvolvida para profissionais independentes portugueses — cabeleireiros, esteticistas, barbeiros, personal trainers e outros prestadores de serviços baseados em marcações.</p>
-            <p>O responsável pelo tratamento de dados é o desenvolvedor da aplicação, contactável através do email <strong>atuagendapontual@gmail.com</strong>.</p>
+            <p>O responsável pelo tratamento de dados é o desenvolvedor da aplicação, contactável através do email <strong><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="83e2f7f6e2e4e6ede7e2f3ecedf7f6e2efc3e4eee2eaefade0ecee">[email&#160;protected]</a></strong>.</p>
         </div>
 
         <div class="section" id="dados-recolhidos">
@@ -409,6 +410,22 @@
             <p><strong>Não usamos os teus dados para fins publicitários, análise de comportamento, machine learning, nem para qualquer outro propósito comercial.</strong></p>
         </div>
 
+        <div class="section" id="planos">
+            <div class="section-header">
+                <div class="section-icon">⚡</div>
+                <h2>Planos gratuito e premium</h2>
+            </div>
+            <p>A AtuAgenda está disponível em duas versões:</p>
+            <ul>
+                <li><strong>Plano Gratuito:</strong> permite criar até 20 compromissos no total e guardar até 10 clientes. Este limite é acumulado e não repõe — mesmo que apagues compromissos, o contador não desce. Este mecanismo é guardado de forma segura na cloud e também localmente, funcionando mesmo sem internet.</li>
+                <li><strong>Plano Premium (7,99€ único):</strong> acesso ilimitado a todas as funcionalidades, incluindo compromissos ilimitados, backup automático, histórico completo, balanço anual e lembretes.</li>
+            </ul>
+            <div class="highlight-box">
+                <span class="icon">ℹ️</span>
+                O contador de compromissos criados é guardado no Firebase e em cache local — desinstalar e reinstalar a app não repõe este contador.
+            </div>
+        </div>
+
         <div class="section" id="onde-guardamos">
             <div class="section-header">
                 <div class="section-icon">☁️</div>
@@ -417,7 +434,7 @@
             <p>Os dados são guardados em dois locais:</p>
             <ul>
                 <li><strong>Firebase Firestore (Google Cloud):</strong> os dados da tua agenda, clientes e notas são guardados na cloud Firebase, associados ao teu UID de utilizador. Os servidores Firebase estão localizados na União Europeia ou nos EUA, conforme a configuração do projeto.</li>
-                <li><strong>Dispositivo local:</strong> uma cópia em cache é guardada no armazenamento local do teu telemóvel para permitir o funcionamento offline. Esta cache é protegida pelas políticas de segurança do Android.</li>
+                <li><strong>Dispositivo local (cache):</strong> após o primeiro login, uma cópia dos dados é guardada no armazenamento local do teu telemóvel. Isto permite que a app funcione mesmo sem ligação à internet — os dados são sincronizados automaticamente quando a ligação for restabelecida. A sessão de login também é guardada localmente, permitindo abrir a app sem internet sem necessidade de novo login.</li>
             </ul>
             <div class="highlight-box">
                 <span class="icon">🔐</span>
@@ -461,7 +478,7 @@
                 <h2>Retenção de dados</h2>
             </div>
             <p>Os dados são mantidos enquanto tiveres uma conta ativa na app. Se solicitares a eliminação da conta, todos os dados associados ao teu UID serão eliminados permanentemente da base de dados Firebase no prazo de 30 dias.</p>
-            <p>A cache local no teu dispositivo pode ser eliminada a qualquer momento através das definições do Android em <em>Definições → Apps → AtuAgenda → Armazenamento → Limpar dados</em>.</p>
+            <p>A cache local no teu dispositivo pode ser eliminada a qualquer momento através das definições do Android em <em>Definições → Apps → AtuAgenda → Armazenamento → Limpar dados</em>. Note que limpar os dados da app elimina a sessão guardada — será necessário fazer login novamente na próxima utilização.</p>
         </div>
 
         <div class="section" id="seguranca">
@@ -504,7 +521,7 @@
             <div class="contact-box">
                 <h3>AtuAgenda — Privacidade</h3>
                 <p>Respondemos a todos os pedidos no prazo máximo de 72 horas.</p>
-                <a href="mailto:atuagendapontual@gmail.com">atuagendapontual@gmail.com</a>
+                <a href="/cdn-cgi/l/email-protection#214055544046444f4540514e4f5554404d61464c40484d0f424e4c"><span class="__cf_email__" data-cfemail="4e2f3a3b2f292b202a2f3e21203a3b2f220e29232f2722602d2123">[email&#160;protected]</span></a>
             </div>
         </div>
 
@@ -515,13 +532,4 @@
     <div class="footer-inner">
         <div class="footer-links">
             <a href="index.html">Início</a>
-            <a href="privacy.html" class="active">Política de Privacidade</a>
-            <a href="terms.html">Termos de Uso</a>
-            <a href="mailto:atuagendapontual@gmail.com">Suporte</a>
-        </div>
-        <p>© 2026 AtuAgenda · Feito em Portugal 🇵🇹 · Todos os direitos reservados</p>
-    </div>
-</footer>
-
-</body>
-</html>
+            <a href="privacy.html" class="active">Política de Priva
