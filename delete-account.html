@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eliminar Conta — AtuAgenda</title>
+    <link rel="icon" href="favicon.ico">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'DM Sans', sans-serif; background: #fafafa; color: #1a1a2e; line-height: 1.6; }
+        .header { background: linear-gradient(135deg, #7C5CFC, #5530CC); padding: 40px 24px; text-align: center; }
+        .header h1 { color: white; font-size: 1.8rem; font-weight: 800; letter-spacing: -0.02em; }
+        .header p { color: rgba(255,255,255,0.7); margin-top: 8px; }
+        .container { max-width: 680px; margin: 0 auto; padding: 40px 24px; }
+        .card { background: white; border-radius: 16px; padding: 28px; margin-bottom: 20px; border: 1px solid #e8e4ff; box-shadow: 0 2px 12px rgba(105,65,232,0.06); }
+        h2 { font-size: 1.1rem; font-weight: 700; color: #6941E8; margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
+        p { color: #4a4a6a; font-size: 0.95rem; margin-bottom: 10px; }
+        ol, ul { margin-left: 20px; color: #4a4a6a; font-size: 0.95rem; }
+        ol li, ul li { margin-bottom: 8px; }
+        .email-box { background: #f3f0ff; border: 2px solid #c9bbff; border-radius: 12px; padding: 16px 20px; text-align: center; margin-top: 16px; }
+        .email-box a { color: #6941E8; font-weight: 700; font-size: 1rem; text-decoration: none; }
+        .warning { background: #fff7ed; border-left: 4px solid #f59e0b; border-radius: 0 10px 10px 0; padding: 14px 18px; margin-top: 16px; font-size: 0.88rem; color: #92400e; }
+        .tag { display: inline-block; background: #f3f0ff; color: #6941E8; border: 1px solid #c9bbff; border-radius: 20px; padding: 3px 12px; font-size: 0.8rem; font-weight: 600; margin: 3px; }
+        footer { text-align: center; padding: 30px; color: #a8a8c0; font-size: 0.82rem; border-top: 1px solid #e8e4ff; margin-top: 20px; }
+        footer a { color: #6941E8; text-decoration: none; }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <h1>📅 AtuAgenda</h1>
+    <p>Eliminação de Conta e Dados</p>
+</div>
+
+<div class="container">
+
+    <div class="card">
+        <h2>🗑️ Como pedir a eliminação da conta</h2>
+        <p>Para pedir a eliminação da tua conta AtuAgenda e de todos os dados associados, segue estes passos:</p>
+        <ol>
+            <li>Envia um email para o endereço indicado abaixo com o assunto <strong>"Eliminação de Conta AtuAgenda"</strong></li>
+            <li>Indica o <strong>email associado à tua conta</strong> (Google ou email/password)</li>
+            <li>Aguarda a confirmação — o processo é concluído no prazo de <strong>30 dias</strong></li>
+        </ol>
+        <div class="email-box">
+            <p style="font-size:0.85rem;color:#6b6b8a;margin-bottom:6px;">Envia o pedido para:</p>
+            <a href="/cdn-cgi/l/email-protection#204154554147454e4441504f4e5455414c60474d41494c0e434f4d1f5355424a4543541d654c494d494e41e387e3834f00444500634f4e5441006154556147454e4441"><span class="__cf_email__" data-cfemail="234257564244464d4742534c4d5756424f63444e424a4f0d404c4e">[email&#160;protected]</span></a>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>📦 Dados que são eliminados</h2>
+        <p>Quando a conta é eliminada, os seguintes dados são <strong>permanentemente removidos</strong> da base de dados Firebase:</p>
+        <ul>
+            <li>Todos os compromissos e agendamentos</li>
+            <li>Histórico de clientes e notas</li>
+            <li>Notas pessoais e marcadores de dias</li>
+            <li>Configurações de serviços e trabalho</li>
+            <li>Dados do plano (gratuito ou premium)</li>
+            <li>Conta de autenticação Firebase</li>
+        </ul>
+        <div style="margin-top:14px;">
+            <span class="tag">Compromissos</span>
+            <span class="tag">Clientes</span>
+            <span class="tag">Notas</span>
+            <span class="tag">Configurações</span>
+            <span class="tag">Conta</span>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>📋 Dados que podem ser mantidos</h2>
+        <p>Nenhum dado pessoal é mantido após a eliminação da conta. Os dados são eliminados na totalidade no prazo de <strong>30 dias</strong> após a confirmação do pedido.</p>
+        <div class="warning">
+            ⚠️ A eliminação da conta é <strong>irreversível</strong>. Recomendamos que exportes um backup dos teus dados antes de pedir a eliminação (Menu → Backup → Exportar Backup).
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>❓ Alternativa: eliminar só os dados</h2>
+        <p>Se pretenderes eliminar apenas os teus dados sem eliminar a conta, podes fazê-lo diretamente na app:</p>
+        <ol>
+            <li>Abre o menu de utilizador (avatar no canto superior direito)</li>
+            <li>Vai a <strong>Dados → Limpar período</strong> para eliminar compromissos de um período</li>
+            <li>Para eliminar tudo, seleciona o intervalo completo de datas</li>
+        </ol>
+    </div>
+
+</div>
+
+<footer>
+    <p>
+        <a href="index.html">Início</a> ·
+        <a href="privacy.html">Política de Privacidade</a> ·
+        <a href="terms.html">Termos de Uso</a> ·
+        <a href="delete-account.html" style="color:#6941E8;font-weight:600;">Eliminar Conta</a> ·
+        <a href="mailto:atuagendapontual@gmail.com">Suporte</a>
+    </p>
+    <p style="margin-top:6px;">© 2026 AtuAgenda · Feito em Portugal 🇵🇹</p>
+</footer>E html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eliminar Conta — AtuAgenda</title>
+    <link rel="icon" href="favicon.ico">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'DM Sans', sans-serif; background: #fafafa; color: #1a1a2e; line-height: 1.6; }
+        .header { background: linear-gradient(135deg, #7C5CFC, #5530CC); padding: 40px 24px; text-align: center; }
+        .header h1 { color: white; font-size: 1.8rem; font-weight: 800; letter-spacing: -0.02em; }
+        .header p { color: rgba(255,255,255,0.7); margin-top: 8px; }
+        .container { max-width: 680px; margin: 0 auto; padding: 40px 24px; }
+        .card { background: white; border-radius: 16px; padding: 28px; margin-bottom: 20px; border: 1px solid #e8e4ff; box-shadow: 0 2px 12px rgba(105,65,232,0.06); }
+        h2 { font-size: 1.1rem; font-weight: 700; color: #6941E8; margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
+        p { color: #4a4a6a; font-size: 0.95rem; margin-bottom: 10px; }
+        ol, ul { margin-left: 20px; color: #4a4a6a; font-size: 0.95rem; }
+        ol li, ul li { margin-bottom: 8px; }
+        .email-box { background: #f3f0ff; border: 2px solid #c9bbff; border-radius: 12px; padding: 16px 20px; text-align: center; margin-top: 16px; }
+        .email-box a { color: #6941E8; font-weight: 700; font-size: 1rem; text-decoration: none; }
+        .warning { background: #fff7ed; border-left: 4px solid #f59e0b; border-radius: 0 10px 10px 0; padding: 14px 18px; margin-top: 16px; font-size: 0.88rem; color: #92400e; }
+        .tag { display: inline-block; background: #f3f0ff; color: #6941E8; border: 1px solid #c9bbff; border-radius: 20px; padding: 3px 12px; font-size: 0.8rem; font-weight: 600; margin: 3px; }
+        footer { text-align: center; padding: 30px; color: #a8a8c0; font-size: 0.82rem; border-top: 1px solid #e8e4ff; margin-top: 20px; }
+        footer a { color: #6941E8; text-decoration: none; }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <h1>📅 AtuAgenda</h1>
+    <p>Eliminação de Conta e Dados</p>
+</div>
+
+<div class="container">
+
+    <div class="card">
+        <h2>🗑️ Como pedir a eliminação da conta</h2>
+        <p>Para pedir a eliminação da tua conta AtuAgenda e de todos os dados associados, segue estes passos:</p>
+        <ol>
+            <li>Envia um email para o endereço indicado abaixo com o assunto <strong>"Eliminação de Conta AtuAgenda"</strong></li>
+            <li>Indica o <strong>email associado à tua conta</strong> (Google ou email/password)</li>
+            <li>Aguarda a confirmação — o processo é concluído no prazo de <strong>30 dias</strong></li>
+        </ol>
+        <div class="email-box">
+            <p style="font-size:0.85rem;color:#6b6b8a;margin-bottom:6px;">Envia o pedido para:</p>
+            <a href="/cdn-cgi/l/email-protection#204154554147454e4441504f4e5455414c60474d41494c0e434f4d1f5355424a4543541d654c494d494e41e387e3834f00444500634f4e5441006154556147454e4441"><span class="__cf_email__" data-cfemail="234257564244464d4742534c4d5756424f63444e424a4f0d404c4e">[email&#160;protected]</span></a>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>📦 Dados que são eliminados</h2>
+        <p>Quando a conta é eliminada, os seguintes dados são <strong>permanentemente removidos</strong> da base de dados Firebase:</p>
+        <ul>
+            <li>Todos os compromissos e agendamentos</li>
+            <li>Histórico de clientes e notas</li>
+            <li>Notas pessoais e marcadores de dias</li>
+            <li>Configurações de serviços e trabalho</li>
+            <li>Dados do plano (gratuito ou premium)</li>
+            <li>Conta de autenticação Firebase</li>
+        </ul>
+        <div style="margin-top:14px;">
+            <span class="tag">Compromissos</span>
+            <span class="tag">Clientes</span>
+            <span class="tag">Notas</span>
+            <span class="tag">Configurações</span>
+            <span class="tag">Conta</span>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>📋 Dados que podem ser mantidos</h2>
+        <p>Nenhum dado pessoal é mantido após a eliminação da conta. Os dados são eliminados na totalidade no prazo de <strong>30 dias</strong> após a confirmação do pedido.</p>
+        <div class="warning">
+            ⚠️ A eliminação da conta é <strong>irreversível</strong>. Recomendamos que exportes um backup dos teus dados antes de pedir a eliminação (Menu → Backup → Exportar Backup).
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>❓ Alternativa: eliminar só os dados</h2>
+        <p>Se pretenderes eliminar apenas os teus dados sem eliminar a conta, podes fazê-lo diretamente na app:</p>
+        <ol>
+            <li>Abre o menu de utilizador (avatar no canto superior direito)</li>
+            <li>Vai a <strong>Dados → Limpar período</strong> para eliminar compromissos de um período</li>
+            <li>Para eliminar tudo, seleciona o intervalo completo de datas</li>
+        </ol>
+    </div>
+
+</div>
+
+<footer>
+    <p>AtuAgenda · <a href="privacy.ht
