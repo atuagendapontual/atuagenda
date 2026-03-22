@@ -5,189 +5,433 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Eliminar Conta — AtuAgenda</title>
     <link rel="icon" href="favicon.ico">
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --primary: #6941E8;
+            --primary-light: #7C5CFC;
+            --primary-dark: #5530CC;
+            --primary-50: #F3F0FF;
+            --primary-100: #E4DEFF;
+            --text: #1a1a2e;
+            --text-secondary: #4a4a6a;
+            --text-muted: #8888aa;
+            --border: #e8e4ff;
+            --bg: #fafafa;
+            --white: #ffffff;
+            --gradient: linear-gradient(135deg, #6941E8, #5530CC);
+        }
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'DM Sans', sans-serif; background: #fafafa; color: #1a1a2e; line-height: 1.6; }
-        .header { background: linear-gradient(135deg, #7C5CFC, #5530CC); padding: 40px 24px; text-align: center; }
-        .header h1 { color: white; font-size: 1.8rem; font-weight: 800; letter-spacing: -0.02em; }
-        .header p { color: rgba(255,255,255,0.7); margin-top: 8px; }
-        .container { max-width: 680px; margin: 0 auto; padding: 40px 24px; }
-        .card { background: white; border-radius: 16px; padding: 28px; margin-bottom: 20px; border: 1px solid #e8e4ff; box-shadow: 0 2px 12px rgba(105,65,232,0.06); }
-        h2 { font-size: 1.1rem; font-weight: 700; color: #6941E8; margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
-        p { color: #4a4a6a; font-size: 0.95rem; margin-bottom: 10px; }
-        ol, ul { margin-left: 20px; color: #4a4a6a; font-size: 0.95rem; }
-        ol li, ul li { margin-bottom: 8px; }
-        .email-box { background: #f3f0ff; border: 2px solid #c9bbff; border-radius: 12px; padding: 16px 20px; text-align: center; margin-top: 16px; }
-        .email-box a { color: #6941E8; font-weight: 700; font-size: 1rem; text-decoration: none; }
-        .warning { background: #fff7ed; border-left: 4px solid #f59e0b; border-radius: 0 10px 10px 0; padding: 14px 18px; margin-top: 16px; font-size: 0.88rem; color: #92400e; }
-        .tag { display: inline-block; background: #f3f0ff; color: #6941E8; border: 1px solid #c9bbff; border-radius: 20px; padding: 3px 12px; font-size: 0.8rem; font-weight: 600; margin: 3px; }
-        footer { text-align: center; padding: 30px; color: #a8a8c0; font-size: 0.82rem; border-top: 1px solid #e8e4ff; margin-top: 20px; }
-        footer a { color: #6941E8; text-decoration: none; }
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+            font-size: 1rem;
+        }
+
+        /* NAV */
+        nav {
+            background: var(--white);
+            border-bottom: 1px solid var(--border);
+            padding: 0 24px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .nav-inner {
+            max-width: 900px;
+            margin: 0 auto;
+            height: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+        .nav-logo-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            background: var(--gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+        }
+        .nav-back {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            text-decoration: none;
+            color: var(--text-muted);
+            font-size: 0.88rem;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        .nav-back:hover { color: var(--primary); }
+
+        /* HERO */
+        .hero {
+            background: var(--white);
+            border-bottom: 1px solid var(--border);
+            padding: 56px 24px 48px;
+        }
+        .hero-inner {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: var(--primary-50);
+            color: var(--primary);
+            border: 1px solid var(--primary-100);
+            border-radius: 20px;
+            padding: 5px 14px;
+            font-size: 0.78rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            letter-spacing: 0.03em;
+        }
+        .hero h1 {
+            font-size: clamp(1.8rem, 4vw, 2.6rem);
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            color: var(--text);
+            margin-bottom: 12px;
+            line-height: 1.15;
+        }
+        .hero h1 span {
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .hero-meta {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            flex-wrap: wrap;
+        }
+        .hero-meta-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .hero-meta-item svg { opacity: 0.5; }
+
+        /* LAYOUT */
+        .layout {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 48px 24px 80px;
+            display: grid;
+            grid-template-columns: 220px 1fr;
+            gap: 48px;
+            align-items: start;
+        }
+        @media (max-width: 700px) {
+            .layout { grid-template-columns: 1fr; gap: 32px; }
+            .sidebar { display: none; }
+        }
+
+        /* SIDEBAR */
+        .sidebar {
+            position: sticky;
+            top: 88px;
+        }
+        .sidebar-title {
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 12px;
+        }
+        .sidebar-nav {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+        .sidebar-nav a {
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            font-weight: 500;
+            padding: 6px 10px;
+            border-radius: 8px;
+            border-left: 2px solid transparent;
+            transition: all 0.15s;
+        }
+        .sidebar-nav a:hover {
+            color: var(--primary);
+            background: var(--primary-50);
+            border-left-color: var(--primary);
+        }
+
+        /* CONTENT */
+        .content { min-width: 0; }
+
+        .section {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 32px;
+            margin-bottom: 20px;
+        }
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 20px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--border);
+        }
+        .section-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            background: var(--primary-50);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-size: 1.1rem;
+        }
+        .section h2 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text);
+            letter-spacing: -0.01em;
+        }
+        .section p {
+            color: var(--text-secondary);
+            font-size: 0.93rem;
+            margin-bottom: 12px;
+            line-height: 1.75;
+        }
+        .section p:last-child { margin-bottom: 0; }
+        .section ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin: 12px 0;
+        }
+        .section ul li {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            color: var(--text-secondary);
+            font-size: 0.93rem;
+            line-height: 1.6;
+        }
+        .section ul li::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--primary);
+            flex-shrink: 0;
+            margin-top: 8px;
+        }
+
+        .highlight-box {
+            background: var(--primary-50);
+            border: 1px solid var(--primary-100);
+            border-radius: 10px;
+            padding: 14px 16px;
+            font-size: 0.88rem;
+            color: var(--primary-dark);
+            font-weight: 500;
+            margin: 16px 0;
+            display: flex;
+            gap: 10px;
+            align-items: flex-start;
+        }
+        .highlight-box .icon { font-size: 1rem; flex-shrink: 0; margin-top: 1px; }
+
+        .contact-box {
+            background: var(--gradient);
+            border-radius: 14px;
+            padding: 24px;
+            color: white;
+            text-align: center;
+            margin-top: 8px;
+        }
+        .contact-box h3 { font-size: 1rem; font-weight: 700; margin-bottom: 6px; }
+        .contact-box p { font-size: 0.85rem; opacity: 0.85; margin-bottom: 16px; }
+        .contact-box a {
+            display: inline-block;
+            background: rgba(255,255,255,0.15);
+            border: 1px solid rgba(255,255,255,0.3);
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.88rem;
+            transition: background 0.2s;
+        }
+        .contact-box a:hover { background: rgba(255,255,255,0.25); }
+
+        /* FOOTER */
+        footer {
+            background: var(--text);
+            color: rgba(255,255,255,0.5);
+            padding: 32px 24px;
+            text-align: center;
+            font-size: 0.82rem;
+        }
+        footer .footer-inner { max-width: 900px; margin: 0 auto; }
+        footer .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 12px;
+            flex-wrap: wrap;
+        }
+        footer .footer-links a {
+            color: rgba(255,255,255,0.6);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        footer .footer-links a:hover { color: white; }
+        footer .footer-links a.active { color: var(--primary-light); }
     </style>
 </head>
 <body>
 
-<div class="header">
-    <h1>📅 AtuAgenda</h1>
-    <p>Eliminação de Conta e Dados</p>
+<nav>
+    <div class="nav-inner">
+        <a href="index.html" class="nav-logo">
+            <div class="nav-logo-icon">📅</div>
+            AtuAgenda
+        </a>
+        <a href="index.html" class="nav-back">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+            Voltar ao site
+        </a>
+    </div>
+</nav>
+
+<div class="hero">
+    <div class="hero-inner">
+        <div class="hero-badge">🗑️ Conta</div>
+        <h1>Eliminar <span>Conta</span></h1>
+        <div class="hero-meta">
+            <div class="hero-meta-item">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                Atualizado: 22 de março de 2026
+            </div>
+            <div class="hero-meta-item">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                Leitura: ~1 minuto
+            </div>
+            <div class="hero-meta-item">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                RGPD Conforme
+            </div>
+        </div>
+    </div>
 </div>
 
-<div class="container">
+<div class="layout">
+    <aside class="sidebar">
+        <div class="sidebar-title">Nesta página</div>
+        <nav class="sidebar-nav">
+            <a href="#como-pedir">Como pedir</a>
+            <a href="#dados-eliminados">Dados eliminados</a>
+            <a href="#alternativa">Alternativa</a>
+            <a href="#contacto">Contacto</a>
+        </nav>
+    </aside>
 
-    <div class="card">
-        <h2>🗑️ Como pedir a eliminação da conta</h2>
-        <p>Para pedir a eliminação da tua conta AtuAgenda e de todos os dados associados, segue estes passos:</p>
-        <ol>
-            <li>Envia um email para o endereço indicado abaixo com o assunto <strong>"Eliminação de Conta AtuAgenda"</strong></li>
-            <li>Indica o <strong>email associado à tua conta</strong> (Google ou email/password)</li>
-            <li>Aguarda a confirmação — o processo é concluído no prazo de <strong>30 dias</strong></li>
-        </ol>
-        <div class="email-box">
-            <p style="font-size:0.85rem;color:#6b6b8a;margin-bottom:6px;">Envia o pedido para:</p>
-            <a href="/cdn-cgi/l/email-protection#204154554147454e4441504f4e5455414c60474d41494c0e434f4d1f5355424a4543541d654c494d494e41e387e3834f00444500634f4e5441006154556147454e4441"><span class="__cf_email__" data-cfemail="234257564244464d4742534c4d5756424f63444e424a4f0d404c4e">[email&#160;protected]</span></a>
+    <main class="content">
+
+        <div class="section" id="como-pedir">
+            <div class="section-header">
+                <div class="section-icon">📧</div>
+                <h2>Como pedir a eliminação da conta</h2>
+            </div>
+            <p>Para pedir a eliminação da tua conta AtuAgenda e de todos os dados associados, envia um email com o seguinte:</p>
+            <ul>
+                <li><strong>Assunto:</strong> Eliminação de Conta AtuAgenda</li>
+                <li><strong>Conteúdo:</strong> o email associado à tua conta (Google ou email/password)</li>
+            </ul>
+            <p style="margin-top:12px;">O processo é concluído no prazo de <strong>30 dias</strong> após a confirmação do pedido.</p>
+            <div class="contact-box" style="margin-top:20px;">
+                <h3>AtuAgenda — Eliminação de Conta</h3>
+                <p>Respondemos a todos os pedidos no prazo máximo de 72 horas.</p>
+                <a href="mailto:atuagendapontual@gmail.com">atuagendapontual@gmail.com</a>
+            </div>
         </div>
-    </div>
 
-    <div class="card">
-        <h2>📦 Dados que são eliminados</h2>
-        <p>Quando a conta é eliminada, os seguintes dados são <strong>permanentemente removidos</strong> da base de dados Firebase:</p>
-        <ul>
-            <li>Todos os compromissos e agendamentos</li>
-            <li>Histórico de clientes e notas</li>
-            <li>Notas pessoais e marcadores de dias</li>
-            <li>Configurações de serviços e trabalho</li>
-            <li>Dados do plano (gratuito ou premium)</li>
-            <li>Conta de autenticação Firebase</li>
-        </ul>
-        <div style="margin-top:14px;">
-            <span class="tag">Compromissos</span>
-            <span class="tag">Clientes</span>
-            <span class="tag">Notas</span>
-            <span class="tag">Configurações</span>
-            <span class="tag">Conta</span>
+        <div class="section" id="dados-eliminados">
+            <div class="section-header">
+                <div class="section-icon">🗑️</div>
+                <h2>Dados que são eliminados</h2>
+            </div>
+            <p>Quando a conta é eliminada, os seguintes dados são <strong>permanentemente removidos</strong> da base de dados Firebase:</p>
+            <ul>
+                <li>Todos os compromissos e agendamentos</li>
+                <li>Histórico de clientes e notas de clientes</li>
+                <li>Notas pessoais e marcadores de dias</li>
+                <li>Configurações de serviços e horários de trabalho</li>
+                <li>Dados do plano (gratuito ou premium)</li>
+                <li>Conta de autenticação Firebase</li>
+            </ul>
+            <div class="highlight-box" style="margin-top:16px;">
+                <span class="icon">⚠️</span>
+                A eliminação da conta é <strong>irreversível</strong>. Recomendamos que exportes um backup dos teus dados antes de pedir a eliminação: Menu → Backup → Exportar Backup.
+            </div>
+            <p style="margin-top:16px;">Nenhum dado pessoal é mantido após a eliminação. Todos os dados são removidos no prazo de <strong>30 dias</strong>.</p>
         </div>
-    </div>
 
-    <div class="card">
-        <h2>📋 Dados que podem ser mantidos</h2>
-        <p>Nenhum dado pessoal é mantido após a eliminação da conta. Os dados são eliminados na totalidade no prazo de <strong>30 dias</strong> após a confirmação do pedido.</p>
-        <div class="warning">
-            ⚠️ A eliminação da conta é <strong>irreversível</strong>. Recomendamos que exportes um backup dos teus dados antes de pedir a eliminação (Menu → Backup → Exportar Backup).
+        <div class="section" id="alternativa">
+            <div class="section-header">
+                <div class="section-icon">🔧</div>
+                <h2>Alternativa: eliminar só os dados</h2>
+            </div>
+            <p>Se pretenderes eliminar apenas os teus dados sem eliminar a conta, podes fazê-lo diretamente na app:</p>
+            <ul>
+                <li>Abre o menu de utilizador (avatar no canto superior direito)</li>
+                <li>Vai a <strong>Dados → Limpar período</strong></li>
+                <li>Seleciona o intervalo de datas e confirma a eliminação</li>
+            </ul>
+            <p style="margin-top:12px;">Esta opção elimina os compromissos do período selecionado mas mantém a conta ativa.</p>
         </div>
-    </div>
 
-    <div class="card">
-        <h2>❓ Alternativa: eliminar só os dados</h2>
-        <p>Se pretenderes eliminar apenas os teus dados sem eliminar a conta, podes fazê-lo diretamente na app:</p>
-        <ol>
-            <li>Abre o menu de utilizador (avatar no canto superior direito)</li>
-            <li>Vai a <strong>Dados → Limpar período</strong> para eliminar compromissos de um período</li>
-            <li>Para eliminar tudo, seleciona o intervalo completo de datas</li>
-        </ol>
-    </div>
-
-</div>
-
-<footer>
-    <p>
-        <a href="index.html">Início</a> ·
-        <a href="privacy.html">Política de Privacidade</a> ·
-        <a href="terms.html">Termos de Uso</a> ·
-        <a href="delete-account.html" style="color:#6941E8;font-weight:600;">Eliminar Conta</a> ·
-        <a href="mailto:atuagendapontual@gmail.com">Suporte</a>
-    </p>
-    <p style="margin-top:6px;">© 2026 AtuAgenda · Feito em Portugal 🇵🇹</p>
-</footer>E html>
-<html lang="pt">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Eliminar Conta — AtuAgenda</title>
-    <link rel="icon" href="favicon.ico">
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'DM Sans', sans-serif; background: #fafafa; color: #1a1a2e; line-height: 1.6; }
-        .header { background: linear-gradient(135deg, #7C5CFC, #5530CC); padding: 40px 24px; text-align: center; }
-        .header h1 { color: white; font-size: 1.8rem; font-weight: 800; letter-spacing: -0.02em; }
-        .header p { color: rgba(255,255,255,0.7); margin-top: 8px; }
-        .container { max-width: 680px; margin: 0 auto; padding: 40px 24px; }
-        .card { background: white; border-radius: 16px; padding: 28px; margin-bottom: 20px; border: 1px solid #e8e4ff; box-shadow: 0 2px 12px rgba(105,65,232,0.06); }
-        h2 { font-size: 1.1rem; font-weight: 700; color: #6941E8; margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
-        p { color: #4a4a6a; font-size: 0.95rem; margin-bottom: 10px; }
-        ol, ul { margin-left: 20px; color: #4a4a6a; font-size: 0.95rem; }
-        ol li, ul li { margin-bottom: 8px; }
-        .email-box { background: #f3f0ff; border: 2px solid #c9bbff; border-radius: 12px; padding: 16px 20px; text-align: center; margin-top: 16px; }
-        .email-box a { color: #6941E8; font-weight: 700; font-size: 1rem; text-decoration: none; }
-        .warning { background: #fff7ed; border-left: 4px solid #f59e0b; border-radius: 0 10px 10px 0; padding: 14px 18px; margin-top: 16px; font-size: 0.88rem; color: #92400e; }
-        .tag { display: inline-block; background: #f3f0ff; color: #6941E8; border: 1px solid #c9bbff; border-radius: 20px; padding: 3px 12px; font-size: 0.8rem; font-weight: 600; margin: 3px; }
-        footer { text-align: center; padding: 30px; color: #a8a8c0; font-size: 0.82rem; border-top: 1px solid #e8e4ff; margin-top: 20px; }
-        footer a { color: #6941E8; text-decoration: none; }
-    </style>
-</head>
-<body>
-
-<div class="header">
-    <h1>📅 AtuAgenda</h1>
-    <p>Eliminação de Conta e Dados</p>
-</div>
-
-<div class="container">
-
-    <div class="card">
-        <h2>🗑️ Como pedir a eliminação da conta</h2>
-        <p>Para pedir a eliminação da tua conta AtuAgenda e de todos os dados associados, segue estes passos:</p>
-        <ol>
-            <li>Envia um email para o endereço indicado abaixo com o assunto <strong>"Eliminação de Conta AtuAgenda"</strong></li>
-            <li>Indica o <strong>email associado à tua conta</strong> (Google ou email/password)</li>
-            <li>Aguarda a confirmação — o processo é concluído no prazo de <strong>30 dias</strong></li>
-        </ol>
-        <div class="email-box">
-            <p style="font-size:0.85rem;color:#6b6b8a;margin-bottom:6px;">Envia o pedido para:</p>
-            <a href="/cdn-cgi/l/email-protection#204154554147454e4441504f4e5455414c60474d41494c0e434f4d1f5355424a4543541d654c494d494e41e387e3834f00444500634f4e5441006154556147454e4441"><span class="__cf_email__" data-cfemail="234257564244464d4742534c4d5756424f63444e424a4f0d404c4e">[email&#160;protected]</span></a>
+        <div class="section" id="contacto">
+            <div class="section-header">
+                <div class="section-icon">✉️</div>
+                <h2>Contacto</h2>
+            </div>
+            <p>Para qualquer questão relacionada com a eliminação de dados ou conta:</p>
+            <div class="contact-box">
+                <h3>AtuAgenda — Suporte</h3>
+                <p>Respondemos a todos os pedidos no prazo máximo de 72 horas.</p>
+                <a href="mailto:atuagendapontual@gmail.com">atuagendapontual@gmail.com</a>
+            </div>
         </div>
-    </div>
 
-    <div class="card">
-        <h2>📦 Dados que são eliminados</h2>
-        <p>Quando a conta é eliminada, os seguintes dados são <strong>permanentemente removidos</strong> da base de dados Firebase:</p>
-        <ul>
-            <li>Todos os compromissos e agendamentos</li>
-            <li>Histórico de clientes e notas</li>
-            <li>Notas pessoais e marcadores de dias</li>
-            <li>Configurações de serviços e trabalho</li>
-            <li>Dados do plano (gratuito ou premium)</li>
-            <li>Conta de autenticação Firebase</li>
-        </ul>
-        <div style="margin-top:14px;">
-            <span class="tag">Compromissos</span>
-            <span class="tag">Clientes</span>
-            <span class="tag">Notas</span>
-            <span class="tag">Configurações</span>
-            <span class="tag">Conta</span>
-        </div>
-    </div>
-
-    <div class="card">
-        <h2>📋 Dados que podem ser mantidos</h2>
-        <p>Nenhum dado pessoal é mantido após a eliminação da conta. Os dados são eliminados na totalidade no prazo de <strong>30 dias</strong> após a confirmação do pedido.</p>
-        <div class="warning">
-            ⚠️ A eliminação da conta é <strong>irreversível</strong>. Recomendamos que exportes um backup dos teus dados antes de pedir a eliminação (Menu → Backup → Exportar Backup).
-        </div>
-    </div>
-
-    <div class="card">
-        <h2>❓ Alternativa: eliminar só os dados</h2>
-        <p>Se pretenderes eliminar apenas os teus dados sem eliminar a conta, podes fazê-lo diretamente na app:</p>
-        <ol>
-            <li>Abre o menu de utilizador (avatar no canto superior direito)</li>
-            <li>Vai a <strong>Dados → Limpar período</strong> para eliminar compromissos de um período</li>
-            <li>Para eliminar tudo, seleciona o intervalo completo de datas</li>
-        </ol>
-    </div>
-
+    </main>
 </div>
 
 <footer>
-    <p>AtuAgenda · <a href="privacy.ht
+  
+
+</body>
+</html>
