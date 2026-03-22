@@ -532,4 +532,545 @@
     <div class="footer-inner">
         <div class="footer-links">
             <a href="index.html">Início</a>
+            <a href="privacy.html" class="active">Política de Privacidade</a>
+            <a href="terms.html">Termos de Uso</a>
+            <a href="delete-account.html">Eliminar Conta</a>
+            <a href="mailto:atuagendapontual@gmail.com">Suporte</a>
+        </div>
+        <div class="footer-copy">© 2026 AtuAgenda · atuagendapontual@gmail.com</div>
+    </div>
+</footer>E html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Política de Privacidade — AtuAgenda</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6941E8;
+            --primary-light: #7C5CFC;
+            --primary-dark: #5530CC;
+            --primary-50: #F3F0FF;
+            --primary-100: #E4DEFF;
+            --text: #1a1a2e;
+            --text-secondary: #4a4a6a;
+            --text-muted: #8888aa;
+            --border: #e8e4ff;
+            --bg: #fafafa;
+            --white: #ffffff;
+            --gradient: linear-gradient(135deg, #6941E8, #5530CC);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+            font-size: 1rem;
+        }
+
+        /* NAV */
+        nav {
+            background: var(--white);
+            border-bottom: 1px solid var(--border);
+            padding: 0 24px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .nav-inner {
+            max-width: 900px;
+            margin: 0 auto;
+            height: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+        .nav-logo-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            background: var(--gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+        }
+        .nav-back {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            text-decoration: none;
+            color: var(--text-muted);
+            font-size: 0.88rem;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        .nav-back:hover { color: var(--primary); }
+
+        /* HERO */
+        .hero {
+            background: var(--white);
+            border-bottom: 1px solid var(--border);
+            padding: 56px 24px 48px;
+        }
+        .hero-inner {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: var(--primary-50);
+            color: var(--primary);
+            border: 1px solid var(--primary-100);
+            border-radius: 20px;
+            padding: 5px 14px;
+            font-size: 0.78rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            letter-spacing: 0.03em;
+        }
+        .hero h1 {
+            font-size: clamp(1.8rem, 4vw, 2.6rem);
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            color: var(--text);
+            margin-bottom: 12px;
+            line-height: 1.15;
+        }
+        .hero h1 span {
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .hero-meta {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            flex-wrap: wrap;
+        }
+        .hero-meta-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .hero-meta-item svg { opacity: 0.5; }
+
+        /* LAYOUT */
+        .layout {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 48px 24px 80px;
+            display: grid;
+            grid-template-columns: 220px 1fr;
+            gap: 48px;
+            align-items: start;
+        }
+        @media (max-width: 700px) {
+            .layout { grid-template-columns: 1fr; gap: 32px; }
+            .sidebar { display: none; }
+        }
+
+        /* SIDEBAR */
+        .sidebar {
+            position: sticky;
+            top: 88px;
+        }
+        .sidebar-title {
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 12px;
+        }
+        .sidebar-nav {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+        .sidebar-nav a {
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            font-weight: 500;
+            padding: 6px 10px;
+            border-radius: 8px;
+            border-left: 2px solid transparent;
+            transition: all 0.15s;
+        }
+        .sidebar-nav a:hover {
+            color: var(--primary);
+            background: var(--primary-50);
+            border-left-color: var(--primary);
+        }
+
+        /* CONTENT */
+        .content { min-width: 0; }
+
+        .section {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 32px;
+            margin-bottom: 20px;
+        }
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 20px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--border);
+        }
+        .section-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            background: var(--primary-50);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-size: 1.1rem;
+        }
+        .section h2 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text);
+            letter-spacing: -0.01em;
+        }
+        .section p {
+            color: var(--text-secondary);
+            font-size: 0.93rem;
+            margin-bottom: 12px;
+            line-height: 1.75;
+        }
+        .section p:last-child { margin-bottom: 0; }
+        .section ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin: 12px 0;
+        }
+        .section ul li {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            color: var(--text-secondary);
+            font-size: 0.93rem;
+            line-height: 1.6;
+        }
+        .section ul li::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--primary);
+            flex-shrink: 0;
+            margin-top: 8px;
+        }
+
+        .highlight-box {
+            background: var(--primary-50);
+            border: 1px solid var(--primary-100);
+            border-radius: 10px;
+            padding: 14px 16px;
+            font-size: 0.88rem;
+            color: var(--primary-dark);
+            font-weight: 500;
+            margin: 16px 0;
+            display: flex;
+            gap: 10px;
+            align-items: flex-start;
+        }
+        .highlight-box .icon { font-size: 1rem; flex-shrink: 0; margin-top: 1px; }
+
+        .contact-box {
+            background: var(--gradient);
+            border-radius: 14px;
+            padding: 24px;
+            color: white;
+            text-align: center;
+            margin-top: 8px;
+        }
+        .contact-box h3 { font-size: 1rem; font-weight: 700; margin-bottom: 6px; }
+        .contact-box p { font-size: 0.85rem; opacity: 0.85; margin-bottom: 16px; }
+        .contact-box a {
+            display: inline-block;
+            background: rgba(255,255,255,0.15);
+            border: 1px solid rgba(255,255,255,0.3);
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.88rem;
+            transition: background 0.2s;
+        }
+        .contact-box a:hover { background: rgba(255,255,255,0.25); }
+
+        /* FOOTER */
+        footer {
+            background: var(--text);
+            color: rgba(255,255,255,0.5);
+            padding: 32px 24px;
+            text-align: center;
+            font-size: 0.82rem;
+        }
+        footer .footer-inner { max-width: 900px; margin: 0 auto; }
+        footer .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 12px;
+            flex-wrap: wrap;
+        }
+        footer .footer-links a {
+            color: rgba(255,255,255,0.6);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        footer .footer-links a:hover { color: white; }
+        footer .footer-links a.active { color: var(--primary-light); }
+    </style>
+</head>
+<body>
+
+<nav>
+    <div class="nav-inner">
+        <a href="index.html" class="nav-logo">
+            <div class="nav-logo-icon">📅</div>
+            AtuAgenda
+        </a>
+        <a href="index.html" class="nav-back">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+            Voltar ao site
+        </a>
+    </div>
+</nav>
+
+<div class="hero">
+    <div class="hero-inner">
+        <div class="hero-badge">🔒 Privacidade</div>
+        <h1>Política de <span>Privacidade</span></h1>
+        <div class="hero-meta">
+            <div class="hero-meta-item">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                Última atualização: 21 de março de 2026
+            </div>
+            <div class="hero-meta-item">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                Leitura: ~3 minutos
+            </div>
+            <div class="hero-meta-item">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                RGPD Conforme
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="layout">
+    <aside class="sidebar">
+        <div class="sidebar-title">Nesta página</div>
+        <nav class="sidebar-nav">
+            <a href="#quem-somos">Quem somos</a>
+            <a href="#dados-recolhidos">Dados recolhidos</a>
+            <a href="#como-usamos">Como usamos</a>
+            <a href="#planos">Planos</a>
+            <a href="#onde-guardamos">Onde guardamos</a>
+            <a href="#partilha">Partilha de dados</a>
+            <a href="#direitos">Os teus direitos</a>
+            <a href="#retencao">Retenção</a>
+            <a href="#seguranca">Segurança</a>
+            <a href="#menores">Menores</a>
+            <a href="#alteracoes">Alterações</a>
+            <a href="#contacto">Contacto</a>
+        </nav>
+    </aside>
+
+    <main class="content">
+
+        <div class="section" id="quem-somos">
+            <div class="section-header">
+                <div class="section-icon">🏢</div>
+                <h2>Quem somos</h2>
+            </div>
+            <p>A <strong>AtuAgenda</strong> é uma aplicação Android de gestão de agendamentos desenvolvida para profissionais independentes portugueses — cabeleireiros, esteticistas, barbeiros, personal trainers e outros prestadores de serviços baseados em marcações.</p>
+            <p>O responsável pelo tratamento de dados é o desenvolvedor da aplicação, contactável através do email <strong><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="83e2f7f6e2e4e6ede7e2f3ecedf7f6e2efc3e4eee2eaefade0ecee">[email&#160;protected]</a></strong>.</p>
+        </div>
+
+        <div class="section" id="dados-recolhidos">
+            <div class="section-header">
+                <div class="section-icon">📋</div>
+                <h2>Dados recolhidos</h2>
+            </div>
+            <p>A AtuAgenda recolhe apenas os dados estritamente necessários para o funcionamento da aplicação:</p>
+            <ul>
+                <li><strong>Dados da conta Google:</strong> email e nome associados à conta usada para autenticação. Não acedemos a contactos, emails, calendários ou qualquer outro dado da conta Google.</li>
+                <li><strong>Dados de agenda:</strong> nomes de clientes, números de telefone (opcionais), datas, horas, serviços e valores que tu próprio introduzes na app.</li>
+                <li><strong>Notas e preferências:</strong> notas internas sobre clientes e preferências de serviço que decides registar.</li>
+                <li><strong>Preferências da app:</strong> tema de cor escolhido e ativação do modo escuro.</li>
+            </ul>
+            <div class="highlight-box">
+                <span class="icon">ℹ️</span>
+                Não recolhemos dados de localização, não acedemos à câmara, microfone, contactos do telemóvel, nem a qualquer sensor do dispositivo.
+            </div>
+        </div>
+
+        <div class="section" id="como-usamos">
+            <div class="section-header">
+                <div class="section-icon">⚙️</div>
+                <h2>Como usamos os dados</h2>
+            </div>
+            <p>Os dados recolhidos são usados exclusivamente para:</p>
+            <ul>
+                <li>Permitir o funcionamento da app — mostrar a tua agenda, histórico de clientes e balanço financeiro.</li>
+                <li>Sincronizar os dados entre dispositivos através da cloud Firebase.</li>
+                <li>Enviar notificações de lembretes de compromissos, caso atives esta funcionalidade.</li>
+                <li>Preservar as tuas preferências de interface (tema, modo escuro).</li>
+            </ul>
+            <p><strong>Não usamos os teus dados para fins publicitários, análise de comportamento, machine learning, nem para qualquer outro propósito comercial.</strong></p>
+        </div>
+
+        <div class="section" id="planos">
+            <div class="section-header">
+                <div class="section-icon">⚡</div>
+                <h2>Planos gratuito e premium</h2>
+            </div>
+            <p>A AtuAgenda está disponível em duas versões:</p>
+            <ul>
+                <li><strong>Plano Gratuito:</strong> permite criar até 20 compromissos no total e guardar até 10 clientes. Este limite é acumulado e não repõe — mesmo que apagues compromissos, o contador não desce. Este mecanismo é guardado de forma segura na cloud e também localmente, funcionando mesmo sem internet.</li>
+                <li><strong>Plano Premium (7,99€ único):</strong> acesso ilimitado a todas as funcionalidades, incluindo compromissos ilimitados, backup automático, histórico completo, balanço anual e lembretes.</li>
+            </ul>
+            <div class="highlight-box">
+                <span class="icon">ℹ️</span>
+                O contador de compromissos criados é guardado no Firebase e em cache local — desinstalar e reinstalar a app não repõe este contador.
+            </div>
+        </div>
+
+        <div class="section" id="onde-guardamos">
+            <div class="section-header">
+                <div class="section-icon">☁️</div>
+                <h2>Onde guardamos os dados</h2>
+            </div>
+            <p>Os dados são guardados em dois locais:</p>
+            <ul>
+                <li><strong>Firebase Firestore (Google Cloud):</strong> os dados da tua agenda, clientes e notas são guardados na cloud Firebase, associados ao teu UID de utilizador. Os servidores Firebase estão localizados na União Europeia ou nos EUA, conforme a configuração do projeto.</li>
+                <li><strong>Dispositivo local (cache):</strong> após o primeiro login, uma cópia dos dados é guardada no armazenamento local do teu telemóvel. Isto permite que a app funcione mesmo sem ligação à internet — os dados são sincronizados automaticamente quando a ligação for restabelecida. A sessão de login também é guardada localmente, permitindo abrir a app sem internet sem necessidade de novo login.</li>
+            </ul>
+            <div class="highlight-box">
+                <span class="icon">🔐</span>
+                Cada utilizador só consegue aceder aos seus próprios dados. As regras de segurança do Firebase garantem que nenhum utilizador pode ler ou modificar dados de outro utilizador.
+            </div>
+        </div>
+
+        <div class="section" id="partilha">
+            <div class="section-header">
+                <div class="section-icon">🤝</div>
+                <h2>Partilha de dados</h2>
+            </div>
+            <p><strong>Não vendemos, não alugamos e não partilhamos os teus dados com terceiros.</strong></p>
+            <p>Os únicos serviços de terceiros que têm acesso técnico aos dados são:</p>
+            <ul>
+                <li><strong>Google Firebase:</strong> plataforma de base de dados e autenticação. Política de privacidade disponível em <a href="https://firebase.google.com/support/privacy" target="_blank" style="color:var(--primary);">firebase.google.com/support/privacy</a>.</li>
+                <li><strong>Google Sign-In:</strong> usado para autenticação. A Google apenas confirma a identidade — não partilha dados da conta com a app além do email e nome.</li>
+            </ul>
+            <p>Estes serviços são utilizados exclusivamente para o funcionamento técnico da app, não para fins de marketing ou análise.</p>
+        </div>
+
+        <div class="section" id="direitos">
+            <div class="section-header">
+                <div class="section-icon">⚖️</div>
+                <h2>Os teus direitos (RGPD)</h2>
+            </div>
+            <p>Ao abrigo do Regulamento Geral sobre a Proteção de Dados (RGPD), tens os seguintes direitos:</p>
+            <ul>
+                <li><strong>Acesso:</strong> podes consultar todos os dados que guardaste na app a qualquer momento, diretamente na interface.</li>
+                <li><strong>Exportação:</strong> podes exportar todos os teus dados em formato JSON através da função <em>Backup</em> nas definições da app.</li>
+                <li><strong>Retificação:</strong> podes editar ou corrigir qualquer dado diretamente na app.</li>
+                <li><strong>Eliminação:</strong> podes eliminar qualquer compromisso, nota ou cliente diretamente na app. Para eliminar a conta completa e todos os dados associados, contacta-nos por email.</li>
+                <li><strong>Portabilidade:</strong> os dados exportados via Backup estão em formato JSON legível, podendo ser importados para outros sistemas.</li>
+                <li><strong>Oposição:</strong> podes deixar de usar a app e solicitar a eliminação de todos os dados a qualquer momento.</li>
+            </ul>
+        </div>
+
+        <div class="section" id="retencao">
+            <div class="section-header">
+                <div class="section-icon">🗓️</div>
+                <h2>Retenção de dados</h2>
+            </div>
+            <p>Os dados são mantidos enquanto tiveres uma conta ativa na app. Se solicitares a eliminação da conta, todos os dados associados ao teu UID serão eliminados permanentemente da base de dados Firebase no prazo de 30 dias.</p>
+            <p>A cache local no teu dispositivo pode ser eliminada a qualquer momento através das definições do Android em <em>Definições → Apps → AtuAgenda → Armazenamento → Limpar dados</em>. Note que limpar os dados da app elimina a sessão guardada — será necessário fazer login novamente na próxima utilização.</p>
+        </div>
+
+        <div class="section" id="seguranca">
+            <div class="section-header">
+                <div class="section-icon">🛡️</div>
+                <h2>Segurança</h2>
+            </div>
+            <p>Implementámos as seguintes medidas de segurança para proteger os teus dados:</p>
+            <ul>
+                <li>Autenticação obrigatória — nenhum dado é acessível sem login.</li>
+                <li>Regras de segurança Firebase que isolam cada utilizador — nenhum utilizador acede a dados de outro.</li>
+                <li>Comunicação encriptada HTTPS entre a app e os servidores Firebase.</li>
+                <li>Sem armazenamento de passwords — a autenticação é delegada inteiramente à Google.</li>
+            </ul>
+        </div>
+
+        <div class="section" id="menores">
+            <div class="section-header">
+                <div class="section-icon">👶</div>
+                <h2>Menores de idade</h2>
+            </div>
+            <p>A AtuAgenda é uma aplicação destinada a uso profissional e não é direcionada a menores de 16 anos. Não recolhemos conscientemente dados de menores. Se tomares conhecimento de que um menor nos forneceu dados pessoais, contacta-nos para que possamos proceder à sua eliminação imediata.</p>
+        </div>
+
+        <div class="section" id="alteracoes">
+            <div class="section-header">
+                <div class="section-icon">📝</div>
+                <h2>Alterações a esta política</h2>
+            </div>
+            <p>Podemos atualizar esta política de privacidade ocasionalmente para refletir alterações na app ou na legislação aplicável. Quando o fizermos, atualizaremos a data de "última atualização" no topo desta página.</p>
+            <p>Para alterações significativas, notificaremos os utilizadores ativos através de um aviso dentro da app. Recomendamos que consultes esta página periodicamente.</p>
+        </div>
+
+        <div class="section" id="contacto">
+            <div class="section-header">
+                <div class="section-icon">✉️</div>
+                <h2>Contacto</h2>
+            </div>
+            <p>Para qualquer questão relacionada com privacidade, pedidos de eliminação de dados ou exercício dos teus direitos ao abrigo do RGPD:</p>
+            <div class="contact-box">
+                <h3>AtuAgenda — Privacidade</h3>
+                <p>Respondemos a todos os pedidos no prazo máximo de 72 horas.</p>
+                <a href="/cdn-cgi/l/email-protection#214055544046444f4540514e4f5554404d61464c40484d0f424e4c"><span class="__cf_email__" data-cfemail="4e2f3a3b2f292b202a2f3e21203a3b2f220e29232f2722602d2123">[email&#160;protected]</span></a>
+            </div>
+        </div>
+
+    </main>
+</div>
+
+<footer>
+    <div class="footer-inner">
+        <div class="footer-links">
+            <a href="index.html">Início</a>
             <a href="privacy.html" class="active">Política de Priva
