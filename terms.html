@@ -1,1084 +1,230 @@
 <!DOCTYPE html>
 <html lang="pt">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Termos de Uso — AtuAgenda</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --primary: #6941E8;
-            --primary-light: #7C5CFC;
-            --primary-dark: #5530CC;
-            --primary-50: #F3F0FF;
-            --primary-100: #E4DEFF;
-            --text: #1a1a2e;
-            --text-secondary: #4a4a6a;
-            --text-muted: #8888aa;
-            --border: #e8e4ff;
-            --bg: #fafafa;
-            --white: #ffffff;
-            --gradient: linear-gradient(135deg, #6941E8, #5530CC);
-        }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: 'DM Sans', sans-serif;
-            background: var(--bg);
-            color: var(--text);
-            line-height: 1.7;
-            font-size: 1rem;
-        }
-        nav {
-            background: var(--white);
-            border-bottom: 1px solid var(--border);
-            padding: 0 24px;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-        .nav-inner {
-            max-width: 900px;
-            margin: 0 auto;
-            height: 64px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-        .nav-logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            text-decoration: none;
-            color: var(--text);
-            font-weight: 700;
-            font-size: 1.1rem;
-        }
-        .nav-logo-icon {
-            width: 36px;
-            height: 36px;
-            border-radius: 10px;
-            background: var(--gradient);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1rem;
-        }
-        .nav-back {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            text-decoration: none;
-            color: var(--text-muted);
-            font-size: 0.88rem;
-            font-weight: 500;
-            transition: color 0.2s;
-        }
-        .nav-back:hover { color: var(--primary); }
-        .hero {
-            background: var(--white);
-            border-bottom: 1px solid var(--border);
-            padding: 56px 24px 48px;
-        }
-        .hero-inner { max-width: 900px; margin: 0 auto; }
-        .hero-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            background: var(--primary-50);
-            color: var(--primary);
-            border: 1px solid var(--primary-100);
-            border-radius: 20px;
-            padding: 5px 14px;
-            font-size: 0.78rem;
-            font-weight: 600;
-            margin-bottom: 20px;
-            letter-spacing: 0.03em;
-        }
-        .hero h1 {
-            font-size: clamp(1.8rem, 4vw, 2.6rem);
-            font-weight: 800;
-            letter-spacing: -0.03em;
-            color: var(--text);
-            margin-bottom: 12px;
-            line-height: 1.15;
-        }
-        .hero h1 span {
-            background: var(--gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        .hero-meta {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            flex-wrap: wrap;
-        }
-        .hero-meta-item { display: flex; align-items: center; gap: 5px; }
-        .layout {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 48px 24px 80px;
-            display: grid;
-            grid-template-columns: 220px 1fr;
-            gap: 48px;
-            align-items: start;
-        }
-        @media (max-width: 700px) {
-            .layout { grid-template-columns: 1fr; gap: 32px; }
-            .sidebar { display: none; }
-        }
-        .sidebar { position: sticky; top: 88px; }
-        .sidebar-title {
-            font-size: 0.7rem;
-            font-weight: 700;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-            margin-bottom: 12px;
-        }
-        .sidebar-nav { display: flex; flex-direction: column; gap: 2px; }
-        .sidebar-nav a {
-            text-decoration: none;
-            color: var(--text-secondary);
-            font-size: 0.85rem;
-            font-weight: 500;
-            padding: 6px 10px;
-            border-radius: 8px;
-            border-left: 2px solid transparent;
-            transition: all 0.15s;
-        }
-        .sidebar-nav a:hover {
-            color: var(--primary);
-            background: var(--primary-50);
-            border-left-color: var(--primary);
-        }
-        .content { min-width: 0; }
-        .section {
-            background: var(--white);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 32px;
-            margin-bottom: 20px;
-        }
-        .section-header {
-            display: flex;
-            align-items: center;
-            gap: 14px;
-            margin-bottom: 20px;
-            padding-bottom: 16px;
-            border-bottom: 1px solid var(--border);
-        }
-        .section-icon {
-            width: 40px;
-            height: 40px;
-            border-radius: 10px;
-            background: var(--primary-50);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-            font-size: 1.1rem;
-        }
-        .section h2 {
-            font-size: 1.1rem;
-            font-weight: 700;
-            color: var(--text);
-            letter-spacing: -0.01em;
-        }
-        .section p {
-            color: var(--text-secondary);
-            font-size: 0.93rem;
-            margin-bottom: 12px;
-            line-height: 1.75;
-        }
-        .section p:last-child { margin-bottom: 0; }
-        .section ul {
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-            margin: 12px 0;
-        }
-        .section ul li {
-            display: flex;
-            align-items: flex-start;
-            gap: 10px;
-            color: var(--text-secondary);
-            font-size: 0.93rem;
-            line-height: 1.6;
-        }
-        .section ul li::before {
-            content: '';
-            width: 6px;
-            height: 6px;
-            border-radius: 50%;
-            background: var(--primary);
-            flex-shrink: 0;
-            margin-top: 8px;
-        }
-        .highlight-box {
-            background: var(--primary-50);
-            border: 1px solid var(--primary-100);
-            border-radius: 10px;
-            padding: 14px 16px;
-            font-size: 0.88rem;
-            color: var(--primary-dark);
-            font-weight: 500;
-            margin: 16px 0;
-            display: flex;
-            gap: 10px;
-            align-items: flex-start;
-        }
-        .highlight-box .icon { font-size: 1rem; flex-shrink: 0; margin-top: 1px; }
-        .warning-box {
-            background: #fff8f0;
-            border: 1px solid #fde8cc;
-            border-radius: 10px;
-            padding: 14px 16px;
-            font-size: 0.88rem;
-            color: #92400e;
-            font-weight: 500;
-            margin: 16px 0;
-            display: flex;
-            gap: 10px;
-            align-items: flex-start;
-        }
-        .contact-box {
-            background: var(--gradient);
-            border-radius: 14px;
-            padding: 24px;
-            color: white;
-            text-align: center;
-            margin-top: 8px;
-        }
-        .contact-box h3 { font-size: 1rem; font-weight: 700; margin-bottom: 6px; }
-        .contact-box p { font-size: 0.85rem; opacity: 0.85; margin-bottom: 16px; }
-        .contact-box a {
-            display: inline-block;
-            background: rgba(255,255,255,0.15);
-            border: 1px solid rgba(255,255,255,0.3);
-            color: white;
-            text-decoration: none;
-            padding: 10px 20px;
-            border-radius: 8px;
-            font-weight: 600;
-            font-size: 0.88rem;
-            transition: background 0.2s;
-        }
-        .contact-box a:hover { background: rgba(255,255,255,0.25); }
-        footer {
-            background: var(--text);
-            color: rgba(255,255,255,0.5);
-            padding: 32px 24px;
-            text-align: center;
-            font-size: 0.82rem;
-        }
-        footer .footer-inner { max-width: 900px; margin: 0 auto; }
-        footer .footer-links {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin-bottom: 12px;
-            flex-wrap: wrap;
-        }
-        footer .footer-links a {
-            color: rgba(255,255,255,0.6);
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.2s;
-        }
-        footer .footer-links a:hover { color: white; }
-        footer .footer-links a.active { color: var(--primary-light); }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Termos de Uso — AtuAgenda</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f8fafc; color: #1e293b; line-height: 1.7; }
+    a { color: #6366f1; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    nav { background: #fff; border-bottom: 1px solid #e2e8f0; padding: 0 24px; display: flex; align-items: center; justify-content: space-between; height: 60px; }
+    nav .logo { font-weight: 700; font-size: 1.1rem; color: #1e293b; }
+    nav .back { font-size: .9rem; color: #6366f1; }
+    .page-header { background: linear-gradient(135deg, #6366f1, #8b5cf6); color: #fff; padding: 48px 24px 40px; text-align: center; }
+    .page-header .label { font-size: .8rem; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; opacity: .8; margin-bottom: 8px; }
+    .page-header h1 { font-size: clamp(1.8rem, 4vw, 2.4rem); font-weight: 800; margin-bottom: 12px; }
+    .page-header .meta { font-size: .85rem; opacity: .8; display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+    .badge { background: rgba(255,255,255,.2); border-radius: 20px; padding: 3px 12px; }
+    .layout { display: grid; grid-template-columns: 220px 1fr; gap: 40px; max-width: 960px; margin: 48px auto; padding: 0 24px; }
+    .toc { position: sticky; top: 80px; align-self: start; background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 20px; }
+    .toc h4 { font-size: .8rem; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: #64748b; margin-bottom: 12px; }
+    .toc ul { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+    .toc ul a { font-size: .85rem; color: #475569; }
+    .toc ul a:hover { color: #6366f1; }
+    .content { min-width: 0; }
+    .section-block { background: #fff; border-radius: 14px; border: 1px solid #e2e8f0; padding: 28px 32px; margin-bottom: 20px; }
+    .section-block .block-header { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+    .section-block .block-icon { font-size: 1.4rem; }
+    .section-block h2 { font-size: 1.15rem; font-weight: 700; }
+    .section-block p { font-size: .9rem; color: #374151; margin-bottom: 10px; }
+    .section-block p:last-child { margin-bottom: 0; }
+    .section-block ul { padding-left: 20px; margin-top: 8px; }
+    .section-block ul li { font-size: .9rem; color: #374151; margin-bottom: 6px; }
+    .info-box { background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 8px; padding: 12px 16px; font-size: .85rem; color: #1d4ed8; margin-top: 12px; }
+    .warn-box { background: #fefce8; border: 1px solid #fde68a; border-radius: 8px; padding: 12px 16px; font-size: .85rem; color: #92400e; margin-top: 12px; }
+    footer { background: #1e293b; color: #94a3b8; padding: 28px 24px; text-align: center; font-size: .85rem; margin-top: 60px; }
+    footer .footer-links { display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; margin-bottom: 12px; }
+    footer a { color: #94a3b8; }
+    footer a:hover { color: #fff; }
+    @media(max-width:700px) {
+      .layout { grid-template-columns: 1fr; }
+      .toc { position: static; }
+    }
+  </style>
 </head>
 <body>
 
 <nav>
-    <div class="nav-inner">
-        <a href="index.html" class="nav-logo">
-            <div class="nav-logo-icon">📅</div>
-            AtuAgenda
-        </a>
-        <a href="index.html" class="nav-back">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
-            Voltar ao site
-        </a>
-    </div>
+  <a href="index.html" class="logo">📅 AtuAgenda</a>
+  <a href="index.html" class="back">← Voltar ao site</a>
 </nav>
 
-<div class="hero">
-    <div class="hero-inner">
-        <div class="hero-badge">📄 Legal</div>
-        <h1>Termos de <span>Uso</span></h1>
-        <div class="hero-meta">
-            <div class="hero-meta-item">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-                Última atualização: 21 de março de 2026
-            </div>
-            <div class="hero-meta-item">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                Leitura: ~3 minutos
-            </div>
-        </div>
-    </div>
+<div class="page-header">
+  <div class="label">📄 Legal</div>
+  <h1>Termos de Uso</h1>
+  <div class="meta">
+    <span>Última atualização: 18 de abril de 2026</span>
+    <span class="badge">Leitura: ~3 minutos</span>
+  </div>
 </div>
 
 <div class="layout">
-    <aside class="sidebar">
-        <div class="sidebar-title">Nesta página</div>
-        <nav class="sidebar-nav">
-            <a href="#aceitacao">Aceitação</a>
-            <a href="#descricao">Descrição da app</a>
-            <a href="#licenca">Licença de uso</a>
-            <a href="#conta">A tua conta</a>
-            <a href="#pagamento">Pagamento</a>
-            <a href="#uso-correto">Uso correto</a>
-            <a href="#dados">Os teus dados</a>
-            <a href="#disponibilidade">Disponibilidade</a>
-            <a href="#responsabilidade">Responsabilidade</a>
-            <a href="#propriedade">Propriedade intelectual</a>
-            <a href="#rescisao">Rescisão</a>
-            <a href="#lei">Lei aplicável</a>
-            <a href="#contacto">Contacto</a>
-        </nav>
-    </aside>
+  <aside class="toc">
+    <h4>Nesta página</h4>
+    <ul>
+      <li><a href="#aceitacao">Aceitação</a></li>
+      <li><a href="#descricao">Descrição da app</a></li>
+      <li><a href="#licenca">Licença de uso</a></li>
+      <li><a href="#conta">A tua conta</a></li>
+      <li><a href="#pagamento">Pagamento</a></li>
+      <li><a href="#uso-correto">Uso correto</a></li>
+      <li><a href="#dados">Os teus dados</a></li>
+      <li><a href="#disponibilidade">Disponibilidade</a></li>
+      <li><a href="#responsabilidade">Responsabilidade</a></li>
+      <li><a href="#propriedade">Propriedade intelectual</a></li>
+      <li><a href="#rescisao">Rescisão</a></li>
+      <li><a href="#lei">Lei aplicável</a></li>
+      <li><a href="#contacto">Contacto</a></li>
+    </ul>
+  </aside>
 
-    <main class="content">
+  <div class="content">
 
-        <div class="section" id="aceitacao">
-            <div class="section-header">
-                <div class="section-icon">✅</div>
-                <h2>Aceitação dos termos</h2>
-            </div>
-            <p>Ao descarregar, instalar ou utilizar a aplicação <strong>AtuAgenda</strong>, aceitas ficar vinculado a estes Termos de Uso. Se não concordares com algum destes termos, não deves utilizar a aplicação.</p>
-            <p>Estes termos constituem o acordo completo entre ti e a AtuAgenda relativamente ao uso da aplicação.</p>
-        </div>
+    <div class="section-block" id="aceitacao">
+      <div class="block-header"><span class="block-icon">✅</span><h2>Aceitação dos termos</h2></div>
+      <p>Ao descarregar, instalar ou utilizar a aplicação <strong>AtuAgenda</strong>, aceitas ficar vinculado a estes Termos de Uso. Se não concordares com algum destes termos, não deves utilizar a aplicação.</p>
+      <p>Estes termos constituem o acordo completo entre ti e a AtuAgenda relativamente ao uso da aplicação.</p>
+    </div>
 
-        <div class="section" id="descricao">
-            <div class="section-header">
-                <div class="section-icon">📱</div>
-                <h2>Descrição da aplicação</h2>
-            </div>
-            <p>A <strong>AtuAgenda</strong> é uma aplicação Android de gestão de agendamentos destinada a profissionais independentes. A app permite:</p>
-            <ul>
-                <li>Criar, editar e eliminar compromissos com clientes.</li>
-                <li>Consultar agenda diária, semanal e mensal.</li>
-                <li>Gerir histórico e notas de clientes.</li>
-                <li>Acompanhar balanço financeiro e exportar relatórios.</li>
-                <li>Configurar serviços, lembretes e preferências de interface.</li>
-                <li>Sincronizar dados via cloud Firebase com backup automático.</li>
-            </ul>
-        </div>
+    <div class="section-block" id="descricao">
+      <div class="block-header"><span class="block-icon">📱</span><h2>Descrição da aplicação</h2></div>
+      <p>A <strong>AtuAgenda</strong> é uma aplicação Android de gestão de agendamentos destinada a profissionais independentes. A app permite:</p>
+      <ul>
+        <li>Criar, editar e eliminar compromissos com clientes.</li>
+        <li>Consultar agenda diária, semanal e mensal.</li>
+        <li>Gerir histórico e notas de clientes.</li>
+        <li>Acompanhar balanço financeiro e exportar relatórios.</li>
+        <li>Configurar serviços, lembretes e preferências de interface.</li>
+        <li>Sincronizar dados via cloud Firebase com backup automático.</li>
+      </ul>
+    </div>
 
-        <div class="section" id="licenca">
-            <div class="section-header">
-                <div class="section-icon">📜</div>
-                <h2>Licença de uso</h2>
-            </div>
-            <p>A AtuAgenda está disponível em duas versões:</p>
-            <ul>
-                <li><strong>Versão Gratuita:</strong> acesso livre e permanente com limite de 20 compromissos criados no total e até 10 clientes. Este limite é acumulado e não repõe mesmo apagando compromissos. Após o primeiro login, a app funciona offline com os dados em cache local.</li>
-                <li><strong>Versão Premium (7,99€ único):</strong> mediante pagamento único, é concedida uma licença <strong>pessoal, não exclusiva, intransmissível e não sublicenciável</strong> com acesso ilimitado a todas as funcionalidades, em todos os dispositivos Android que possuas ou controles.</li>
-            </ul>
-            <ul>
-                <li>A licença Premium é válida para uso pessoal e profissional do titular da conta.</li>
-                <li>A licença Premium inclui todas as atualizações futuras sem custos adicionais.</li>
-                <li>Não é permitida a revenda, redistribuição ou sublicenciamento da app.</li>
-                <li>Não é permitida a engenharia reversa, descompilação ou modificação do código.</li>
-            </ul>
-            <div class="highlight-box">
-                <span class="icon">💡</span>
-                Paga uma vez, usa para sempre — em todos os teus dispositivos Android, sem mensalidades nem renovações.
-            </div>
-        </div>
+    <div class="section-block" id="licenca">
+      <div class="block-header"><span class="block-icon">📜</span><h2>Licença de uso</h2></div>
+      <p>A AtuAgenda está disponível em duas versões:</p>
+      <ul>
+        <li><strong>Versão Gratuita:</strong> acesso livre e permanente com limite de 30 compromissos por mês e até 10 clientes. Após o primeiro login, a app funciona offline com os dados em cache local.</li>
+        <li><strong>Versão Premium (2,99€/mês):</strong> mediante subscrição mensal ativa, é concedida uma licença <strong>pessoal, não exclusiva, intransmissível e não sublicenciável</strong> com acesso ilimitado a todas as funcionalidades, em todos os dispositivos Android que possuas ou controles associados à mesma conta Google.</li>
+      </ul>
+      <ul>
+        <li>A licença Premium é válida para uso pessoal e profissional do titular da conta.</li>
+        <li>O acesso Premium mantém-se enquanto a subscrição estiver ativa.</li>
+        <li>Não é permitida a revenda, redistribuição ou sublicenciamento da app.</li>
+        <li>Não é permitida a engenharia reversa, descompilação ou modificação do código.</li>
+      </ul>
+      <div class="info-box">💡 A subscrição Premium pode ser cancelada a qualquer momento na Google Play Store, sem penalizações. O acesso Premium mantém-se até ao fim do período já pago.</div>
+    </div>
 
-        <div class="section" id="conta">
-            <div class="section-header">
-                <div class="section-icon">👤</div>
-                <h2>A tua conta</h2>
-            </div>
-            <p>O acesso à AtuAgenda é feito através da tua conta Google. És responsável por:</p>
-            <ul>
-                <li>Manter a segurança da tua conta Google.</li>
-                <li>Todas as atividades realizadas na app com a tua conta.</li>
-                <li>Notificar-nos imediatamente em caso de uso não autorizado da tua conta.</li>
-            </ul>
-            <p>Não é permitida a partilha de contas entre múltiplos utilizadores ou profissionais de negócios distintos.</p>
-        </div>
+    <div class="section-block" id="conta">
+      <div class="block-header"><span class="block-icon">👤</span><h2>A tua conta</h2></div>
+      <p>O acesso à AtuAgenda é feito através da tua conta Google. És responsável por:</p>
+      <ul>
+        <li>Manter a segurança da tua conta Google.</li>
+        <li>Todas as atividades realizadas na app com a tua conta.</li>
+        <li>Notificar-nos imediatamente em caso de uso não autorizado da tua conta.</li>
+      </ul>
+      <p>Não é permitida a partilha de contas entre múltiplos utilizadores ou profissionais de negócios distintos.</p>
+    </div>
 
-        <div class="section" id="pagamento">
-            <div class="section-header">
-                <div class="section-icon">💳</div>
-                <h2>Pagamento e reembolso</h2>
-            </div>
-            <p>A versão gratuita da AtuAgenda está disponível sem qualquer custo. A versão Premium está disponível na Google Play Store mediante um <strong>pagamento único de 7,99€</strong>.</p>
-            <ul>
-                <li>O pagamento é processado de forma segura pela Google Play.</li>
-                <li>A Google Play oferece reembolso automático nas primeiras <strong>48 horas</strong> após a compra, sem necessidade de justificação.</li>
-                <li>Após o período de reembolso automático, podes contactar-nos por email para analisar pedidos de reembolso caso a caso.</li>
-                <li>Não existem taxas de subscrição, mensalidades ou compras adicionais dentro da app.</li>
-                <li>O limite gratuito de 20 compromissos é permanente e não repõe — esta limitação é intencional e faz parte das condições do plano gratuito.</li>
-            </ul>
-            <div class="warning-box">
-                <span>⚠️</span>
-                O preço oficial e definitivo é sempre o indicado na Google Play Store no momento da compra. A versão gratuita está sempre disponível sem custo, com limite de 20 compromissos no total. A versão Premium custa 7,99€ — pagamento único.
-            </div>
-        </div>
+    <div class="section-block" id="pagamento">
+      <div class="block-header"><span class="block-icon">💳</span><h2>Pagamento e reembolso</h2></div>
+      <p>A versão gratuita da AtuAgenda está disponível sem qualquer custo. A versão Premium está disponível na Google Play Store mediante uma <strong>subscrição mensal de 2,99€/mês</strong>.</p>
+      <ul>
+        <li>O pagamento é processado de forma segura pela Google Play, com renovação automática mensal.</li>
+        <li>Podes cancelar a subscrição a qualquer momento nas definições da Google Play Store — o acesso Premium mantém-se até ao fim do período pago.</li>
+        <li>A Google Play oferece reembolso automático nas primeiras <strong>48 horas</strong> após a compra, sem necessidade de justificação.</li>
+        <li>Após o período de reembolso automático, podes contactar-nos por email para analisar pedidos de reembolso caso a caso.</li>
+        <li>O plano gratuito inclui até 30 compromissos por mês e até 10 clientes — esta limitação é intencional e faz parte das condições do plano gratuito.</li>
+      </ul>
+      <div class="warn-box">⚠️ O preço oficial e definitivo é sempre o indicado na Google Play Store no momento da subscrição. A versão gratuita está sempre disponível sem custo. A versão Premium custa 2,99€/mês, com renovação automática até cancelamento.</div>
+    </div>
 
-        <div class="section" id="uso-correto">
-            <div class="section-header">
-                <div class="section-icon">✔️</div>
-                <h2>Uso correto da aplicação</h2>
-            </div>
-            <p>Ao utilizar a AtuAgenda, comprometes-te a:</p>
-            <ul>
-                <li>Utilizar a app apenas para fins legais e legítimos.</li>
-                <li>Não introduzir dados falsos, fraudulentos ou de terceiros sem o seu consentimento.</li>
-                <li>Não tentar contornar os mecanismos de autenticação ou segurança da app.</li>
-                <li>Não usar a app para fins que violem leis de proteção de dados aplicáveis (nomeadamente o RGPD), incluindo o registo de dados de clientes sem base legal adequada.</li>
-            </ul>
-            <p>Enquanto profissional que regista dados de clientes na app, és o <strong>responsável pelo tratamento</strong> desses dados ao abrigo do RGPD. A AtuAgenda atua como subcontratante técnico.</p>
-        </div>
+    <div class="section-block" id="uso-correto">
+      <div class="block-header"><span class="block-icon">✔️</span><h2>Uso correto da aplicação</h2></div>
+      <p>Ao utilizar a AtuAgenda, comprometes-te a:</p>
+      <ul>
+        <li>Utilizar a app apenas para fins legais e legítimos.</li>
+        <li>Não introduzir dados falsos, fraudulentos ou de terceiros sem o seu consentimento.</li>
+        <li>Não tentar contornar os mecanismos de autenticação ou segurança da app.</li>
+        <li>Não usar a app para fins que violem leis de proteção de dados aplicáveis (nomeadamente o RGPD).</li>
+      </ul>
+      <p>Enquanto profissional que regista dados de clientes na app, és o <strong>responsável pelo tratamento</strong> desses dados ao abrigo do RGPD. A AtuAgenda atua como subcontratante técnico.</p>
+    </div>
 
-        <div class="section" id="dados">
-            <div class="section-header">
-                <div class="section-icon">🗄️</div>
-                <h2>Os teus dados</h2>
-            </div>
-            <p>Os dados que introduzes na AtuAgenda são teus. Reservamo-nos o direito de aceder aos dados apenas em situações estritamente necessárias para suporte técnico e apenas com o teu consentimento explícito.</p>
-            <p>Consulta a nossa <a href="privacy.html" style="color:var(--primary);font-weight:600;">Política de Privacidade</a> para informação completa sobre como tratamos os teus dados.</p>
-            <p>Recomendamos que faças backups regulares através da função disponível na app. A AtuAgenda não se responsabiliza por perda de dados decorrente de eliminação acidental, falha de dispositivo ou encerramento de conta Google.</p>
-        </div>
+    <div class="section-block" id="dados">
+      <div class="block-header"><span class="block-icon">🗄️</span><h2>Os teus dados</h2></div>
+      <p>Os dados que introduzes na AtuAgenda são teus. Reservamo-nos o direito de aceder aos dados apenas em situações estritamente necessárias para suporte técnico e apenas com o teu consentimento explícito.</p>
+      <p>Consulta a nossa <a href="privacy.html">Política de Privacidade</a> para informação completa sobre como tratamos os teus dados.</p>
+      <p>Recomendamos que faças backups regulares através da função disponível na app. A AtuAgenda não se responsabiliza por perda de dados decorrente de eliminação acidental, falha de dispositivo ou encerramento de conta Google.</p>
+    </div>
 
-        <div class="section" id="disponibilidade">
-            <div class="section-header">
-                <div class="section-icon">🟢</div>
-                <h2>Disponibilidade do serviço</h2>
-            </div>
-            <p>Esforçamo-nos para manter a AtuAgenda disponível e funcional. No entanto, não garantimos disponibilidade ininterrupta, pois o funcionamento da app depende de serviços de terceiros, nomeadamente a infraestrutura Firebase da Google.</p>
-            <ul>
-                <li>Após o primeiro login online, a app funciona em modo offline — os dados ficam guardados localmente no dispositivo e a sessão é preservada.</li>
-                <li>Em modo offline, é possível consultar e adicionar compromissos. O contador do plano gratuito é atualizado localmente e sincronizado com a cloud quando a ligação for restabelecida.</li>
-                <li>A sincronização completa com a cloud requer ligação à internet.</li>
-                <li>O primeiro login requer sempre ligação à internet para autenticação com Google.</li>
-                <li>Podemos realizar manutenção ou atualizações que causem interrupções temporárias.</li>
-                <li>Não nos responsabilizamos por interrupções causadas por falhas da infraestrutura Firebase ou da Google.</li>
-            </ul>
-        </div>
+    <div class="section-block" id="disponibilidade">
+      <div class="block-header"><span class="block-icon">🟢</span><h2>Disponibilidade do serviço</h2></div>
+      <p>Esforçamo-nos para manter a AtuAgenda disponível e funcional. No entanto, não garantimos disponibilidade ininterrupta, pois o funcionamento da app depende de serviços de terceiros, nomeadamente a infraestrutura Firebase da Google.</p>
+      <ul>
+        <li>Após o primeiro login online, a app funciona em modo offline com dados em cache local.</li>
+        <li>A sincronização completa com a cloud requer ligação à internet.</li>
+        <li>O primeiro login requer sempre ligação à internet para autenticação com Google.</li>
+        <li>Podemos realizar manutenção ou atualizações que causem interrupções temporárias.</li>
+      </ul>
+    </div>
 
-        <div class="section" id="responsabilidade">
-            <div class="section-header">
-                <div class="section-icon">⚠️</div>
-                <h2>Limitação de responsabilidade</h2>
-            </div>
-            <p>A AtuAgenda é fornecida "tal como está". Não garantimos que a app esteja isenta de erros ou que satisfaça todos os teus requisitos específicos.</p>
-            <p>Não nos responsabilizamos por:</p>
-            <ul>
-                <li>Perda de dados causada por uso incorreto, eliminação acidental ou falha de dispositivo.</li>
-                <li>Danos diretos ou indiretos decorrentes do uso ou impossibilidade de uso da app.</li>
-                <li>Erros, imprecisões ou omissões nos dados que tu próprio introduziste.</li>
-                <li>Decisões de negócio tomadas com base nos dados ou relatórios gerados pela app.</li>
-            </ul>
-            <p>A nossa responsabilidade total nunca excederá o montante pago pela licença da app.</p>
-        </div>
+    <div class="section-block" id="responsabilidade">
+      <div class="block-header"><span class="block-icon">⚠️</span><h2>Limitação de responsabilidade</h2></div>
+      <p>A AtuAgenda é fornecida "tal como está". Não garantimos que a app esteja isenta de erros ou que satisfaça todos os teus requisitos específicos.</p>
+      <p>Não nos responsabilizamos por:</p>
+      <ul>
+        <li>Perda de dados causada por uso incorreto, eliminação acidental ou falha de dispositivo.</li>
+        <li>Danos diretos ou indiretos decorrentes do uso ou impossibilidade de uso da app.</li>
+        <li>Erros, imprecisões ou omissões nos dados que tu próprio introduziste.</li>
+        <li>Decisões de negócio tomadas com base nos dados ou relatórios gerados pela app.</li>
+      </ul>
+      <p>A nossa responsabilidade total nunca excederá o montante pago nos últimos 3 meses de subscrição.</p>
+    </div>
 
-        <div class="section" id="propriedade">
-            <div class="section-header">
-                <div class="section-icon">©️</div>
-                <h2>Propriedade intelectual</h2>
-            </div>
-            <p>A AtuAgenda, incluindo o seu código, design, interface, logótipo, nome e toda a documentação associada, é propriedade exclusiva do seu desenvolvedor e está protegida por leis de direitos de autor e propriedade intelectual.</p>
-            <p>A licença de uso concedida não transfere qualquer direito de propriedade intelectual. Todos os direitos não expressamente concedidos são reservados.</p>
-            <p>O nome "AtuAgenda" e o logótipo associado são marcas não registadas do desenvolvedor e não podem ser usados sem autorização expressa.</p>
-        </div>
+    <div class="section-block" id="propriedade">
+      <div class="block-header"><span class="block-icon">©️</span><h2>Propriedade intelectual</h2></div>
+      <p>A AtuAgenda, incluindo o seu código, design, interface, logótipo, nome e toda a documentação associada, é propriedade exclusiva do seu desenvolvedor e está protegida por leis de direitos de autor e propriedade intelectual.</p>
+      <p>A licença de uso concedida não transfere qualquer direito de propriedade intelectual. Todos os direitos não expressamente concedidos são reservados.</p>
+      <p>O nome "AtuAgenda" e o logótipo associado são marcas não registadas do desenvolvedor e não podem ser usados sem autorização expressa.</p>
+    </div>
 
-        <div class="section" id="rescisao">
-            <div class="section-header">
-                <div class="section-icon">🚫</div>
-                <h2>Rescisão</h2>
-            </div>
-            <p>Podes deixar de usar a AtuAgenda a qualquer momento, desinstalando a app e solicitando a eliminação dos teus dados por email.</p>
-            <p>Reservamo-nos o direito de suspender ou terminar o acesso de utilizadores que violem estes termos de uso, sem reembolso do valor pago.</p>
-            <p>Em caso de encerramento definitivo da app, notificaremos os utilizadores com pelo menos <strong>30 dias de antecedência</strong> para que possam exportar os seus dados.</p>
-        </div>
+    <div class="section-block" id="rescisao">
+      <div class="block-header"><span class="block-icon">🚫</span><h2>Rescisão</h2></div>
+      <p>Podes deixar de usar a AtuAgenda a qualquer momento, cancelando a subscrição na Google Play Store, desinstalando a app e solicitando a eliminação dos teus dados por email.</p>
+      <p>Reservamo-nos o direito de suspender ou terminar o acesso de utilizadores que violem estes termos de uso. Em caso de rescisão por violação de termos, não é devolvido o valor do mês corrente.</p>
+      <p>Em caso de encerramento definitivo da app, notificaremos os utilizadores com pelo menos <strong>30 dias de antecedência</strong> para que possam exportar os seus dados. As subscrições ativas serão reembolsadas proporcionalmente.</p>
+    </div>
 
-        <div class="section" id="lei">
-            <div class="section-header">
-                <div class="section-icon">🏛️</div>
-                <h2>Lei aplicável</h2>
-            </div>
-            <p>Estes Termos de Uso são regidos pela lei portuguesa e pelo direito da União Europeia, nomeadamente o RGPD — Regulamento (UE) 2016/679.</p>
-            <p>Qualquer litígio decorrente da utilização da AtuAgenda será submetido aos tribunais competentes da República Portuguesa, sem prejuízo do direito do consumidor de recorrer a mecanismos alternativos de resolução de litígios disponíveis em Portugal.</p>
-            <p>Para resolução de conflitos de consumo, podes ainda recorrer à plataforma europeia de resolução de litígios em linha disponível em <a href="https://ec.europa.eu/consumers/odr" target="_blank" style="color:var(--primary);">ec.europa.eu/consumers/odr</a>.</p>
-        </div>
+    <div class="section-block" id="lei">
+      <div class="block-header"><span class="block-icon">🏛️</span><h2>Lei aplicável</h2></div>
+      <p>Estes Termos de Uso são regidos pela lei portuguesa e pelo direito da União Europeia, nomeadamente o RGPD — Regulamento (UE) 2016/679.</p>
+      <p>Qualquer litígio decorrente da utilização da AtuAgenda será submetido aos tribunais competentes da República Portuguesa, sem prejuízo do direito do consumidor de recorrer a mecanismos alternativos de resolução de litígios disponíveis em Portugal.</p>
+      <p>Para resolução de conflitos de consumo, podes ainda recorrer à plataforma europeia de resolução de litígios em linha disponível em <a href="https://ec.europa.eu/consumers/odr" target="_blank">ec.europa.eu/consumers/odr</a>.</p>
+    </div>
 
-        <div class="section" id="contacto">
-            <div class="section-header">
-                <div class="section-icon">✉️</div>
-                <h2>Contacto</h2>
-            </div>
-            <p>Para questões relacionadas com estes Termos de Uso, suporte técnico ou qualquer outro assunto:</p>
-            <div class="contact-box">
-                <h3>AtuAgenda — Suporte</h3>
-                <p>Respondemos a todos os pedidos no prazo máximo de 72 horas úteis.</p>
-                <a href="/cdn-cgi/l/email-protection#ec8d98998d8b8982888d9c838298998d80ac8b818d8580c28f8381"><span class="__cf_email__" data-cfemail="1d7c69687c7a7873797c6d727369687c715d7a707c7471337e7270">[email&#160;protected]</span></a>
-            </div>
-        </div>
+    <div class="section-block" id="contacto">
+      <div class="block-header"><span class="block-icon">✉️</span><h2>Contacto</h2></div>
+      <p>Para questões relacionadas com estes Termos de Uso, suporte técnico ou qualquer outro assunto:</p>
+      <p><strong>AtuAgenda — Suporte</strong><br>Respondemos a todos os pedidos no prazo máximo de 72 horas úteis.</p>
+      <p><a href="mailto:suporte@atuagenda.pt">suporte@atuagenda.pt</a></p>
+    </div>
 
-    </main>
+  </div>
 </div>
 
 <footer>
-    <div class="footer-inner">
-        <div class="footer-links">
-            <a href="index.html">Início</a>
-            <a href="privacy.html">Política de Privacidade</a>
-            <a href="terms.html" class="active">Termos de Uso</a>
-            <a href="delete-account.html">Eliminar Conta</a>
-            <a href="mailto:atuagendapontual@gmail.com">Suporte</a>
-        </div>
-        <div class="footer-copy">© 2026 AtuAgenda · atuagendapontual@gmail.com</div>
-    </div>
-</footer>E html>
-<html lang="pt">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Termos de Uso — AtuAgenda</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --primary: #6941E8;
-            --primary-light: #7C5CFC;
-            --primary-dark: #5530CC;
-            --primary-50: #F3F0FF;
-            --primary-100: #E4DEFF;
-            --text: #1a1a2e;
-            --text-secondary: #4a4a6a;
-            --text-muted: #8888aa;
-            --border: #e8e4ff;
-            --bg: #fafafa;
-            --white: #ffffff;
-            --gradient: linear-gradient(135deg, #6941E8, #5530CC);
-        }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: 'DM Sans', sans-serif;
-            background: var(--bg);
-            color: var(--text);
-            line-height: 1.7;
-            font-size: 1rem;
-        }
-        nav {
-            background: var(--white);
-            border-bottom: 1px solid var(--border);
-            padding: 0 24px;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-        .nav-inner {
-            max-width: 900px;
-            margin: 0 auto;
-            height: 64px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-        .nav-logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            text-decoration: none;
-            color: var(--text);
-            font-weight: 700;
-            font-size: 1.1rem;
-        }
-        .nav-logo-icon {
-            width: 36px;
-            height: 36px;
-            border-radius: 10px;
-            background: var(--gradient);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1rem;
-        }
-        .nav-back {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            text-decoration: none;
-            color: var(--text-muted);
-            font-size: 0.88rem;
-            font-weight: 500;
-            transition: color 0.2s;
-        }
-        .nav-back:hover { color: var(--primary); }
-        .hero {
-            background: var(--white);
-            border-bottom: 1px solid var(--border);
-            padding: 56px 24px 48px;
-        }
-        .hero-inner { max-width: 900px; margin: 0 auto; }
-        .hero-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            background: var(--primary-50);
-            color: var(--primary);
-            border: 1px solid var(--primary-100);
-            border-radius: 20px;
-            padding: 5px 14px;
-            font-size: 0.78rem;
-            font-weight: 600;
-            margin-bottom: 20px;
-            letter-spacing: 0.03em;
-        }
-        .hero h1 {
-            font-size: clamp(1.8rem, 4vw, 2.6rem);
-            font-weight: 800;
-            letter-spacing: -0.03em;
-            color: var(--text);
-            margin-bottom: 12px;
-            line-height: 1.15;
-        }
-        .hero h1 span {
-            background: var(--gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        .hero-meta {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            flex-wrap: wrap;
-        }
-        .hero-meta-item { display: flex; align-items: center; gap: 5px; }
-        .layout {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 48px 24px 80px;
-            display: grid;
-            grid-template-columns: 220px 1fr;
-            gap: 48px;
-            align-items: start;
-        }
-        @media (max-width: 700px) {
-            .layout { grid-template-columns: 1fr; gap: 32px; }
-            .sidebar { display: none; }
-        }
-        .sidebar { position: sticky; top: 88px; }
-        .sidebar-title {
-            font-size: 0.7rem;
-            font-weight: 700;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-            margin-bottom: 12px;
-        }
-        .sidebar-nav { display: flex; flex-direction: column; gap: 2px; }
-        .sidebar-nav a {
-            text-decoration: none;
-            color: var(--text-secondary);
-            font-size: 0.85rem;
-            font-weight: 500;
-            padding: 6px 10px;
-            border-radius: 8px;
-            border-left: 2px solid transparent;
-            transition: all 0.15s;
-        }
-        .sidebar-nav a:hover {
-            color: var(--primary);
-            background: var(--primary-50);
-            border-left-color: var(--primary);
-        }
-        .content { min-width: 0; }
-        .section {
-            background: var(--white);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 32px;
-            margin-bottom: 20px;
-        }
-        .section-header {
-            display: flex;
-            align-items: center;
-            gap: 14px;
-            margin-bottom: 20px;
-            padding-bottom: 16px;
-            border-bottom: 1px solid var(--border);
-        }
-        .section-icon {
-            width: 40px;
-            height: 40px;
-            border-radius: 10px;
-            background: var(--primary-50);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-            font-size: 1.1rem;
-        }
-        .section h2 {
-            font-size: 1.1rem;
-            font-weight: 700;
-            color: var(--text);
-            letter-spacing: -0.01em;
-        }
-        .section p {
-            color: var(--text-secondary);
-            font-size: 0.93rem;
-            margin-bottom: 12px;
-            line-height: 1.75;
-        }
-        .section p:last-child { margin-bottom: 0; }
-        .section ul {
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-            margin: 12px 0;
-        }
-        .section ul li {
-            display: flex;
-            align-items: flex-start;
-            gap: 10px;
-            color: var(--text-secondary);
-            font-size: 0.93rem;
-            line-height: 1.6;
-        }
-        .section ul li::before {
-            content: '';
-            width: 6px;
-            height: 6px;
-            border-radius: 50%;
-            background: var(--primary);
-            flex-shrink: 0;
-            margin-top: 8px;
-        }
-        .highlight-box {
-            background: var(--primary-50);
-            border: 1px solid var(--primary-100);
-            border-radius: 10px;
-            padding: 14px 16px;
-            font-size: 0.88rem;
-            color: var(--primary-dark);
-            font-weight: 500;
-            margin: 16px 0;
-            display: flex;
-            gap: 10px;
-            align-items: flex-start;
-        }
-        .highlight-box .icon { font-size: 1rem; flex-shrink: 0; margin-top: 1px; }
-        .warning-box {
-            background: #fff8f0;
-            border: 1px solid #fde8cc;
-            border-radius: 10px;
-            padding: 14px 16px;
-            font-size: 0.88rem;
-            color: #92400e;
-            font-weight: 500;
-            margin: 16px 0;
-            display: flex;
-            gap: 10px;
-            align-items: flex-start;
-        }
-        .contact-box {
-            background: var(--gradient);
-            border-radius: 14px;
-            padding: 24px;
-            color: white;
-            text-align: center;
-            margin-top: 8px;
-        }
-        .contact-box h3 { font-size: 1rem; font-weight: 700; margin-bottom: 6px; }
-        .contact-box p { font-size: 0.85rem; opacity: 0.85; margin-bottom: 16px; }
-        .contact-box a {
-            display: inline-block;
-            background: rgba(255,255,255,0.15);
-            border: 1px solid rgba(255,255,255,0.3);
-            color: white;
-            text-decoration: none;
-            padding: 10px 20px;
-            border-radius: 8px;
-            font-weight: 600;
-            font-size: 0.88rem;
-            transition: background 0.2s;
-        }
-        .contact-box a:hover { background: rgba(255,255,255,0.25); }
-        footer {
-            background: var(--text);
-            color: rgba(255,255,255,0.5);
-            padding: 32px 24px;
-            text-align: center;
-            font-size: 0.82rem;
-        }
-        footer .footer-inner { max-width: 900px; margin: 0 auto; }
-        footer .footer-links {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin-bottom: 12px;
-            flex-wrap: wrap;
-        }
-        footer .footer-links a {
-            color: rgba(255,255,255,0.6);
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.2s;
-        }
-        footer .footer-links a:hover { color: white; }
-        footer .footer-links a.active { color: var(--primary-light); }
-    </style>
-</head>
-<body>
+  <div class="footer-links">
+    <a href="index.html">Início</a>
+    <a href="privacy.html">Política de Privacidade</a>
+    <a href="terms.html">Termos de Uso</a>
+    <a href="delete-account.html">Eliminar Conta</a>
+    <a href="mailto:atuagendapontual@gmail.com">Suporte</a>
+  </div>
+  <p>© 2026 AtuAgenda · atuagendapontual@gmail.com</p>
+</footer>
 
-<nav>
-    <div class="nav-inner">
-        <a href="index.html" class="nav-logo">
-            <div class="nav-logo-icon">📅</div>
-            AtuAgenda
-        </a>
-        <a href="index.html" class="nav-back">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
-            Voltar ao site
-        </a>
-    </div>
-</nav>
-
-<div class="hero">
-    <div class="hero-inner">
-        <div class="hero-badge">📄 Legal</div>
-        <h1>Termos de <span>Uso</span></h1>
-        <div class="hero-meta">
-            <div class="hero-meta-item">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-                Última atualização: 21 de março de 2026
-            </div>
-            <div class="hero-meta-item">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                Leitura: ~3 minutos
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="layout">
-    <aside class="sidebar">
-        <div class="sidebar-title">Nesta página</div>
-        <nav class="sidebar-nav">
-            <a href="#aceitacao">Aceitação</a>
-            <a href="#descricao">Descrição da app</a>
-            <a href="#licenca">Licença de uso</a>
-            <a href="#conta">A tua conta</a>
-            <a href="#pagamento">Pagamento</a>
-            <a href="#uso-correto">Uso correto</a>
-            <a href="#dados">Os teus dados</a>
-            <a href="#disponibilidade">Disponibilidade</a>
-            <a href="#responsabilidade">Responsabilidade</a>
-            <a href="#propriedade">Propriedade intelectual</a>
-            <a href="#rescisao">Rescisão</a>
-            <a href="#lei">Lei aplicável</a>
-            <a href="#contacto">Contacto</a>
-        </nav>
-    </aside>
-
-    <main class="content">
-
-        <div class="section" id="aceitacao">
-            <div class="section-header">
-                <div class="section-icon">✅</div>
-                <h2>Aceitação dos termos</h2>
-            </div>
-            <p>Ao descarregar, instalar ou utilizar a aplicação <strong>AtuAgenda</strong>, aceitas ficar vinculado a estes Termos de Uso. Se não concordares com algum destes termos, não deves utilizar a aplicação.</p>
-            <p>Estes termos constituem o acordo completo entre ti e a AtuAgenda relativamente ao uso da aplicação.</p>
-        </div>
-
-        <div class="section" id="descricao">
-            <div class="section-header">
-                <div class="section-icon">📱</div>
-                <h2>Descrição da aplicação</h2>
-            </div>
-            <p>A <strong>AtuAgenda</strong> é uma aplicação Android de gestão de agendamentos destinada a profissionais independentes. A app permite:</p>
-            <ul>
-                <li>Criar, editar e eliminar compromissos com clientes.</li>
-                <li>Consultar agenda diária, semanal e mensal.</li>
-                <li>Gerir histórico e notas de clientes.</li>
-                <li>Acompanhar balanço financeiro e exportar relatórios.</li>
-                <li>Configurar serviços, lembretes e preferências de interface.</li>
-                <li>Sincronizar dados via cloud Firebase com backup automático.</li>
-            </ul>
-        </div>
-
-        <div class="section" id="licenca">
-            <div class="section-header">
-                <div class="section-icon">📜</div>
-                <h2>Licença de uso</h2>
-            </div>
-            <p>A AtuAgenda está disponível em duas versões:</p>
-            <ul>
-                <li><strong>Versão Gratuita:</strong> acesso livre e permanente com limite de 20 compromissos criados no total e até 10 clientes. Este limite é acumulado e não repõe mesmo apagando compromissos. Após o primeiro login, a app funciona offline com os dados em cache local.</li>
-                <li><strong>Versão Premium (7,99€ único):</strong> mediante pagamento único, é concedida uma licença <strong>pessoal, não exclusiva, intransmissível e não sublicenciável</strong> com acesso ilimitado a todas as funcionalidades, em todos os dispositivos Android que possuas ou controles.</li>
-            </ul>
-            <ul>
-                <li>A licença Premium é válida para uso pessoal e profissional do titular da conta.</li>
-                <li>A licença Premium inclui todas as atualizações futuras sem custos adicionais.</li>
-                <li>Não é permitida a revenda, redistribuição ou sublicenciamento da app.</li>
-                <li>Não é permitida a engenharia reversa, descompilação ou modificação do código.</li>
-            </ul>
-            <div class="highlight-box">
-                <span class="icon">💡</span>
-                Paga uma vez, usa para sempre — em todos os teus dispositivos Android, sem mensalidades nem renovações.
-            </div>
-        </div>
-
-        <div class="section" id="conta">
-            <div class="section-header">
-                <div class="section-icon">👤</div>
-                <h2>A tua conta</h2>
-            </div>
-            <p>O acesso à AtuAgenda é feito através da tua conta Google. És responsável por:</p>
-            <ul>
-                <li>Manter a segurança da tua conta Google.</li>
-                <li>Todas as atividades realizadas na app com a tua conta.</li>
-                <li>Notificar-nos imediatamente em caso de uso não autorizado da tua conta.</li>
-            </ul>
-            <p>Não é permitida a partilha de contas entre múltiplos utilizadores ou profissionais de negócios distintos.</p>
-        </div>
-
-        <div class="section" id="pagamento">
-            <div class="section-header">
-                <div class="section-icon">💳</div>
-                <h2>Pagamento e reembolso</h2>
-            </div>
-            <p>A versão gratuita da AtuAgenda está disponível sem qualquer custo. A versão Premium está disponível na Google Play Store mediante um <strong>pagamento único de 7,99€</strong>.</p>
-            <ul>
-                <li>O pagamento é processado de forma segura pela Google Play.</li>
-                <li>A Google Play oferece reembolso automático nas primeiras <strong>48 horas</strong> após a compra, sem necessidade de justificação.</li>
-                <li>Após o período de reembolso automático, podes contactar-nos por email para analisar pedidos de reembolso caso a caso.</li>
-                <li>Não existem taxas de subscrição, mensalidades ou compras adicionais dentro da app.</li>
-                <li>O limite gratuito de 20 compromissos é permanente e não repõe — esta limitação é intencional e faz parte das condições do plano gratuito.</li>
-            </ul>
-            <div class="warning-box">
-                <span>⚠️</span>
-                O preço oficial e definitivo é sempre o indicado na Google Play Store no momento da compra. A versão gratuita está sempre disponível sem custo, com limite de 20 compromissos no total. A versão Premium custa 7,99€ — pagamento único.
-            </div>
-        </div>
-
-        <div class="section" id="uso-correto">
-            <div class="section-header">
-                <div class="section-icon">✔️</div>
-                <h2>Uso correto da aplicação</h2>
-            </div>
-            <p>Ao utilizar a AtuAgenda, comprometes-te a:</p>
-            <ul>
-                <li>Utilizar a app apenas para fins legais e legítimos.</li>
-                <li>Não introduzir dados falsos, fraudulentos ou de terceiros sem o seu consentimento.</li>
-                <li>Não tentar contornar os mecanismos de autenticação ou segurança da app.</li>
-                <li>Não usar a app para fins que violem leis de proteção de dados aplicáveis (nomeadamente o RGPD), incluindo o registo de dados de clientes sem base legal adequada.</li>
-            </ul>
-            <p>Enquanto profissional que regista dados de clientes na app, és o <strong>responsável pelo tratamento</strong> desses dados ao abrigo do RGPD. A AtuAgenda atua como subcontratante técnico.</p>
-        </div>
-
-        <div class="section" id="dados">
-            <div class="section-header">
-                <div class="section-icon">🗄️</div>
-                <h2>Os teus dados</h2>
-            </div>
-            <p>Os dados que introduzes na AtuAgenda são teus. Reservamo-nos o direito de aceder aos dados apenas em situações estritamente necessárias para suporte técnico e apenas com o teu consentimento explícito.</p>
-            <p>Consulta a nossa <a href="privacy.html" style="color:var(--primary);font-weight:600;">Política de Privacidade</a> para informação completa sobre como tratamos os teus dados.</p>
-            <p>Recomendamos que faças backups regulares através da função disponível na app. A AtuAgenda não se responsabiliza por perda de dados decorrente de eliminação acidental, falha de dispositivo ou encerramento de conta Google.</p>
-        </div>
-
-        <div class="section" id="disponibilidade">
-            <div class="section-header">
-                <div class="section-icon">🟢</div>
-                <h2>Disponibilidade do serviço</h2>
-            </div>
-            <p>Esforçamo-nos para manter a AtuAgenda disponível e funcional. No entanto, não garantimos disponibilidade ininterrupta, pois o funcionamento da app depende de serviços de terceiros, nomeadamente a infraestrutura Firebase da Google.</p>
-            <ul>
-                <li>Após o primeiro login online, a app funciona em modo offline — os dados ficam guardados localmente no dispositivo e a sessão é preservada.</li>
-                <li>Em modo offline, é possível consultar e adicionar compromissos. O contador do plano gratuito é atualizado localmente e sincronizado com a cloud quando a ligação for restabelecida.</li>
-                <li>A sincronização completa com a cloud requer ligação à internet.</li>
-                <li>O primeiro login requer sempre ligação à internet para autenticação com Google.</li>
-                <li>Podemos realizar manutenção ou atualizações que causem interrupções temporárias.</li>
-                <li>Não nos responsabilizamos por interrupções causadas por falhas da infraestrutura Firebase ou da Google.</li>
-            </ul>
-        </div>
-
-        <div class="section" id="responsabilidade">
-            <div class="section-header">
-                <div class="section-icon">⚠️</div>
-                <h2>Limitação de responsabilidade</h2>
-            </div>
-            <p>A AtuAgenda é fornecida "tal como está". Não garantimos que a app esteja isenta de erros ou que satisfaça todos os teus requisitos específicos.</p>
-            <p>Não nos responsabilizamos por:</p>
-            <ul>
-                <li>Perda de dados causada por uso incorreto, eliminação acidental ou falha de dispositivo.</li>
-                <li>Danos diretos ou indiretos decorrentes do uso ou impossibilidade de uso da app.</li>
-                <li>Erros, imprecisões ou omissões nos dados que tu próprio introduziste.</li>
-                <li>Decisões de negócio tomadas com base nos dados ou relatórios gerados pela app.</li>
-            </ul>
-            <p>A nossa responsabilidade total nunca excederá o montante pago pela licença da app.</p>
-        </div>
-
-        <div class="section" id="propriedade">
-            <div class="section-header">
-                <div class="section-icon">©️</div>
-                <h2>Propriedade intelectual</h2>
-            </div>
-            <p>A AtuAgenda, incluindo o seu código, design, interface, logótipo, nome e toda a documentação associada, é propriedade exclusiva do seu desenvolvedor e está protegida por leis de direitos de autor e propriedade intelectual.</p>
-            <p>A licença de uso concedida não transfere qualquer direito de propriedade intelectual. Todos os direitos não expressamente concedidos são reservados.</p>
-            <p>O nome "AtuAgenda" e o logótipo associado são marcas não registadas do desenvolvedor e não podem ser usados sem autorização expressa.</p>
-        </div>
-
-        <div class="section" id="rescisao">
-            <div class="section-header">
-                <div class="section-icon">🚫</div>
-                <h2>Rescisão</h2>
-            </div>
-            <p>Podes deixar de usar a AtuAgenda a qualquer momento, desinstalando a app e solicitando a eliminação dos teus dados por email.</p>
-            <p>Reservamo-nos o direito de suspender ou terminar o acesso de utilizadores que violem estes termos de uso, sem reembolso do valor pago.</p>
-            <p>Em caso de encerramento definitivo da app, notificaremos os utilizadores com pelo menos <strong>30 dias de antecedência</strong> para que possam exportar os seus dados.</p>
-        </div>
-
-        <div class="section" id="lei">
-            <div class="section-header">
-                <div class="section-icon">🏛️</div>
-                <h2>Lei aplicável</h2>
-            </div>
-            <p>Estes Termos de Uso são regidos pela lei portuguesa e pelo direito da União Europeia, nomeadamente o RGPD — Regulamento (UE) 2016/679.</p>
-            <p>Qualquer litígio decorrente da utilização da AtuAgenda será submetido aos tribunais competentes da República Portuguesa, sem prejuízo do direito do consumidor de recorrer a mecanismos alternativos de resolução de litígios disponíveis em Portugal.</p>
-            <p>Para resolução de conflitos de consumo, podes ainda recorrer à plataforma europeia de resolução de litígios em linha disponível em <a href="https://ec.europa.eu/consumers/odr" target="_blank" style="color:var(--primary);">ec.europa.eu/consumers/odr</a>.</p>
-        </div>
-
-        <div class="section" id="contacto">
-            <div class="section-header">
-                <div class="section-icon">✉️</div>
-                <h2>Contacto</h2>
-            </div>
-            <p>Para questões relacionadas com estes Termos de Uso, suporte técnico ou qualquer outro assunto:</p>
-            <div class="contact-box">
-                <h3>AtuAgenda — Suporte</h3>
-                <p>Respondemos a todos os pedidos no prazo máximo de 72 horas úteis.</p>
-                <a href="/cdn-cgi/l/email-protection#ec8d98998d8b8982888d9c838298998d80ac8b818d8580c28f8381"><span class="__cf_email__" data-cfemail="1d7c69687c7a7873797c6d727369687c715d7a707c7471337e7270">[email&#160;protected]</span></a>
-            </div>
-        </div>
-
-    </main>
-</div>
-
-<footer>
-    <div class="footer-inner">
-        <div class="footer-links">
-            <a href="index.html">Início</a>
-            <a href="privacy.html">Política de Privacidade</a>
-            <a href="terms.html" class="active">Termos de Uso</a>
-            <a href="/cdn-cgi/l/email-protection#8eeffafbefe9ebe0ea
+</body>
+</html>
