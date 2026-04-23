@@ -65,13 +65,15 @@
     #pricing { background: #f1f5f9; border-radius: 0; max-width: 100%; padding: 72px 24px; }
     #pricing .inner { max-width: 1100px; margin: 0 auto; }
     .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; margin-top: 40px; }
-    .plan { background: #fff; border-radius: 16px; padding: 32px; border: 2px solid #e2e8f0; }
-    .plan.featured { border-color: #6366f1; position: relative; }
+    .plan { background: #fff; border-radius: 16px; padding: 32px; border: 2px solid #e2e8f0; transition: transform .2s, box-shadow .2s; position: relative; }
+    .plan:hover { transform: translateY(-4px); box-shadow: 0 12px 24px rgba(0,0,0,.1); }
+    .plan.featured { border-color: #6366f1; }
     .plan-badge { position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: #6366f1; color: #fff; font-size: .75rem; font-weight: 700; padding: 4px 14px; border-radius: 20px; white-space: nowrap; }
     .plan-name { font-size: .85rem; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: #64748b; margin-bottom: 8px; }
     .plan-price { font-size: 2.8rem; font-weight: 800; color: #1e293b; line-height: 1; }
     .plan-price span { font-size: 1rem; font-weight: 500; color: #64748b; }
-    .plan-period { font-size: .85rem; color: #64748b; margin-bottom: 20px; margin-top: 4px; }
+    .plan-period { font-size: .85rem; color: #64748b; margin-bottom: 12px; margin-top: 4px; }
+    .plan-savings { background: #10b981; color: #fff; font-size: .7rem; font-weight: 700; display: inline-block; padding: 2px 10px; border-radius: 20px; margin-bottom: 16px; }
     .plan ul { list-style: none; margin-bottom: 28px; }
     .plan ul li { font-size: .9rem; padding: 6px 0; border-bottom: 1px solid #f1f5f9; display: flex; gap: 8px; }
     .plan ul li::before { content: '✓'; color: #10b981; font-weight: 700; flex-shrink: 0; }
@@ -82,6 +84,8 @@
     .btn-plan-free:hover { background: #e2e8f0; }
     .btn-plan-premium { background: #6366f1; color: #fff; }
     .btn-plan-premium:hover { background: #4f46e5; }
+    .btn-plan-yearly { background: #10b981; color: #fff; }
+    .btn-plan-yearly:hover { background: #059669; }
     .plan-note { font-size: .78rem; color: #94a3b8; text-align: center; margin-top: 10px; }
 
     /* FAQ */
@@ -124,12 +128,13 @@
 
 <!-- HERO -->
 <div class="hero">
-  <p style="font-size:.8rem;opacity:.7;margin-bottom:8px;">📅 App Android · 2,99€/mês</p>
+  <p style="font-size:.8rem;opacity:.7;margin-bottom:8px;">📅 App Android · a partir de 5,00€/mês</p>
   <h1>A agenda para o teu negócio</h1>
   <p>Gere os teus agendamentos, clientes e faturação num só lugar. Simples, rápida e sempre sincronizada na cloud.</p>
   <div class="hero-badges">
     <span>✓ Grátis para começar</span>
-    <span>✓ Premium 2,99€/mês</span>
+    <span>✓ Premium 5,00€/mês</span>
+    <span>✓ Plano anual com 20% desconto</span>
     <span>✓ Backup na cloud</span>
     <span>✓ Login com Google</span>
   </div>
@@ -197,7 +202,7 @@
   <div class="inner">
     <div class="section-label">Preço</div>
     <h2 class="section-title">Começa grátis, cresce quando precisares</h2>
-    <p class="section-sub">Experimenta sem compromisso. Quando quiseres mais, subscreve por apenas 2,99€/mês — cancela quando quiseres.</p>
+    <p class="section-sub">Experimenta sem compromisso. Escolhe o plano que mais se adequa ao teu negócio.</p>
     <div class="pricing-grid">
 
       <!-- FREE -->
@@ -221,11 +226,10 @@
         <p class="plan-note">Sem cartão. Sem compromisso.</p>
       </div>
 
-      <!-- PREMIUM -->
-      <div class="plan featured">
-        <div class="plan-badge">⚡ Mais popular</div>
-        <div class="plan-name">Premium</div>
-        <div class="plan-price">€2,99 <span>/ mês</span></div>
+      <!-- PREMIUM MENSAL -->
+      <div class="plan">
+        <div class="plan-name">Premium Mensal</div>
+        <div class="plan-price">€5,00 <span>/ mês</span></div>
         <div class="plan-period">subscrição mensal · cancela quando quiseres</div>
         <ul>
           <li>Tudo do plano gratuito</li>
@@ -238,8 +242,30 @@
           <li><strong>Estatísticas do negócio</strong></li>
           <li>Todas as atualizações futuras incluídas</li>
         </ul>
-        <a href="https://play.google.com/store/apps/details?id=pt.atuagenda&hl=pt_PT" class="btn-plan btn-plan-premium">Subscrever — 2,99€/mês</a>
+        <a href="https://play.google.com/store/apps/details?id=pt.atuagenda&hl=pt_PT" class="btn-plan btn-plan-premium">Subscrever — 5,00€/mês</a>
         <p class="plan-note">Processado com segurança pela Google Play · Cancela a qualquer momento</p>
+      </div>
+
+      <!-- PREMIUM ANUAL (20% DESCONTO) -->
+      <div class="plan featured">
+        <div class="plan-badge">⚡ Melhor economia</div>
+        <div class="plan-name">Premium Anual</div>
+        <div class="plan-price">€48,00 <span>/ ano</span></div>
+        <div class="plan-period">subscrição anual · equivalente a 4,00€/mês</div>
+        <div class="plan-savings">🔥 Poupa 20% · 12€ de desconto</div>
+        <ul>
+          <li>Tudo do plano gratuito</li>
+          <li><strong>Compromissos ilimitados</strong></li>
+          <li><strong>Clientes ilimitados</strong></li>
+          <li><strong>Backup automático na cloud</strong></li>
+          <li><strong>Histórico completo de clientes</strong></li>
+          <li><strong>Balanço anual PDF e Excel</strong></li>
+          <li><strong>Lembretes de compromissos</strong></li>
+          <li><strong>Estatísticas do negócio</strong></li>
+          <li>Todas as atualizações futuras incluídas</li>
+        </ul>
+        <a href="https://play.google.com/store/apps/details?id=pt.atuagenda&hl=pt_PT" class="btn-plan btn-plan-yearly">Subscrever — 48,00€/ano</a>
+        <p class="plan-note">Processado com segurança pela Google Play · Equivalente a 4,00€/mês · Poupa 12€ por ano</p>
       </div>
 
     </div>
@@ -266,11 +292,11 @@
     </div>
     <div class="faq-item">
       <h3>A versão gratuita tem limites?</h3>
-      <p>Sim. A versão gratuita inclui até 30 compromissos por mês e até 10 clientes. Para uso ilimitado com backup, histórico completo, balanço e lembretes, o Premium custa apenas 2,99€/mês — sem permanência, cancela quando quiseres.</p>
+      <p>Sim. A versão gratuita inclui até 30 compromissos por mês e até 10 clientes. Para uso ilimitado, tens o Premium mensal (5,00€/mês) ou o Premium anual (48,00€/ano, que equivale a 4,00€/mês e oferece 20% de desconto) — sem permanência, cancela quando quiseres.</p>
     </div>
     <div class="faq-item">
       <h3>Posso cancelar a subscrição Premium a qualquer momento?</h3>
-      <p>Sim. A subscrição é mensal e podes cancelar a qualquer momento diretamente na Google Play Store, sem penalizações. Após o cancelamento, manténs o acesso Premium até ao fim do período pago.</p>
+      <p>Sim. As subscrições são mensais ou anuais e podes cancelar a qualquer momento diretamente na Google Play Store, sem penalizações. Após o cancelamento, manténs o acesso Premium até ao fim do período pago.</p>
     </div>
     <div class="faq-item">
       <h3>Para que tipo de negócios funciona?</h3>
@@ -286,7 +312,7 @@
 <!-- CTA BANNER -->
 <div class="cta-banner">
   <h2>Começa grátis hoje mesmo</h2>
-  <p>Descarrega grátis e começa a usar hoje. Quando precisares de mais, o Premium é apenas 2,99€/mês — sem permanência, sem surpresas.</p>
+  <p>Descarrega grátis e começa a usar hoje. Quando precisares de mais, escolhe o plano ideal para ti — mensal ou anual com 20% de desconto.</p>
   <a href="https://play.google.com/store/apps/details?id=pt.atuagenda&hl=pt_PT" class="btn-hero">Descarregar grátis</a>
 </div>
 
