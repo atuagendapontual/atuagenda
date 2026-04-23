@@ -75,12 +75,12 @@ Disponível na Google Play Store.
 
 ## 📁 Estrutura do Repositório
 
-atuagenda/
-├── index.html # App principal (Capacitor WebView)
-├── privacy.html # Política de privacidade
-├── terms.html # Termos de utilização
-├── delete-account.html # Página de eliminação de conta
-└── favicon.ico
+**atuagenda/**
+- `index.html` — App principal (Capacitor WebView)
+- `privacy.html` — Política de privacidade
+- `terms.html` — Termos de utilização
+- `delete-account.html` — Página de eliminação de conta
+- `favicon.ico` — Ícone do site
 
 ---
 
