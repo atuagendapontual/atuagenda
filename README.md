@@ -47,17 +47,19 @@ Disponível na Google Play Store.
 
 ## 💰 Planos
 
-| | Gratuito | Premium |
-|---|---|---|
-| Compromissos | 20 (total) | Ilimitados |
-| Clientes | — | Histórico completo |
-| Balanço anual | ❌ | ✅ |
-| Exportação PDF/Excel | ❌ | ✅ |
-| Estatísticas | ❌ | ✅ |
-| Lembretes | ❌ | ✅ |
-| Backup | ❌ | ✅ |
+| | Gratuito | Premium Mensal | Premium Anual |
+|---|---|---|---|
+| Compromissos | 20 (total) | Ilimitados | Ilimitados |
+| Clientes | — | Histórico completo | Histórico completo |
+| Balanço anual | ❌ | ✅ | ✅ |
+| Exportação PDF/Excel | ❌ | ✅ | ✅ |
+| Estatísticas | ❌ | ✅ | ✅ |
+| Lembretes | ❌ | ✅ | ✅ |
+| Backup | ❌ | ✅ | ✅ |
+| **Preço** | **Grátis** | **5,00€/mês** | **48,00€/ano** |
 
-**Premium:** 2,99€/mês
+**Premium Mensal:** 5,00€/mês  
+**Premium Anual:** 48,00€/ano (equivalente a 4,00€/mês — poupa 12€ por ano com 20% de desconto)
 
 ---
 
@@ -73,14 +75,12 @@ Disponível na Google Play Store.
 
 ## 📁 Estrutura do Repositório
 
-```
 atuagenda/
-├── index.html          # App principal (Capacitor WebView)
-├── privacy.html        # Política de privacidade
-├── terms.html          # Termos de utilização
+├── index.html # App principal (Capacitor WebView)
+├── privacy.html # Política de privacidade
+├── terms.html # Termos de utilização
 ├── delete-account.html # Página de eliminação de conta
 └── favicon.ico
-```
 
 ---
 
