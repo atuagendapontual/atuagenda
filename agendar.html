@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-    <title>Agendar Marcação Online!</title>
+    <title>Agendar Marcação</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
@@ -207,7 +207,7 @@ function renderCal() {
     var off=p1.getDay()-1; if(off<0)off=6;
     for(var i=0;i<off;i++){var e=document.createElement('div');e.className='dia-btn empty';g.appendChild(e);}
     for(var d=1;d<=pN.getDate();d++){
-        var dt=new Date(ano,mes,d), ds=dt.toISOString().split('T')[0];
+        var dt=new Date(ano,mes,d), ds=ano+'-'+String(mes+1).padStart(2,'0')+'-'+String(d).padStart(2,'0');
         var ok=disp.has(ds)&&dt>hoje;
         var b=document.createElement('button');
         b.className='dia-btn'+(ok?'':' empty');
