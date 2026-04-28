@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-    <title>Agendar Marcação Online</title>
+    <title>Agendar Marcação</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
@@ -32,10 +32,10 @@
         .card { background:var(--white); border-radius:var(--radius); border:1px solid var(--border); padding:20px; margin-bottom:12px; box-shadow:var(--shadow); }
         .card-title { font-size:0.8rem; font-weight:700; color:var(--text-2); text-transform:uppercase; letter-spacing:0.06em; margin-bottom:14px; }
         .dias-grid { display:grid; grid-template-columns:repeat(7,1fr); gap:4px; margin-bottom:4px; }
-        .dia-label { text-align:center; font-size:0.65rem; font-weight:700; color:var(--text-2); text-transform:uppercase; padding:4px 0; }
-        .dia-btn { aspect-ratio:1; border-radius:10px; border:1.5px solid var(--border); background:var(--white); font-size:0.82rem; font-weight:600; color:var(--text); cursor:pointer; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:2px; transition:all 0.15s; }
+        .dia-label { text-align:center; font-size:0.68rem; font-weight:700; color:var(--text-2); text-transform:uppercase; padding:6px 0; }
+        .dia-btn { aspect-ratio:1; border-radius:10px; border:1.5px solid var(--border); background:var(--white); font-size:1rem; font-weight:700; color:var(--text); cursor:pointer; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:2px; transition:all 0.15s; }
         .dia-btn:hover { border-color:var(--primary); background:var(--primary-light); }
-        .dia-btn.selected { background:var(--primary); color:white; border-color:var(--primary); }
+        .dia-btn.selected { background:var(--primary); color:white; border-color:var(--primary); transform:scale(1.1); box-shadow:0 4px 12px rgba(37,99,235,0.4); }
         .dia-btn.empty { border-color:transparent; background:transparent; cursor:default; opacity:0.2; pointer-events:none; }
         .dia-dot { width:4px; height:4px; border-radius:50%; background:var(--primary); }
         .dia-btn.selected .dia-dot { background:rgba(255,255,255,0.7); }
@@ -174,7 +174,7 @@
         <div class="card sucesso">
             <div class="sucesso-icon">&#127881;</div>
             <div class="sucesso-titulo">Pedido enviado!</div>
-            <div class="sucesso-sub">O profissional vai confirmar ou reagendar a tua marca&#231;&#227;o em breve.<br>Ser&#225;s contactada pelo telefone indicado.<br><br><strong id="sucesso-detalhe"></strong></div>
+            <div class="sucesso-sub">O profissional vai confirmar a tua marca&#231;&#227;o em breve.<br>Ser&#225;s contactada pelo telefone indicado.<br><br><strong id="sucesso-detalhe"></strong></div>
         </div>
     </div>
 </div>
