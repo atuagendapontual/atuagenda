@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-    <title>Agendar Marcação</title>
+    <title>Agendar Marcação Online</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
@@ -141,6 +141,11 @@
                     <div class="inline-err" id="err-telefone"></div>
                 </div>
                 <div class="form-group">
+                    <label class="form-label">Email <span class="req">*</span></label>
+                    <input type="email" id="input-email" class="form-input" placeholder="Para receberes confirma&#231;&#227;o da marca&#231;&#227;o" autocomplete="email">
+                    <div class="inline-err" id="err-email"></div>
+                </div>
+                <div class="form-group">
                     <label class="form-label">O que pretendes? <span class="req">*</span></label>
                     <textarea id="input-pretende" class="form-input" placeholder="Descreve o que pretendes. Ex: corte e colora&#231;&#227;o, cabelo comprido danificado, madeixas..." rows="4"></textarea>
                     <div class="inline-err" id="err-pretende"></div>
@@ -263,10 +268,13 @@ function erroInline(inputId,errId,msg){
 function avancarPasso4(){
     var nome=document.getElementById('input-nome').value.trim();
     var tel=document.getElementById('input-telefone').value.trim();
+    var email=document.getElementById('input-email').value.trim();
     var pret=document.getElementById('input-pretende').value.trim();
     var hor=document.getElementById('input-horario-pref').value.trim();
     if(!nome||nome.length<2){erroInline('input-nome','err-nome','Indica o teu nome completo.');return;}
     if(!tel||tel.replace(/\D/g,'').length<9){erroInline('input-telefone','err-telefone','Indica um numero de telefone valido.');return;}
+    var email=document.getElementById('input-email').value.trim();
+    if(!email||!/^[^@]+@[^@]+\.[^@]+$/.test(email)){erroInline('input-email','err-email','Indica um email valido.');return;}
     if(!pret||pret.length<5){erroInline('input-pretende','err-pretende','Descreve o que pretendes (minimo 5 caracteres).');return;}
     if(!hor){erroInline('input-horario-pref','err-horario','Indica o teu horario preferencial.');return;}
     avancarPasso(4);
@@ -297,6 +305,7 @@ function renderResumo(){
     h+='<div class="resumo-row"><span class="resumo-label">Hora</span><span class="resumo-val">'+slotSelec.inicio+' - '+slotSelec.fim+'</span></div>';
     h+='<div class="resumo-row"><span class="resumo-label">Nome</span><span class="resumo-val">'+esc(nome)+'</span></div>';
     h+='<div class="resumo-row"><span class="resumo-label">Telefone</span><span class="resumo-val">'+esc(tel)+'</span></div>';
+    h+='<div class="resumo-row"><span class="resumo-label">Email</span><span class="resumo-val">'+esc(email)+'</span></div>';
     h+='<div class="resumo-row resumo-pretende"><span class="resumo-label">O que pretendo</span><span class="resumo-val">'+esc(pret)+'</span></div>';
     h+='<div class="resumo-row"><span class="resumo-label">Hor. preferencial</span><span class="resumo-val">'+esc(hor)+'</span></div>';
     h+='<div style="margin-top:10px;padding-top:10px;border-top:1px solid #bfdbfe;font-size:0.75rem;color:var(--text-2);">Aguarda confirmacao - seras contactada pelo profissional.</div>';
@@ -314,6 +323,7 @@ async function submeterMarcacao(){
                 slug:slug,
                 nome:document.getElementById('input-nome').value.trim(),
                 telefone:document.getElementById('input-telefone').value.trim(),
+                email:document.getElementById('input-email').value.trim(),
                 pretende:document.getElementById('input-pretende').value.trim(),
                 horarioPref:document.getElementById('input-horario-pref').value.trim(),
                 data:dataSelec, horaInicio:slotSelec.inicio, horaFim:slotSelec.fim
