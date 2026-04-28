@@ -299,6 +299,7 @@ function renderResumo(){
     var df=DIAS[new Date(pts[0],pts[1]-1,pts[2]).getDay()]+', '+pts[2]+' de '+MESES[pts[1]-1]+' de '+pts[0];
     var nome=document.getElementById('input-nome').value.trim();
     var tel=document.getElementById('input-telefone').value.trim();
+    var email=document.getElementById('input-email').value.trim();
     var pret=document.getElementById('input-pretende').value.trim();
     var hor=document.getElementById('input-horario-pref').value.trim();
     var h='<div class="resumo-row"><span class="resumo-label">Data</span><span class="resumo-val">'+esc(df)+'</span></div>';
