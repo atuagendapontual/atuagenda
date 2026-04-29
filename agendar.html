@@ -321,7 +321,7 @@ function selSlot(s,btn){
     slotSelec=s;
     document.querySelectorAll('.slot-btn.selected').forEach(function(b){b.classList.remove('selected');});
     btn.classList.add('selected');
-    avancarPasso(5);
+    avancarPasso(4);
 }
 
 function erroInline(inputId,errId,msg){
@@ -343,7 +343,7 @@ function avancarPasso4(){
     if(!email||!/^[^@]+@[^@]+\.[^@]+$/.test(email)){erroInline('input-email','err-email','Indica um email valido.');return;}
     if(!pret||pret.length<5){erroInline('input-pretende','err-pretende','Descreve o que pretendes (minimo 5 caracteres).');return;}
     if(!hor){erroInline('input-horario-pref','err-horario','Indica o teu horario preferencial.');return;}
-    avancarPasso(4);
+    avancarPasso(5);
 }
 
 function avancarPasso(n){
