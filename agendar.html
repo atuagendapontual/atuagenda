@@ -233,7 +233,7 @@ function renderServicos() {
             +'<span style="font-size:0.78rem;color:var(--text-2);background:var(--bg);padding:3px 8px;border-radius:6px;">⏱ '+esc(durLabel)+'</span>';
         btn.onmouseover = function(){ this.style.borderColor='var(--primary)'; this.style.background='var(--primary-light)'; };
         btn.onmouseout = function(){ this.style.borderColor='var(--border)'; this.style.background='var(--white)'; };
-        btn.onclick = (function(sNome, sDur) { return function() { selServico(sNome, sDur); }; })(nome, dur);
+        btn.onclick = (function(sNome, sDur, b) { return function() { selServico(sNome, sDur, b); }; })(nome, dur, btn);
         lista.appendChild(btn);
     });
 }
@@ -245,19 +245,18 @@ function formatarDuracao(min) {
     return h + 'h' + (m ? m : '');
 }
 
-function selServico(nome, dur) {
+function selServico(nome, dur, btnEl) {
     servicoSelec = { nome: nome, duracaoMin: dur };
-    // Recarregar disponibilidade com duração do serviço
+    // Destacar botão seleccionado
+    document.querySelectorAll('#servicos-lista-agend button').forEach(function(b){
+        b.style.background='var(--white)'; b.style.borderColor='var(--border)';
+    });
+    if (btnEl) { btnEl.style.background='#eff6ff'; btnEl.style.borderColor='var(--primary)'; }
+    // Se serviço tem duração específica, recarregar slots
     var tz = Intl.DateTimeFormat().resolvedOptions().timeZone || 'UTC';
     var url = BASE+'/obterDisponibilidade?slug='+encodeURIComponent(slug)+'&tz='+encodeURIComponent(tz);
-    if (dur) url += '&servico='+encodeURIComponent(nome);
-    var btnActivo = document.querySelector('#servicos-lista-agend button.selec');
-    if (btnActivo) { btnActivo.classList.remove('selec'); btnActivo.style.background='var(--white)'; btnActivo.style.borderColor='var(--border)'; }
-    // Destacar botão seleccionado
-    event.currentTarget.style.background='#eff6ff';
-    event.currentTarget.style.borderColor='var(--primary)';
-    // Se serviço tem duração específica, recarregar slots
     if (dur && dur !== (prof.duracaoMin || 60)) {
+        url += '&servico='+encodeURIComponent(nome);
         fetch(url).then(function(r){ return r.json(); }).then(function(d){
             if (d.dias) prof.dias = d.dias;
             avancarPasso(2);
@@ -350,6 +349,7 @@ function avancarPasso4(){
 function avancarPasso(n){
     for(var i=1;i<=5;i++){var el=document.getElementById('passo-'+i);if(el)el.style.display=i===n?'block':'none';}
     updateSteps(n);
+    if(n===2)renderCal();
     if(n===3)renderSlots();
     if(n===5)renderResumo();
     window.scrollTo({top:0,behavior:'smooth'});
