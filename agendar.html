@@ -114,8 +114,7 @@
                 <div id="sem-servicos-msg" style="display:none;text-align:center;padding:20px;color:var(--text-2);font-size:0.88rem;">Sem servi&#231;os configurados. Contacta o profissional.</div>
             </div>
         </div>
-
-        <div id="passo-3">
+        <div id="passo-2" style="display:none;">
             <div class="card">
                 <div class="card-title">Escolhe uma data</div>
                 <div class="mes-nav">
@@ -128,13 +127,14 @@
                     <div class="dia-label">Qui</div><div class="dia-label">Sex</div><div class="dia-label">Sab</div><div class="dia-label">Dom</div>
                 </div>
                 <div class="dias-grid" id="dias-grid"></div>
+                <button class="btn-voltar" onclick="avancarPasso(1)">&#8249; Voltar</button>
             </div>
         </div>
         <div id="passo-3" style="display:none;">
             <div class="card">
                 <div class="card-title" id="slots-titulo">Escolhe uma hora</div>
                 <div id="slots-container"></div>
-                <button class="btn-voltar" onclick="avancarPasso(4)">&#8249; Voltar</button>
+                <button class="btn-voltar" onclick="avancarPasso(2)">&#8249; Voltar</button>
             </div>
         </div>
         <div id="passo-4" style="display:none;">
@@ -166,7 +166,7 @@
                     <div class="form-hint">Caso o hor&#225;rio escolhido n&#227;o seja poss&#237;vel, ser&#225;s contactada para combinar.</div>
                     <div class="inline-err" id="err-horario"></div>
                 </div>
-                <button class="btn-voltar" onclick="avancarPasso(2)">&#8249; Voltar</button>
+                <button class="btn-voltar" onclick="avancarPasso(3)">&#8249; Voltar</button>
                 <button class="btn-primary" style="margin-top:14px;" onclick="avancarPasso4()">Continuar &#8250;</button>
             </div>
         </div>
@@ -184,7 +184,7 @@
         <div class="card sucesso">
             <div class="sucesso-icon">&#127881;</div>
             <div class="sucesso-titulo">Pedido enviado!</div>
-            <div class="sucesso-sub">O profissional vai confirmar ou reagendar a tua marca&#231;&#227;o em breve.<br>Ser&#225;s contactada pelo telefone ou email indicado em caso de incompatibilidades no horário pretendido.<br><br><strong id="sucesso-detalhe"></strong></div>
+            <div class="sucesso-sub">O profissional vai confirmar a tua marca&#231;&#227;o em breve.<br>Ser&#225;s contactada pelo telefone indicado.<br><br><strong id="sucesso-detalhe"></strong></div>
         </div>
     </div>
 </div>
