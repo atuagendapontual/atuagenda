@@ -97,15 +97,25 @@
     </div>
     <div id="view-form" style="display:none;">
         <div class="steps">
-            <div class="step active" id="step-1"><div class="step-num">1</div><span>Data</span></div>
+            <div class="step active" id="step-1"><div class="step-num">1</div><span>Servi&#231;o</span></div>
             <div class="step-line" id="line-1"></div>
-            <div class="step" id="step-2"><div class="step-num">2</div><span>Hora</span></div>
+            <div class="step" id="step-2"><div class="step-num">2</div><span>Data</span></div>
             <div class="step-line" id="line-2"></div>
-            <div class="step" id="step-3"><div class="step-num">3</div><span>Dados</span></div>
+            <div class="step" id="step-3"><div class="step-num">3</div><span>Hora</span></div>
             <div class="step-line" id="line-3"></div>
-            <div class="step" id="step-4"><div class="step-num">4</div><span>Confirmar</span></div>
+            <div class="step" id="step-4"><div class="step-num">4</div><span>Dados</span></div>
+            <div class="step-line" id="line-4"></div>
+            <div class="step" id="step-5"><div class="step-num">5</div><span>Confirmar</span></div>
         </div>
         <div id="passo-1">
+            <div class="card">
+                <div class="card-title">Que servi&#231;o pretendes?</div>
+                <div id="servicos-lista-agend" style="display:flex;flex-direction:column;gap:8px;"></div>
+                <div id="sem-servicos-msg" style="display:none;text-align:center;padding:20px;color:var(--text-2);font-size:0.88rem;">Sem servi&#231;os configurados. Contacta o profissional.</div>
+            </div>
+        </div>
+
+        <div id="passo-3">
             <div class="card">
                 <div class="card-title">Escolhe uma data</div>
                 <div class="mes-nav">
@@ -120,14 +130,14 @@
                 <div class="dias-grid" id="dias-grid"></div>
             </div>
         </div>
-        <div id="passo-2" style="display:none;">
+        <div id="passo-3" style="display:none;">
             <div class="card">
                 <div class="card-title" id="slots-titulo">Escolhe uma hora</div>
                 <div id="slots-container"></div>
-                <button class="btn-voltar" onclick="avancarPasso(1)">&#8249; Voltar</button>
+                <button class="btn-voltar" onclick="avancarPasso(4)">&#8249; Voltar</button>
             </div>
         </div>
-        <div id="passo-3" style="display:none;">
+        <div id="passo-4" style="display:none;">
             <div class="card">
                 <div class="card-title">Os teus dados</div>
                 <div class="form-group">
@@ -160,7 +170,7 @@
                 <button class="btn-primary" style="margin-top:14px;" onclick="avancarPasso4()">Continuar &#8250;</button>
             </div>
         </div>
-        <div id="passo-4" style="display:none;">
+        <div id="passo-5" style="display:none;">
             <div class="card">
                 <div class="card-title">Confirma a marca&#231;&#227;o</div>
                 <div class="resumo" id="resumo"></div>
@@ -174,7 +184,7 @@
         <div class="card sucesso">
             <div class="sucesso-icon">&#127881;</div>
             <div class="sucesso-titulo">Pedido enviado!</div>
-            <div class="sucesso-sub">O profissional vai confirmar ou reagendar a tua marca&#231;&#227;o em breve.<br>Ser&#225;s contactada pelo telefone ou email indicado sobre a marcação pretendida ou, em caso de incompatibilidade de horários, outro dia/horário<br><br><strong id="sucesso-detalhe"></strong></div>
+            <div class="sucesso-sub">O profissional vai confirmar ou reagendar a tua marca&#231;&#227;o em breve.<br>Ser&#225;s contactada pelo telefone ou email indicado em caso de incompatibilidades no horário pretendido.<br><br><strong id="sucesso-detalhe"></strong></div>
         </div>
     </div>
 </div>
@@ -182,7 +192,7 @@
 <script>
 var BASE = 'https://us-central1-agenda-pontual-a1402.cloudfunctions.net';
 var MESES = ['Janeiro','Fevereiro','Marco','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'];
-var slug='', prof=null, dataSelec=null, slotSelec=null;
+var slug='', prof=null, dataSelec=null, slotSelec=null, servicoSelec=null;
 var mesAtual = new Date(); mesAtual.setDate(1);
 
 async function init() {
@@ -196,8 +206,65 @@ async function init() {
         prof = await r.json();
         document.getElementById('header-nome').textContent = prof.nome;
         document.title = 'Agendar - '+prof.nome;
-        mostrarView('form'); renderCal();
+        mostrarView('form'); renderServicos();
     } catch(e) { mostrarErro('Erro ao carregar. Tenta novamente.'); }
+}
+
+function renderServicos() {
+    var lista = document.getElementById('servicos-lista-agend');
+    var semMsg = document.getElementById('sem-servicos-msg');
+    if (!lista) return;
+    var servicos = prof.servicos || [];
+    if (!servicos.length) {
+        lista.style.display = 'none';
+        if (semMsg) semMsg.style.display = 'block';
+        // Se não há serviços, avançar directamente para data
+        avancarPasso(2);
+        return;
+    }
+    lista.innerHTML = '';
+    servicos.forEach(function(s) {
+        var nome = typeof s === 'string' ? s : (s.nome || s);
+        var dur = (typeof s === 'object' && s.duracaoMin) ? s.duracaoMin : 0;
+        var durLabel = dur ? formatarDuracao(dur) : 'Duração padrão';
+        var btn = document.createElement('button');
+        btn.style.cssText = 'width:100%;padding:14px 16px;border:1.5px solid var(--border);border-radius:12px;background:var(--white);text-align:left;cursor:pointer;display:flex;justify-content:space-between;align-items:center;font-family:inherit;transition:all 0.15s;';
+        btn.innerHTML = '<span style="font-size:0.95rem;font-weight:600;color:var(--text);">'+esc(nome)+'</span>'
+            +'<span style="font-size:0.78rem;color:var(--text-2);background:var(--bg);padding:3px 8px;border-radius:6px;">⏱ '+esc(durLabel)+'</span>';
+        btn.onmouseover = function(){ this.style.borderColor='var(--primary)'; this.style.background='var(--primary-light)'; };
+        btn.onmouseout = function(){ this.style.borderColor='var(--border)'; this.style.background='var(--white)'; };
+        btn.onclick = (function(sNome, sDur) { return function() { selServico(sNome, sDur); }; })(nome, dur);
+        lista.appendChild(btn);
+    });
+}
+
+function formatarDuracao(min) {
+    if (!min) return 'Duração padrão';
+    if (min < 60) return min + ' min';
+    var h = Math.floor(min/60), m = min%60;
+    return h + 'h' + (m ? m : '');
+}
+
+function selServico(nome, dur) {
+    servicoSelec = { nome: nome, duracaoMin: dur };
+    // Recarregar disponibilidade com duração do serviço
+    var tz = Intl.DateTimeFormat().resolvedOptions().timeZone || 'UTC';
+    var url = BASE+'/obterDisponibilidade?slug='+encodeURIComponent(slug)+'&tz='+encodeURIComponent(tz);
+    if (dur) url += '&servico='+encodeURIComponent(nome);
+    var btnActivo = document.querySelector('#servicos-lista-agend button.selec');
+    if (btnActivo) { btnActivo.classList.remove('selec'); btnActivo.style.background='var(--white)'; btnActivo.style.borderColor='var(--border)'; }
+    // Destacar botão seleccionado
+    event.currentTarget.style.background='#eff6ff';
+    event.currentTarget.style.borderColor='var(--primary)';
+    // Se serviço tem duração específica, recarregar slots
+    if (dur && dur !== (prof.duracaoMin || 60)) {
+        fetch(url).then(function(r){ return r.json(); }).then(function(d){
+            if (d.dias) prof.dias = d.dias;
+            avancarPasso(2);
+        }).catch(function(){ avancarPasso(2); });
+    } else {
+        avancarPasso(2);
+    }
 }
 
 function diasDisponiveis() { return prof ? new Set(prof.dias.map(function(d){return d.data;})) : new Set(); }
@@ -230,7 +297,7 @@ function selData(ds,btn){
     dataSelec=ds;
     document.querySelectorAll('.dia-btn.selected').forEach(function(b){b.classList.remove('selected');});
     btn.classList.add('selected');
-    avancarPasso(2);
+    avancarPasso(3);
 }
 
 function renderSlots(){
@@ -255,7 +322,7 @@ function selSlot(s,btn){
     slotSelec=s;
     document.querySelectorAll('.slot-btn.selected').forEach(function(b){b.classList.remove('selected');});
     btn.classList.add('selected');
-    avancarPasso(3);
+    avancarPasso(5);
 }
 
 function erroInline(inputId,errId,msg){
@@ -281,16 +348,16 @@ function avancarPasso4(){
 }
 
 function avancarPasso(n){
-    for(var i=1;i<=4;i++){var el=document.getElementById('passo-'+i);if(el)el.style.display=i===n?'block':'none';}
+    for(var i=1;i<=5;i++){var el=document.getElementById('passo-'+i);if(el)el.style.display=i===n?'block':'none';}
     updateSteps(n);
-    if(n===2)renderSlots();
-    if(n===4)renderResumo();
+    if(n===3)renderSlots();
+    if(n===5)renderResumo();
     window.scrollTo({top:0,behavior:'smooth'});
 }
 
 function updateSteps(n){
-    for(var i=1;i<=4;i++){var s=document.getElementById('step-'+i);if(!s)continue;s.className='step'+(i<n?' done':i===n?' active':'');}
-    for(var i=1;i<=3;i++){var l=document.getElementById('line-'+i);if(l)l.className='step-line'+(i<n?' done':'');}
+    for(var i=1;i<=5;i++){var s=document.getElementById('step-'+i);if(!s)continue;s.className='step'+(i<n?' done':i===n?' active':'');}
+    for(var i=1;i<=4;i++){var l=document.getElementById('line-'+i);if(l)l.className='step-line'+(i<n?' done':'');}
 }
 
 function renderResumo(){
@@ -304,6 +371,7 @@ function renderResumo(){
     var hor=document.getElementById('input-horario-pref').value.trim();
     var h='<div class="resumo-row"><span class="resumo-label">Data</span><span class="resumo-val">'+esc(df)+'</span></div>';
     h+='<div class="resumo-row"><span class="resumo-label">Hora</span><span class="resumo-val">'+slotSelec.inicio+' - '+slotSelec.fim+'</span></div>';
+    if(servicoSelec) h+='<div class="resumo-row"><span class="resumo-label">Servi&#231;o</span><span class="resumo-val">'+esc(servicoSelec.nome)+'</span></div>';
     h+='<div class="resumo-row"><span class="resumo-label">Nome</span><span class="resumo-val">'+esc(nome)+'</span></div>';
     h+='<div class="resumo-row"><span class="resumo-label">Telefone</span><span class="resumo-val">'+esc(tel)+'</span></div>';
     h+='<div class="resumo-row"><span class="resumo-label">Email</span><span class="resumo-val">'+esc(email)+'</span></div>';
@@ -322,6 +390,7 @@ async function submeterMarcacao(){
             method:'POST', headers:{'Content-Type':'application/json'},
             body:JSON.stringify({
                 slug:slug,
+                servico: servicoSelec ? servicoSelec.nome : '',
                 nome:document.getElementById('input-nome').value.trim(),
                 telefone:document.getElementById('input-telefone').value.trim(),
                 email:document.getElementById('input-email').value.trim(),
