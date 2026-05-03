@@ -530,6 +530,24 @@
         }
         .footer a { color: var(--accent); text-decoration: none; font-weight: 700; }
 
+        /* ── SELECTOR IDIOMA ── */
+        .lang-sel { display: flex; gap: 4px; flex-shrink: 0; }
+        .lang-btn {
+            background: var(--surface);
+            border: 1.5px solid var(--border);
+            border-radius: 8px;
+            padding: 4px 8px;
+            font-size: 0.65rem;
+            font-weight: 700;
+            color: var(--ink-3);
+            cursor: pointer;
+            font-family: 'DM Sans', sans-serif;
+            transition: all 0.2s;
+            letter-spacing: 0.05em;
+        }
+        .lang-btn:hover { border-color: var(--accent); color: var(--accent); }
+        .lang-btn.active { background: var(--accent); border-color: var(--accent); color: white; }
+
         /* ── ANIMAÇÃO ENTRADA ── */
         .card { animation: slideUp 0.35s cubic-bezier(0.22, 1, 0.36, 1) both; }
         @keyframes slideUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
@@ -544,7 +562,12 @@
             <div class="header-brand">AtuAgenda</div>
             <div class="header-nome" id="header-nome">A carregar...</div>
         </div>
-        <div class="header-badge">ONLINE</div>
+        <div class="lang-sel">
+            <button class="lang-btn active" onclick="setLang('pt')">PT</button>
+            <button class="lang-btn" onclick="setLang('en')">EN</button>
+            <button class="lang-btn" onclick="setLang('es')">ES</button>
+            <button class="lang-btn" onclick="setLang('fr')">FR</button>
+        </div>
     </div>
 </div>
 
@@ -612,10 +635,7 @@
                     <div class="mes-titulo" id="mes-titulo"></div>
                     <button class="mes-nav-btn" onclick="mudarMes(1)">›</button>
                 </div>
-                <div class="dias-grid">
-                    <div class="dia-label">Seg</div><div class="dia-label">Ter</div><div class="dia-label">Qua</div>
-                    <div class="dia-label">Qui</div><div class="dia-label">Sex</div><div class="dia-label">Sáb</div><div class="dia-label">Dom</div>
-                </div>
+                <div class="dias-grid" id="dias-labels"></div>
                 <div class="dias-grid" id="dias-grid"></div>
                 <button class="btn-voltar" style="margin-top:16px;" onclick="avancarPasso(1)">‹ Voltar</button>
             </div>
@@ -700,7 +720,7 @@
 
 <script>
 var BASE='https://us-central1-agenda-pontual-a1402.cloudfunctions.net';
-var MESES=['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'];
+var MESES=['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro']; // fallback
 var slug='',prof=null,dataSelec=null,slotSelec=null,servicoSelec=null;
 var mesAtual=new Date(); mesAtual.setDate(1);
 
@@ -708,6 +728,7 @@ async function init(){
     var p=new URLSearchParams(window.location.search);
     slug=p.get('s')||p.get('slug')||window.location.pathname.split('/').filter(Boolean).pop();
     if(!slug||slug==='agendar.html'||slug==='agendar'){mostrarErro('Link inválido.');return;}
+    setLang(langAtual);
     try{
         var tz=Intl.DateTimeFormat().resolvedOptions().timeZone||'UTC';
         var r=await fetch(BASE+'/obterDisponibilidade?slug='+encodeURIComponent(slug)+'&tz='+encodeURIComponent(tz));
@@ -717,11 +738,11 @@ async function init(){
         document.title='Agendar — '+prof.nome;
         mostrarView('form');
         renderServicos();
-    }catch(e){mostrarErro('Erro ao carregar. Tenta novamente.');}
+    }catch(e){mostrarErro(T().loading.replace('...',''));}
 }
 
 function formatDur(min){
-    if(!min)return'Duração padrão';
+    if(!min)return T().duracao_padrao;
     if(min<60)return min+' min';
     var h=Math.floor(min/60),m=min%60;
     return h+'h'+(m?m:'');
@@ -734,7 +755,7 @@ function renderServicos(){
     var servicos=prof.servicos||[];
     if(!servicos.length){
         lista.style.display='none';
-        if(semMsg)semMsg.style.display='block';
+        if(semMsg){semMsg.textContent=T().sem_servicos;semMsg.style.display='block';}
         avancarPasso(2);
         return;
     }
@@ -766,10 +787,20 @@ function selServico(nome,dur,btnEl){
 
 function diasDisponiveis(){return prof?new Set(prof.dias.map(function(d){return d.data;})):new Set();}
 
+function renderDiasLabels(){
+    var g=document.getElementById('dias-labels');
+    if(!g)return;
+    g.innerHTML='';
+    T().dias_label.forEach(function(d){
+        var el=document.createElement('div');el.className='dia-label';el.textContent=d;g.appendChild(el);
+    });
+}
+
 function renderCal(){
+    renderDiasLabels();
     var g=document.getElementById('dias-grid');g.innerHTML='';
     var ano=mesAtual.getFullYear(),mes=mesAtual.getMonth();
-    document.getElementById('mes-titulo').textContent=MESES[mes]+' '+ano;
+    document.getElementById('mes-titulo').textContent=T().meses[mes]+' '+ano;
     var hoje=new Date();hoje.setHours(0,0,0,0);
     var disp=diasDisponiveis();
     var p1=new Date(ano,mes,1);
@@ -805,15 +836,14 @@ function selData(ds,btn){
 function renderSlots(){
     var c=document.getElementById('slots-container');c.innerHTML='';
     var dia=prof.dias.find(function(d){return d.data===dataSelec;});
-    if(!dia||!dia.slots.length){c.innerHTML='<div class="sem-slots">Sem horários disponíveis neste dia.</div>';return;}
+    if(!dia||!dia.slots.length){c.innerHTML='<div class="sem-slots">'+T().sem_slots+'</div>';return;}
     var pts=dataSelec.split('-').map(Number);
-    var DIAS=['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado'];
-    document.getElementById('slots-titulo').textContent=DIAS[new Date(pts[0],pts[1]-1,pts[2]).getDay()]+', '+pts[2]+' de '+MESES[pts[1]-1];
+    document.getElementById('slots-titulo').textContent=T().dias[new Date(pts[0],pts[1]-1,pts[2]).getDay()]+', '+pts[2]+' de '+T().meses[pts[1]-1];
     var g=document.createElement('div');g.className='slots-grid';
     dia.slots.forEach(function(s){
         var b=document.createElement('button');
         b.className='slot-btn'+(slotSelec&&slotSelec.inicio===s.inicio?' selected':'');
-        b.innerHTML=s.inicio+'<span class="slot-fim">até '+s.fim+'</span>';
+        b.innerHTML=s.inicio+'<span class="slot-fim">'+T().ate+' '+s.fim+'</span>';
         b.onclick=(function(slot,btn){return function(){selSlot(slot,btn);};})(s,b);
         g.appendChild(b);
     });
@@ -840,11 +870,11 @@ function avancarPasso4(){
     var email=document.getElementById('input-email').value.trim();
     var pret=document.getElementById('input-pretende').value.trim();
     var hor=document.getElementById('input-horario-pref').value.trim();
-    if(!nome||nome.length<2){erroInline('input-nome','err-nome','Indica o teu nome completo.');return;}
-    if(!tel||tel.replace(/\D/g,'').length<9){erroInline('input-telefone','err-telefone','Indica um número válido.');return;}
-    if(!email||!/^[^@]+@[^@]+\.[^@]+$/.test(email)){erroInline('input-email','err-email','Indica um email válido.');return;}
-    if(!pret||pret.length<5){erroInline('input-pretende','err-pretende','Descreve o que pretendes.');return;}
-    if(!hor){erroInline('input-horario-pref','err-horario','Indica o teu horário preferencial.');return;}
+    if(!nome||nome.length<2){erroInline('input-nome','err-nome',T().erro_nome);return;}
+    if(!tel||tel.replace(/\D/g,'').length<9){erroInline('input-telefone','err-telefone',T().erro_tel);return;}
+    if(!email||!/^[^@]+@[^@]+\.[^@]+$/.test(email)){erroInline('input-email','err-email',T().erro_email);return;}
+    if(!pret||pret.length<5){erroInline('input-pretende','err-pretende',T().erro_pretende);return;}
+    if(!hor){erroInline('input-horario-pref','err-horario',T().erro_horario);return;}
     avancarPasso(5);
 }
 
@@ -868,31 +898,30 @@ function updateSteps(n){
 
 function renderResumo(){
     var pts=dataSelec.split('-').map(Number);
-    var DIAS=['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado'];
-    var df=DIAS[new Date(pts[0],pts[1]-1,pts[2]).getDay()]+', '+pts[2]+' de '+MESES[pts[1]-1]+' de '+pts[0];
+    var df=T().dias[new Date(pts[0],pts[1]-1,pts[2]).getDay()]+', '+pts[2]+' de '+T().meses[pts[1]-1]+' de '+pts[0];
     var nome=document.getElementById('input-nome').value.trim();
     var tel=document.getElementById('input-telefone').value.trim();
     var email=document.getElementById('input-email').value.trim();
     var pret=document.getElementById('input-pretende').value.trim();
     var hor=document.getElementById('input-horario-pref').value.trim();
-    var h='<div class="resumo-title">Resumo da marcação</div>';
-    if(servicoSelec)h+='<div class="resumo-row"><span class="resumo-label">Serviço</span><span class="resumo-val">'+esc(servicoSelec.nome)+'</span></div>';
-    h+='<div class="resumo-row"><span class="resumo-label">Data</span><span class="resumo-val">'+esc(df)+'</span></div>';
-    h+='<div class="resumo-row"><span class="resumo-label">Hora</span><span class="resumo-val">'+slotSelec.inicio+' — '+slotSelec.fim+'</span></div>';
+    var h='<div class="resumo-title">'+T().resumo_titulo+'</div>';
+    if(servicoSelec)h+='<div class="resumo-row"><span class="resumo-label">'+T().servico+'</span><span class="resumo-val">'+esc(servicoSelec.nome)+'</span></div>';
+    h+='<div class="resumo-row"><span class="resumo-label">'+T().data+'</span><span class="resumo-val">'+esc(df)+'</span></div>';
+    h+='<div class="resumo-row"><span class="resumo-label">'+T().hora+'</span><span class="resumo-val">'+slotSelec.inicio+' — '+slotSelec.fim+'</span></div>';
     h+='<hr class="resumo-divider">';
-    h+='<div class="resumo-row"><span class="resumo-label">Nome</span><span class="resumo-val">'+esc(nome)+'</span></div>';
-    h+='<div class="resumo-row"><span class="resumo-label">Telefone</span><span class="resumo-val">'+esc(tel)+'</span></div>';
-    h+='<div class="resumo-row"><span class="resumo-label">Email</span><span class="resumo-val" style="font-size:0.8rem;">'+esc(email)+'</span></div>';
-    h+='<div class="resumo-row resumo-pretende"><span class="resumo-label">O que pretendo</span><span class="resumo-val">'+esc(pret)+'</span></div>';
-    h+='<div class="resumo-row"><span class="resumo-label">Hor. preferencial</span><span class="resumo-val">'+esc(hor)+'</span></div>';
-    h+='<div style="margin-top:12px;font-size:0.72rem;color:var(--ink-3);text-align:center;">Aguarda confirmação — serás contactada em breve.</div>';
+    h+='<div class="resumo-row"><span class="resumo-label">'+T().nome+'</span><span class="resumo-val">'+esc(nome)+'</span></div>';
+    h+='<div class="resumo-row"><span class="resumo-label">'+T().telefone+'</span><span class="resumo-val">'+esc(tel)+'</span></div>';
+    h+='<div class="resumo-row"><span class="resumo-label">'+T().email+'</span><span class="resumo-val" style="font-size:0.8rem;">'+esc(email)+'</span></div>';
+    h+='<div class="resumo-row resumo-pretende"><span class="resumo-label">'+T().o_que_pretendes+'</span><span class="resumo-val">'+esc(pret)+'</span></div>';
+    h+='<div class="resumo-row"><span class="resumo-label">'+T().hor_pref+'</span><span class="resumo-val">'+esc(hor)+'</span></div>';
+    h+='<div style="margin-top:12px;font-size:0.72rem;color:var(--ink-3);text-align:center;">'+T().aguarda+'</div>';
     document.getElementById('resumo').innerHTML=h;
 }
 
 async function submeterMarcacao(){
     var btn=document.getElementById('btn-confirmar');
     var errEl=document.getElementById('erro-submit');
-    errEl.style.display='none';btn.disabled=true;btn.textContent='A enviar...';
+    errEl.style.display='none';btn.disabled=true;btn.textContent=T().a_enviar;
     try{
         var r=await fetch(BASE+'/criarMarcacaoOnline',{
             method:'POST',headers:{'Content-Type':'application/json'},
@@ -908,11 +937,13 @@ async function submeterMarcacao(){
             })
         });
         var d=await r.json();
-        if(!r.ok){errEl.textContent=d.erro||'Erro ao enviar.';errEl.style.display='block';btn.disabled=false;btn.innerHTML='✓ Confirmar Marcação';return;}
+        if(!r.ok){errEl.textContent=d.erro||'Erro ao enviar.';errEl.style.display='block';btn.disabled=false;btn.innerHTML=T().confirmar_btn;return;}
         var p=dataSelec.split('-').map(Number);
         document.getElementById('sucesso-detalhe').textContent=p[2]+'/'+p[1]+'/'+p[0]+' às '+slotSelec.inicio;
+        document.querySelector('.sucesso-titulo').textContent=T().pedido_enviado;
+        document.querySelector('.sucesso-sub').innerHTML=T().sucesso_sub.replace(/\n/g,'<br>');
         mostrarView('sucesso');
-    }catch(e){errEl.textContent='Sem ligação. Tenta novamente.';errEl.style.display='block';btn.disabled=false;btn.innerHTML='✓ Confirmar Marcação';}
+    }catch(e){errEl.textContent=T().sem_ligacao;errEl.style.display='block';btn.disabled=false;btn.innerHTML=T().confirmar_btn;}
 }
 
 function mostrarView(v){
@@ -920,6 +951,262 @@ function mostrarView(v){
 }
 function mostrarErro(msg){document.getElementById('erro-msg-txt').textContent=msg;mostrarView('erro');}
 function esc(s){return String(s||'').replace(/[&<>"]/g,function(m){return({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'})[m];});}
+
+var LANGS = {
+    pt: {
+        loading: 'A carregar disponibilidade...',
+        indisponivel: 'Agendamento indisponível',
+        passo: 'Passo',
+        servico: 'Serviço', data: 'Data', hora: 'Hora', dados: 'Dados', confirmar: 'Confirmar',
+        que_servico: 'Que serviço pretendes?',
+        sem_servicos: 'Sem serviços configurados. Contacta o profissional.',
+        escolhe_data: 'Escolhe uma data',
+        escolhe_hora: 'Escolhe uma hora',
+        os_teus_dados: 'Os teus dados',
+        confirma: 'Confirma a tua marcação',
+        nome: 'Nome', telefone: 'Telefone', email: 'Email',
+        o_que_pretendes: 'O que pretendes?',
+        horario_pref: 'Horário preferencial',
+        hint_horario: 'Caso o horário escolhido não seja possível, serás contactada por email ou telefone.',
+        continuar: 'Continuar →',
+        voltar: '‹ Voltar',
+        confirmar_btn: '✓ Confirmar Marcação',
+        resumo_titulo: 'Resumo da marcação',
+        aguarda: 'Aguarda confirmação — serás contactada em breve.',
+        pedido_enviado: 'Pedido enviado!',
+        sucesso_sub: 'O profissional vai confirmar em breve.\nReceberás um email de confirmação.\nSerás contactada pelo email ou telefone indicado.',
+        sem_slots: 'Sem horários disponíveis neste dia.',
+        a_enviar: 'A enviar...',
+        erro_nome: 'Indica o teu nome completo.',
+        erro_tel: 'Indica um número válido.',
+        erro_email: 'Indica um email válido.',
+        erro_pretende: 'Descreve o que pretendes.',
+        erro_horario: 'Indica o teu horário preferencial.',
+        sem_ligacao: 'Sem ligação. Tenta novamente.',
+        placeholder_nome: 'O teu nome completo',
+        placeholder_tel: 'Para confirmação da marcação',
+        placeholder_email: 'Para receberes confirmação',
+        placeholder_pretende: 'Descreve o que pretendes. Ex: Duas unhas partidas, Nail art em 3 unhas, etc..',
+        placeholder_horario: 'Ex: após as 14h, ou só posso terças de manhã.',
+        hor_pref: 'Hor. preferencial',
+        duracao_padrao: 'Duração padrão',
+        dias: ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado'],
+        meses: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
+        dias_label: ['Seg','Ter','Qua','Qui','Sex','Sáb','Dom'],
+        ate: 'até', powered: 'Powered by'
+    },
+    en: {
+        loading: 'Loading availability...',
+        indisponivel: 'Booking unavailable',
+        passo: 'Step',
+        servico: 'Service', data: 'Date', hora: 'Time', dados: 'Details', confirmar: 'Confirm',
+        que_servico: 'What service do you need?',
+        sem_servicos: 'No services configured. Contact the professional.',
+        escolhe_data: 'Choose a date',
+        escolhe_hora: 'Choose a time',
+        os_teus_dados: 'Your details',
+        confirma: 'Confirm your booking',
+        nome: 'Name', telefone: 'Phone', email: 'Email',
+        o_que_pretendes: 'What do you need?',
+        horario_pref: 'Preferred schedule',
+        hint_horario: 'If the chosen time is not available, you will be contacted by email or phone.',
+        continuar: 'Continue →',
+        voltar: '‹ Back',
+        confirmar_btn: '✓ Confirm Booking',
+        resumo_titulo: 'Booking summary',
+        aguarda: 'Awaiting confirmation — you will be contacted shortly.',
+        pedido_enviado: 'Request sent!',
+        sucesso_sub: 'The professional will confirm shortly.\nYou will receive a confirmation email.\nYou will be contacted by the email or phone provided.',
+        sem_slots: 'No available times on this day.',
+        a_enviar: 'Sending...',
+        erro_nome: 'Please enter your full name.',
+        erro_tel: 'Please enter a valid number.',
+        erro_email: 'Please enter a valid email.',
+        erro_pretende: 'Please describe what you need.',
+        erro_horario: 'Please indicate your preferred schedule.',
+        sem_ligacao: 'No connection. Please try again.',
+        placeholder_nome: 'Your full name',
+        placeholder_tel: 'For booking confirmation',
+        placeholder_email: 'To receive confirmation',
+        placeholder_pretende: 'Describe what you need. E.g.: Two broken nails, Nail art on 3 nails, etc.',
+        placeholder_horario: 'E.g.: after 2pm, or only Tuesday mornings.',
+        hor_pref: 'Pref. schedule',
+        duracao_padrao: 'Default duration',
+        dias: ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'],
+        meses: ['January','February','March','April','May','June','July','August','September','October','November','December'],
+        dias_label: ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'],
+        ate: 'to', powered: 'Powered by'
+    },
+    es: {
+        loading: 'Cargando disponibilidad...',
+        indisponivel: 'Cita no disponible',
+        passo: 'Paso',
+        servico: 'Servicio', data: 'Fecha', hora: 'Hora', dados: 'Datos', confirmar: 'Confirmar',
+        que_servico: '¿Qué servicio necesitas?',
+        sem_servicos: 'Sin servicios configurados. Contacta al profesional.',
+        escolhe_data: 'Elige una fecha',
+        escolhe_hora: 'Elige una hora',
+        os_teus_dados: 'Tus datos',
+        confirma: 'Confirma tu cita',
+        nome: 'Nombre', telefone: 'Teléfono', email: 'Email',
+        o_que_pretendes: '¿Qué necesitas?',
+        horario_pref: 'Horario preferido',
+        hint_horario: 'Si el horario elegido no está disponible, serás contactada por email o teléfono.',
+        continuar: 'Continuar →',
+        voltar: '‹ Volver',
+        confirmar_btn: '✓ Confirmar Cita',
+        resumo_titulo: 'Resumen de la cita',
+        aguarda: 'Esperando confirmación — serás contactada pronto.',
+        pedido_enviado: '¡Solicitud enviada!',
+        sucesso_sub: 'El profesional confirmará pronto.\nRecibirás un email de confirmación.\nSerás contactada por el email o teléfono indicado.',
+        sem_slots: 'Sin horarios disponibles en este día.',
+        a_enviar: 'Enviando...',
+        erro_nome: 'Indica tu nombre completo.',
+        erro_tel: 'Indica un número válido.',
+        erro_email: 'Indica un email válido.',
+        erro_pretende: 'Describe lo que necesitas.',
+        erro_horario: 'Indica tu horario preferido.',
+        sem_ligacao: 'Sin conexión. Inténtalo de nuevo.',
+        placeholder_nome: 'Tu nombre completo',
+        placeholder_tel: 'Para confirmación de la cita',
+        placeholder_email: 'Para recibir confirmación',
+        placeholder_pretende: 'Describe lo que necesitas. Ej: Dos uñas rotas, Nail art en 3 uñas, etc.',
+        placeholder_horario: 'Ej: después de las 14h, o solo martes por la mañana.',
+        hor_pref: 'Hor. preferido',
+        duracao_padrao: 'Duración estándar',
+        dias: ['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'],
+        meses: ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],
+        dias_label: ['Lun','Mar','Mié','Jue','Vie','Sáb','Dom'],
+        ate: 'hasta', powered: 'Desarrollado por'
+    },
+    fr: {
+        loading: 'Chargement des disponibilités...',
+        indisponivel: 'Réservation indisponible',
+        passo: 'Étape',
+        servico: 'Service', data: 'Date', hora: 'Heure', dados: 'Détails', confirmar: 'Confirmer',
+        que_servico: 'Quel service souhaitez-vous?',
+        sem_servicos: 'Aucun service configuré. Contactez le professionnel.',
+        escolhe_data: 'Choisissez une date',
+        escolhe_hora: 'Choisissez une heure',
+        os_teus_dados: 'Vos coordonnées',
+        confirma: 'Confirmez votre réservation',
+        nome: 'Nom', telefone: 'Téléphone', email: 'Email',
+        o_que_pretendes: 'Que souhaitez-vous?',
+        horario_pref: 'Horaire préféré',
+        hint_horario: "Si l'horaire choisi n'est pas disponible, vous serez contacté par email ou téléphone.",
+        continuar: 'Continuer →',
+        voltar: '‹ Retour',
+        confirmar_btn: '✓ Confirmer la Réservation',
+        resumo_titulo: 'Récapitulatif de la réservation',
+        aguarda: 'En attente de confirmation — vous serez contacté prochainement.',
+        pedido_enviado: 'Demande envoyée!',
+        sucesso_sub: 'Le professionnel confirmera bientôt.\nVous recevrez un email de confirmation.\nVous serez contacté par email ou téléphone.',
+        sem_slots: 'Aucun horaire disponible ce jour.',
+        a_enviar: 'Envoi en cours...',
+        erro_nome: 'Veuillez indiquer votre nom complet.',
+        erro_tel: 'Veuillez indiquer un numéro valide.',
+        erro_email: 'Veuillez indiquer un email valide.',
+        erro_pretende: 'Décrivez ce que vous souhaitez.',
+        erro_horario: 'Indiquez votre horaire préféré.',
+        sem_ligacao: 'Pas de connexion. Veuillez réessayer.',
+        placeholder_nome: 'Votre nom complet',
+        placeholder_tel: 'Pour la confirmation de la réservation',
+        placeholder_email: 'Pour recevoir la confirmation',
+        placeholder_pretende: 'Décrivez ce que vous souhaitez. Ex: Deux ongles cassés, Nail art sur 3 ongles, etc.',
+        placeholder_horario: "Ex: après 14h, ou seulement le mardi matin.",
+        hor_pref: 'Hor. préféré',
+        duracao_padrao: 'Durée standard',
+        dias: ['Dimanche','Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi'],
+        meses: ['Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Août','Septembre','Octobre','Novembre','Décembre'],
+        dias_label: ['Lun','Mar','Mer','Jeu','Ven','Sam','Dim'],
+        ate: 'à', powered: 'Propulsé par'
+    }
+};
+
+var langAtual = (function(){
+    try { var s = localStorage.getItem('agendar_lang'); if(s && LANGS[s]) return s; } catch(e){}
+    var bl = (navigator.language || navigator.userLanguage || 'pt').substring(0,2).toLowerCase();
+    return LANGS[bl] ? bl : 'pt';
+})();
+
+function setLang(l) {
+    langAtual = l;
+    // Actualizar botões
+    document.querySelectorAll('.lang-btn').forEach(function(b) {
+        b.classList.toggle('active', b.textContent.toLowerCase() === l);
+    });
+    var t = LANGS[l];
+    // Loading
+    var loadTxt = document.querySelector('.loading-txt');
+    if (loadTxt) loadTxt.textContent = t.loading;
+    // Steps labels
+    var labels = ['servico','data','hora','dados','confirmar'];
+    for (var i = 0; i < 5; i++) {
+        var s = document.getElementById('step-'+(i+1));
+        if (s) { var lbl = s.querySelector('.step-label'); if (lbl) lbl.textContent = t[labels[i]]; }
+    }
+    // Card titles e eyebrows
+    var eyebrows = document.querySelectorAll('.card-eyebrow');
+    eyebrows.forEach(function(e, i) { e.textContent = t.passo + ' ' + (i+1); });
+    // Títulos dos passos
+    var titulos = [t.que_servico, t.escolhe_data, t.escolhe_hora, t.os_teus_dados, t.confirma];
+    var cardTitles = document.querySelectorAll('.card-title');
+    cardTitles.forEach(function(el, i) { if (titulos[i]) el.textContent = titulos[i]; });
+    // Labels do formulário
+    var fLabels = document.querySelectorAll('.form-label');
+    var labelKeys = [t.nome, t.telefone, t.email, t.o_que_pretendes, t.horario_pref];
+    fLabels.forEach(function(el, i) {
+        if (labelKeys[i]) {
+            // manter o asterisco
+            var req = el.querySelector('.req');
+            el.childNodes[0].textContent = labelKeys[i] + ' ';
+        }
+    });
+    // Placeholders
+    var inputNome = document.getElementById('input-nome');
+    var inputTel = document.getElementById('input-telefone');
+    var inputEmail = document.getElementById('input-email');
+    var inputPret = document.getElementById('input-pretende');
+    var inputHor = document.getElementById('input-horario-pref');
+    if (inputNome) inputNome.placeholder = t.placeholder_nome;
+    if (inputTel) inputTel.placeholder = t.placeholder_tel;
+    if (inputEmail) inputEmail.placeholder = t.placeholder_email;
+    if (inputPret) inputPret.placeholder = t.placeholder_pretende;
+    if (inputHor) inputHor.placeholder = t.placeholder_horario;
+    // Hint
+    var hint = document.querySelector('.form-hint');
+    if (hint) hint.textContent = t.hint_horario;
+    // Botões
+    var btnContinuar = document.querySelector('#passo-4 .btn-primary');
+    if (btnContinuar) btnContinuar.textContent = t.continuar;
+    var btnConfirmar = document.getElementById('btn-confirmar');
+    if (btnConfirmar && !btnConfirmar.disabled) btnConfirmar.textContent = t.confirmar_btn;
+    // Botões voltar
+    document.querySelectorAll('.btn-voltar').forEach(function(b) { b.textContent = t.voltar; });
+    // Sucesso
+    var sucTitulo = document.querySelector('.sucesso-titulo');
+    if (sucTitulo) sucTitulo.textContent = t.pedido_enviado;
+    var sucSub = document.querySelector('.sucesso-sub');
+    if (sucSub) sucSub.innerHTML = t.sucesso_sub.replace(/\n/g,'<br>');
+    // Footer
+    var footer = document.querySelector('.footer');
+    if (footer) footer.innerHTML = t.powered + ' <a href="https://play.google.com/store/apps/details?id=pt.atuagenda" target="_blank">AtuAgenda</a>';
+    // Re-render calendário se visível
+    if (document.getElementById('dias-grid') && document.getElementById('dias-grid').children.length > 0) {
+        renderCal();
+    }
+    // Re-render slots se visível
+    if (dataSelec && document.getElementById('passo-3') && document.getElementById('passo-3').style.display !== 'none') {
+        renderSlots();
+    }
+    // Slots titulo
+    var slotsTit = document.getElementById('slots-titulo');
+    if (slotsTit && slotsTit.textContent === 'Escolhe uma hora') slotsTit.textContent = t.escolhe_hora;
+    // Guardar preferência
+    try { localStorage.setItem('agendar_lang', l); } catch(e) {}
+}
+
+function T() { return LANGS[langAtual] || LANGS['pt']; }
 
 init();
 </script>
