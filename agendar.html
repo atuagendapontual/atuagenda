@@ -5,131 +5,546 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
     <title>Agendar</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
-        *{margin:0;padding:0;box-sizing:border-box;}
-        :root{
-            --pri:#6366f1;--pri-dark:#4f46e5;--pri-light:#eef2ff;--pri-mid:#818cf8;
-            --success:#10b981;--error:#ef4444;--warn:#f59e0b;
-            --text:#0f172a;--text-2:#64748b;--text-3:#94a3b8;
-            --border:#e2e8f0;--bg:#f8fafc;--white:#ffffff;
-            --radius:16px;--shadow:0 4px 24px rgba(0,0,0,0.06);
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --ink: #0a0a0f;
+            --ink-2: #4a4a5a;
+            --ink-3: #9090a8;
+            --surface: #f4f3f8;
+            --white: #ffffff;
+            --accent: #7c5cfc;
+            --accent-2: #c084fc;
+            --accent-glow: rgba(124,92,252,0.18);
+            --success: #00c896;
+            --error: #ff4d6d;
+            --border: rgba(0,0,0,0.08);
+            --radius: 20px;
         }
-        body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;}
 
-        /* Header */
-        .header{background:var(--white);border-bottom:1px solid var(--border);padding:0;position:sticky;top:0;z-index:100;}
-        .header-inner{max-width:520px;margin:0 auto;padding:16px 20px;display:flex;align-items:center;gap:12px;}
-        .header-icon{width:40px;height:40px;background:linear-gradient(135deg,var(--pri),#8b5cf6);border-radius:12px;display:flex;align-items:center;justify-content:center;color:white;font-size:1.1rem;flex-shrink:0;}
-        .header-texts{}
-        .header-brand{font-size:0.65rem;font-weight:700;color:var(--text-3);text-transform:uppercase;letter-spacing:0.1em;}
-        .header-nome{font-size:1.1rem;font-weight:800;color:var(--text);letter-spacing:-0.02em;}
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--surface);
+            color: var(--ink);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
 
-        /* Container */
-        .container{max-width:520px;margin:0 auto;padding:20px 16px 60px;}
+        /* ── HEADER ── */
+        .header {
+            background: var(--white);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(12px);
+        }
+        .header-inner {
+            max-width: 540px;
+            margin: 0 auto;
+            padding: 14px 20px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+        .header-avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: 14px;
+            background: linear-gradient(135deg, var(--accent), var(--accent-2));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            flex-shrink: 0;
+            box-shadow: 0 4px 16px var(--accent-glow);
+        }
+        .header-info { flex: 1; min-width: 0; }
+        .header-brand {
+            font-size: 0.6rem;
+            font-weight: 600;
+            color: var(--ink-3);
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+        }
+        .header-nome {
+            font-family: 'Nunito', sans-serif;
+            font-size: 1.05rem;
+            font-weight: 800;
+            color: var(--ink);
+            letter-spacing: -0.02em;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .header-badge {
+            background: linear-gradient(135deg, var(--accent), var(--accent-2));
+            color: white;
+            font-size: 0.6rem;
+            font-weight: 700;
+            padding: 4px 10px;
+            border-radius: 20px;
+            letter-spacing: 0.05em;
+            flex-shrink: 0;
+        }
 
-        /* Steps */
-        .steps{display:flex;align-items:center;justify-content:center;margin-bottom:24px;gap:0;}
-        .step{display:flex;align-items:center;gap:5px;font-size:0.72rem;font-weight:600;color:var(--text-3);}
-        .step.active{color:var(--pri);}
-        .step.done{color:var(--success);}
-        .step-num{width:22px;height:22px;border-radius:50%;background:var(--border);display:flex;align-items:center;justify-content:center;font-size:0.65rem;font-weight:800;flex-shrink:0;transition:all 0.2s;}
-        .step.active .step-num{background:var(--pri);color:white;box-shadow:0 0 0 4px var(--pri-light);}
-        .step.done .step-num{background:var(--success);color:white;}
-        .step-line{width:20px;height:2px;background:var(--border);margin:0 4px;flex-shrink:0;transition:background 0.2s;}
-        .step-line.done{background:var(--success);}
+        /* ── CONTAINER ── */
+        .container {
+            max-width: 540px;
+            margin: 0 auto;
+            padding: 24px 16px 80px;
+        }
 
-        /* Card */
-        .card{background:var(--white);border-radius:var(--radius);border:1px solid var(--border);padding:20px;margin-bottom:12px;box-shadow:var(--shadow);}
-        .card-title{font-size:0.7rem;font-weight:800;color:var(--text-3);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:16px;}
+        /* ── STEPS ── */
+        .steps-bar {
+            display: flex;
+            align-items: center;
+            margin-bottom: 28px;
+            padding: 0 4px;
+        }
+        .step-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            flex: 1;
+        }
+        .step-dot {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: var(--white);
+            border: 2px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.65rem;
+            font-weight: 800;
+            color: var(--ink-3);
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            position: relative;
+            z-index: 1;
+        }
+        .step-item.active .step-dot {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: white;
+            transform: scale(1.2);
+            box-shadow: 0 0 0 6px var(--accent-glow);
+        }
+        .step-item.done .step-dot {
+            background: var(--success);
+            border-color: var(--success);
+            color: white;
+        }
+        .step-label {
+            font-size: 0.58rem;
+            font-weight: 600;
+            color: var(--ink-3);
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+        }
+        .step-item.active .step-label { color: var(--accent); }
+        .step-item.done .step-label { color: var(--success); }
+        .step-line {
+            flex: 1;
+            height: 2px;
+            background: var(--border);
+            margin-bottom: 18px;
+            transition: background 0.3s;
+        }
+        .step-line.done { background: var(--success); }
 
-        /* Serviços */
-        .servico-btn{width:100%;padding:14px 16px;border:1.5px solid var(--border);border-radius:14px;background:var(--white);text-align:left;cursor:pointer;display:flex;justify-content:space-between;align-items:center;font-family:inherit;transition:all 0.15s;margin-bottom:8px;}
-        .servico-btn:hover,.servico-btn.selected{border-color:var(--pri);background:var(--pri-light);}
-        .servico-btn.selected{box-shadow:0 0 0 3px rgba(99,102,241,0.15);}
-        .servico-nome{font-size:0.95rem;font-weight:600;color:var(--text);}
-        .servico-dur{font-size:0.75rem;color:var(--text-2);background:var(--bg);padding:4px 10px;border-radius:20px;font-weight:600;}
+        /* ── CARD ── */
+        .card {
+            background: var(--white);
+            border-radius: var(--radius);
+            padding: 24px;
+            margin-bottom: 14px;
+            border: 1px solid var(--border);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.04);
+        }
+        .card-eyebrow {
+            font-size: 0.62rem;
+            font-weight: 700;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            margin-bottom: 6px;
+        }
+        .card-title {
+            font-family: 'Nunito', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 800;
+            color: var(--ink);
+            letter-spacing: -0.02em;
+            margin-bottom: 20px;
+        }
 
-        /* Calendário */
-        .mes-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;}
-        .mes-nav-btn{width:34px;height:34px;border-radius:10px;border:1.5px solid var(--border);background:var(--white);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1rem;color:var(--text-2);transition:all 0.15s;}
-        .mes-nav-btn:hover{background:var(--pri-light);border-color:var(--pri);color:var(--pri);}
-        .mes-titulo{font-size:0.95rem;font-weight:800;color:var(--text);}
-        .dias-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:3px;margin-bottom:3px;}
-        .dia-label{text-align:center;font-size:0.6rem;font-weight:700;color:var(--text-3);text-transform:uppercase;padding:4px 0;}
-        .dia-btn{aspect-ratio:1;border-radius:10px;border:1.5px solid transparent;background:transparent;font-size:0.88rem;font-weight:700;color:var(--text-3);cursor:default;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;transition:all 0.15s;}
-        .dia-btn.disponivel{color:var(--text);border-color:var(--border);background:var(--white);cursor:pointer;}
-        .dia-btn.disponivel:hover{border-color:var(--pri);background:var(--pri-light);color:var(--pri);transform:scale(1.05);}
-        .dia-btn.selected{background:var(--pri);color:white;border-color:var(--pri);transform:scale(1.08);box-shadow:0 4px 12px rgba(99,102,241,0.35);}
-        .dia-dot{width:4px;height:4px;border-radius:50%;background:var(--pri);}
-        .dia-btn.selected .dia-dot{background:rgba(255,255,255,0.7);}
+        /* ── SERVIÇOS ── */
+        .servico-btn {
+            width: 100%;
+            padding: 16px 18px;
+            border: 1.5px solid var(--border);
+            border-radius: 16px;
+            background: var(--white);
+            text-align: left;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-family: 'DM Sans', sans-serif;
+            transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+            margin-bottom: 10px;
+            position: relative;
+            overflow: hidden;
+        }
+        .servico-btn::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, var(--accent), var(--accent-2));
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+        .servico-btn:hover { border-color: var(--accent); transform: translateY(-1px); box-shadow: 0 8px 24px var(--accent-glow); }
+        .servico-btn.selected { border-color: var(--accent); box-shadow: 0 8px 24px var(--accent-glow); background: linear-gradient(135deg, #f5f0ff, #faf0ff); }
+        .servico-nome { font-size: 0.95rem; font-weight: 600; color: var(--ink); position: relative; }
+        .servico-btn.selected .servico-nome { color: var(--accent); }
+        .servico-dur {
+            font-size: 0.72rem;
+            color: var(--ink-3);
+            background: var(--surface);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-weight: 600;
+            position: relative;
+            flex-shrink: 0;
+        }
+        .servico-btn.selected .servico-dur { background: var(--accent-glow); color: var(--accent); }
 
-        /* Slots */
-        .slots-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;}
-        .slot-btn{padding:12px 6px;border-radius:12px;border:1.5px solid var(--border);background:var(--white);font-size:0.88rem;font-weight:700;color:var(--text);cursor:pointer;text-align:center;transition:all 0.15s;}
-        .slot-btn:hover{border-color:var(--pri);background:var(--pri-light);color:var(--pri);}
-        .slot-btn.selected{background:var(--pri);color:white;border-color:var(--pri);box-shadow:0 4px 12px rgba(99,102,241,0.3);}
-        .slot-fim{font-size:0.65rem;opacity:0.75;display:block;margin-top:2px;font-weight:500;}
+        /* ── CALENDÁRIO ── */
+        .mes-nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 18px;
+        }
+        .mes-nav-btn {
+            width: 38px;
+            height: 38px;
+            border-radius: 12px;
+            border: 1.5px solid var(--border);
+            background: var(--white);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            color: var(--ink-2);
+            transition: all 0.2s;
+            font-family: inherit;
+        }
+        .mes-nav-btn:hover { background: var(--accent); border-color: var(--accent); color: white; }
+        .mes-titulo {
+            font-family: 'Nunito', sans-serif;
+            font-size: 1rem;
+            font-weight: 800;
+            color: var(--ink);
+            letter-spacing: -0.01em;
+        }
+        .dias-grid { display: grid; grid-template-columns: repeat(7,1fr); gap: 4px; margin-bottom: 4px; }
+        .dia-label {
+            text-align: center;
+            font-size: 0.58rem;
+            font-weight: 700;
+            color: var(--ink-3);
+            text-transform: uppercase;
+            padding: 4px 0;
+            letter-spacing: 0.06em;
+        }
+        .dia-btn {
+            aspect-ratio: 1;
+            border-radius: 12px;
+            border: 1.5px solid transparent;
+            background: transparent;
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: var(--ink-3);
+            cursor: default;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 3px;
+            transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+            font-family: 'DM Sans', sans-serif;
+        }
+        .dia-btn.disponivel {
+            color: var(--ink);
+            border-color: var(--border);
+            background: var(--surface);
+            cursor: pointer;
+        }
+        .dia-btn.disponivel:hover {
+            border-color: var(--accent);
+            background: linear-gradient(135deg, #f5f0ff, #faf0ff);
+            color: var(--accent);
+            transform: scale(1.08);
+        }
+        .dia-btn.selected {
+            background: linear-gradient(135deg, var(--accent), var(--accent-2));
+            color: white;
+            border-color: transparent;
+            transform: scale(1.1);
+            box-shadow: 0 6px 16px var(--accent-glow);
+        }
+        .dia-dot { width: 4px; height: 4px; border-radius: 50%; background: var(--accent); }
+        .dia-btn.selected .dia-dot { background: rgba(255,255,255,0.6); }
 
-        /* Formulário */
-        .form-group{margin-bottom:14px;}
-        .form-label{display:block;font-size:0.75rem;font-weight:700;color:var(--text-2);margin-bottom:6px;letter-spacing:0.02em;}
-        .req{color:var(--error);margin-left:2px;}
-        .form-input{width:100%;padding:12px 14px;border:1.5px solid var(--border);border-radius:12px;font-size:0.92rem;font-family:inherit;background:var(--white);color:var(--text);transition:all 0.15s;outline:none;}
-        .form-input:focus{border-color:var(--pri);box-shadow:0 0 0 3px rgba(99,102,241,0.1);}
-        .form-input.erro{border-color:var(--error);box-shadow:0 0 0 3px rgba(239,68,68,0.1);}
-        textarea.form-input{resize:none;line-height:1.5;}
-        .form-hint{font-size:0.72rem;color:var(--text-3);margin-top:5px;}
-        .inline-err{font-size:0.72rem;color:var(--error);margin-top:4px;min-height:16px;font-weight:500;}
+        /* ── SLOTS ── */
+        .slots-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; }
+        .slot-btn {
+            padding: 14px 8px;
+            border-radius: 14px;
+            border: 1.5px solid var(--border);
+            background: var(--surface);
+            font-family: 'Nunito', sans-serif;
+            font-size: 0.92rem;
+            font-weight: 700;
+            color: var(--ink);
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        .slot-btn:hover {
+            border-color: var(--accent);
+            background: linear-gradient(135deg, #f5f0ff, #faf0ff);
+            color: var(--accent);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px var(--accent-glow);
+        }
+        .slot-btn.selected {
+            background: linear-gradient(135deg, var(--accent), var(--accent-2));
+            color: white;
+            border-color: transparent;
+            box-shadow: 0 6px 16px var(--accent-glow);
+            transform: translateY(-2px);
+        }
+        .slot-fim { font-family: 'DM Sans', sans-serif; font-size: 0.62rem; opacity: 0.75; display: block; margin-top: 3px; font-weight: 500; }
 
-        /* Resumo */
-        .resumo{background:linear-gradient(135deg,#eef2ff,#f5f3ff);border:1.5px solid #c7d2fe;border-radius:var(--radius);padding:16px;margin-bottom:16px;}
-        .resumo-title{font-size:0.7rem;font-weight:800;color:var(--pri);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:12px;}
-        .resumo-row{display:flex;justify-content:space-between;align-items:flex-start;font-size:0.85rem;margin-bottom:8px;gap:10px;}
-        .resumo-row:last-child{margin-bottom:0;}
-        .resumo-label{color:var(--text-2);font-weight:500;white-space:nowrap;flex-shrink:0;}
-        .resumo-val{font-weight:700;color:var(--text);text-align:right;}
-        .resumo-pretende{flex-direction:column;gap:5px;}
-        .resumo-pretende .resumo-val{text-align:left;font-weight:500;font-size:0.82rem;line-height:1.5;background:white;border-radius:10px;padding:10px 12px;border-left:3px solid var(--pri);width:100%;}
-        .resumo-divider{border:none;border-top:1px solid #c7d2fe;margin:10px 0;}
+        /* ── FORMULÁRIO ── */
+        .form-group { margin-bottom: 18px; }
+        .form-label {
+            display: block;
+            font-size: 0.72rem;
+            font-weight: 700;
+            color: var(--ink-2);
+            margin-bottom: 8px;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+        }
+        .req { color: var(--accent); margin-left: 2px; }
+        .form-input {
+            width: 100%;
+            padding: 14px 16px;
+            border: 1.5px solid var(--border);
+            border-radius: 14px;
+            font-size: 0.92rem;
+            font-family: 'DM Sans', sans-serif;
+            background: var(--surface);
+            color: var(--ink);
+            transition: all 0.2s;
+            outline: none;
+            -webkit-appearance: none;
+        }
+        .form-input:focus {
+            border-color: var(--accent);
+            background: var(--white);
+            box-shadow: 0 0 0 4px var(--accent-glow);
+        }
+        .form-input.erro { border-color: var(--error); box-shadow: 0 0 0 4px rgba(255,77,109,0.12); }
+        .form-input::placeholder { color: var(--ink-3); }
+        textarea.form-input { resize: none; line-height: 1.6; }
+        .form-hint { font-size: 0.72rem; color: var(--ink-3); margin-top: 6px; line-height: 1.5; }
+        .inline-err { font-size: 0.72rem; color: var(--error); margin-top: 5px; min-height: 18px; font-weight: 600; }
 
-        /* Botões */
-        .btn-primary{width:100%;padding:15px;background:linear-gradient(135deg,var(--pri),#8b5cf6);color:white;border:none;border-radius:var(--radius);font-size:0.95rem;font-weight:700;font-family:inherit;cursor:pointer;transition:all 0.2s;display:flex;align-items:center;justify-content:center;gap:8px;box-shadow:0 4px 15px rgba(99,102,241,0.3);}
-        .btn-primary:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(99,102,241,0.4);}
-        .btn-primary:disabled{opacity:0.5;cursor:not-allowed;transform:none;}
-        .btn-voltar{background:none;border:none;color:var(--text-2);font-size:0.85rem;cursor:pointer;font-family:inherit;padding:10px 0;display:flex;align-items:center;gap:4px;font-weight:500;}
-        .btn-voltar:hover{color:var(--pri);}
+        /* ── RESUMO ── */
+        .resumo {
+            background: linear-gradient(135deg, #f5f0ff, #fdf4ff);
+            border: 1.5px solid rgba(124,92,252,0.2);
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .resumo-title {
+            font-family: 'Nunito', sans-serif;
+            font-size: 0.72rem;
+            font-weight: 800;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 16px;
+        }
+        .resumo-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            font-size: 0.88rem;
+            margin-bottom: 10px;
+            gap: 12px;
+        }
+        .resumo-row:last-child { margin-bottom: 0; }
+        .resumo-label { color: var(--ink-3); font-weight: 500; white-space: nowrap; flex-shrink: 0; font-size: 0.82rem; }
+        .resumo-val { font-weight: 700; color: var(--ink); text-align: right; }
+        .resumo-pretende { flex-direction: column; gap: 6px; }
+        .resumo-pretende .resumo-val {
+            text-align: left;
+            font-weight: 400;
+            font-size: 0.85rem;
+            line-height: 1.6;
+            background: white;
+            border-radius: 12px;
+            padding: 12px 14px;
+            border-left: 3px solid var(--accent);
+            width: 100%;
+        }
+        .resumo-divider { border: none; border-top: 1px solid rgba(124,92,252,0.15); margin: 12px 0; }
 
-        /* Estados */
-        .loading{text-align:center;padding:60px 20px;color:var(--text-2);}
-        .spinner{display:inline-block;width:36px;height:36px;border:3px solid var(--border);border-top-color:var(--pri);border-radius:50%;animation:spin 0.7s linear infinite;margin-bottom:14px;}
-        @keyframes spin{to{transform:rotate(360deg);}}
-        .erro-view{text-align:center;padding:60px 20px;}
-        .erro-icon{font-size:3.5rem;margin-bottom:16px;}
-        .sem-slots{text-align:center;padding:24px;color:var(--text-2);font-size:0.88rem;}
-        .erro-msg{background:#fef2f2;border:1px solid #fecaca;border-radius:12px;padding:12px 14px;color:var(--error);font-size:0.85rem;font-weight:500;margin-bottom:12px;display:none;}
+        /* ── BOTÕES ── */
+        .btn-primary {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, var(--accent), var(--accent-2));
+            color: white;
+            border: none;
+            border-radius: 16px;
+            font-family: 'Nunito', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 800;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            box-shadow: 0 8px 24px var(--accent-glow);
+            letter-spacing: 0.01em;
+        }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 32px var(--accent-glow); }
+        .btn-primary:active { transform: translateY(0); }
+        .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+        .btn-voltar {
+            background: none;
+            border: none;
+            color: var(--ink-3);
+            font-size: 0.85rem;
+            cursor: pointer;
+            font-family: 'DM Sans', sans-serif;
+            padding: 12px 0;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        .btn-voltar:hover { color: var(--accent); }
 
-        /* Sucesso */
-        .sucesso{text-align:center;padding:40px 20px;}
-        .sucesso-circle{width:80px;height:80px;background:linear-gradient(135deg,var(--success),#34d399);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:2rem;margin:0 auto 20px;box-shadow:0 8px 24px rgba(16,185,129,0.3);}
-        .sucesso-titulo{font-size:1.4rem;font-weight:800;color:var(--text);margin-bottom:8px;letter-spacing:-0.02em;}
-        .sucesso-sub{font-size:0.88rem;color:var(--text-2);line-height:1.7;}
-        .sucesso-detalhe{display:inline-block;background:var(--pri-light);color:var(--pri);font-weight:700;padding:8px 16px;border-radius:20px;margin-top:12px;font-size:0.9rem;}
+        /* ── ESTADOS ── */
+        .loading { text-align: center; padding: 80px 20px; color: var(--ink-2); }
+        .spinner {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            border: 3px solid var(--border);
+            border-top-color: var(--accent);
+            border-radius: 50%;
+            animation: spin 0.7s linear infinite;
+            margin-bottom: 16px;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .loading-txt { font-size: 0.88rem; color: var(--ink-3); }
 
-        /* Footer */
-        .footer{text-align:center;padding:24px;font-size:0.72rem;color:var(--text-3);}
-        .footer a{color:var(--pri);text-decoration:none;font-weight:700;}
+        .erro-view { text-align: center; padding: 60px 20px; }
+        .erro-icon { font-size: 3.5rem; margin-bottom: 16px; }
+        .sem-slots { text-align: center; padding: 28px; color: var(--ink-3); font-size: 0.88rem; }
+
+        .erro-msg {
+            background: #fff0f3;
+            border: 1.5px solid rgba(255,77,109,0.2);
+            border-radius: 12px;
+            padding: 14px 16px;
+            color: var(--error);
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 14px;
+            display: none;
+        }
+
+        /* ── SUCESSO ── */
+        .sucesso { text-align: center; padding: 48px 24px; }
+        .sucesso-ring {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--success), #34d399);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.2rem;
+            margin: 0 auto 24px;
+            box-shadow: 0 12px 32px rgba(0,200,150,0.3);
+            animation: popIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        @keyframes popIn { from { transform: scale(0); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+        .sucesso-titulo {
+            font-family: 'Nunito', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--ink);
+            margin-bottom: 10px;
+            letter-spacing: -0.03em;
+        }
+        .sucesso-sub { font-size: 0.88rem; color: var(--ink-2); line-height: 1.8; }
+        .sucesso-pill {
+            display: inline-block;
+            background: linear-gradient(135deg, #f5f0ff, #fdf4ff);
+            border: 1.5px solid rgba(124,92,252,0.2);
+            color: var(--accent);
+            font-weight: 800;
+            padding: 10px 20px;
+            border-radius: 20px;
+            margin-top: 16px;
+            font-size: 0.92rem;
+            font-family: 'Nunito', sans-serif;
+        }
+
+        /* ── FOOTER ── */
+        .footer {
+            text-align: center;
+            padding: 28px;
+            font-size: 0.72rem;
+            color: var(--ink-3);
+        }
+        .footer a { color: var(--accent); text-decoration: none; font-weight: 700; }
+
+        /* ── ANIMAÇÃO ENTRADA ── */
+        .card { animation: slideUp 0.35s cubic-bezier(0.22, 1, 0.36, 1) both; }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body>
 
 <div class="header">
     <div class="header-inner">
-        <div class="header-icon">&#128197;</div>
-        <div class="header-texts">
+        <div class="header-avatar">📅</div>
+        <div class="header-info">
             <div class="header-brand">AtuAgenda</div>
             <div class="header-nome" id="header-nome">A carregar...</div>
         </div>
+        <div class="header-badge">ONLINE</div>
     </div>
 </div>
 
@@ -137,69 +552,89 @@
 
     <div id="view-loading" class="loading">
         <div class="spinner"></div>
-        <div>A carregar disponibilidade...</div>
+        <div class="loading-txt">A carregar disponibilidade...</div>
     </div>
 
     <div id="view-erro" style="display:none;">
         <div class="card erro-view">
-            <div class="erro-icon">&#128533;</div>
-            <div style="font-size:1.1rem;font-weight:800;margin-bottom:8px;">Agendamento indispon&#237;vel</div>
-            <div style="font-size:0.88rem;color:var(--text-2);" id="erro-msg-txt">Este link n&#227;o est&#225; activo.</div>
+            <div class="erro-icon">😕</div>
+            <div style="font-family:'DM Sans',sans-serif;font-size:1rem;font-weight:600;margin-bottom:8px;color:var(--ink);">Agendamento indisponível</div>
+            <div style="font-size:0.85rem;color:var(--ink-3);" id="erro-msg-txt">Este link não está activo.</div>
         </div>
     </div>
 
     <div id="view-form" style="display:none;">
-        <div class="steps">
-            <div class="step active" id="step-1"><div class="step-num">1</div><span>Servi&#231;o</span></div>
-            <div class="step-line" id="line-1"></div>
-            <div class="step" id="step-2"><div class="step-num">2</div><span>Data</span></div>
-            <div class="step-line" id="line-2"></div>
-            <div class="step" id="step-3"><div class="step-num">3</div><span>Hora</span></div>
-            <div class="step-line" id="line-3"></div>
-            <div class="step" id="step-4"><div class="step-num">4</div><span>Dados</span></div>
-            <div class="step-line" id="line-4"></div>
-            <div class="step" id="step-5"><div class="step-num">5</div><span>Confirmar</span></div>
-        </div>
 
-        <!-- PASSO 1: Serviço -->
-        <div id="passo-1">
-            <div class="card">
-                <div class="card-title">Que servi&#231;o pretendes?</div>
-                <div id="servicos-lista-agend"></div>
-                <div id="sem-servicos-msg" style="display:none;text-align:center;padding:20px;color:var(--text-2);font-size:0.88rem;">Sem servi&#231;os configurados. Contacta o profissional.</div>
+        <div class="steps-bar">
+            <div class="step-item active" id="step-1">
+                <div class="step-dot">1</div>
+                <div class="step-label">Serviço</div>
+            </div>
+            <div class="step-line" id="line-1"></div>
+            <div class="step-item" id="step-2">
+                <div class="step-dot">2</div>
+                <div class="step-label">Data</div>
+            </div>
+            <div class="step-line" id="line-2"></div>
+            <div class="step-item" id="step-3">
+                <div class="step-dot">3</div>
+                <div class="step-label">Hora</div>
+            </div>
+            <div class="step-line" id="line-3"></div>
+            <div class="step-item" id="step-4">
+                <div class="step-dot">4</div>
+                <div class="step-label">Dados</div>
+            </div>
+            <div class="step-line" id="line-4"></div>
+            <div class="step-item" id="step-5">
+                <div class="step-dot">5</div>
+                <div class="step-label">Confirmar</div>
             </div>
         </div>
 
-        <!-- PASSO 2: Data -->
+        <!-- PASSO 1 -->
+        <div id="passo-1">
+            <div class="card">
+                <div class="card-eyebrow">Passo 1</div>
+                <div class="card-title">Que serviço pretendes?</div>
+                <div id="servicos-lista-agend"></div>
+                <div id="sem-servicos-msg" style="display:none;text-align:center;padding:24px;color:var(--ink-3);font-size:0.88rem;">Sem serviços configurados. Contacta o profissional.</div>
+            </div>
+        </div>
+
+        <!-- PASSO 2 -->
         <div id="passo-2" style="display:none;">
             <div class="card">
+                <div class="card-eyebrow">Passo 2</div>
                 <div class="card-title">Escolhe uma data</div>
                 <div class="mes-nav">
-                    <button class="mes-nav-btn" onclick="mudarMes(-1)">&#8249;</button>
+                    <button class="mes-nav-btn" onclick="mudarMes(-1)">‹</button>
                     <div class="mes-titulo" id="mes-titulo"></div>
-                    <button class="mes-nav-btn" onclick="mudarMes(1)">&#8250;</button>
+                    <button class="mes-nav-btn" onclick="mudarMes(1)">›</button>
                 </div>
                 <div class="dias-grid">
                     <div class="dia-label">Seg</div><div class="dia-label">Ter</div><div class="dia-label">Qua</div>
-                    <div class="dia-label">Qui</div><div class="dia-label">Sex</div><div class="dia-label">Sab</div><div class="dia-label">Dom</div>
+                    <div class="dia-label">Qui</div><div class="dia-label">Sex</div><div class="dia-label">Sáb</div><div class="dia-label">Dom</div>
                 </div>
                 <div class="dias-grid" id="dias-grid"></div>
-                <button class="btn-voltar" style="margin-top:12px;" onclick="avancarPasso(1)">&#8249; Voltar</button>
+                <button class="btn-voltar" style="margin-top:16px;" onclick="avancarPasso(1)">‹ Voltar</button>
             </div>
         </div>
 
-        <!-- PASSO 3: Hora -->
+        <!-- PASSO 3 -->
         <div id="passo-3" style="display:none;">
             <div class="card">
+                <div class="card-eyebrow">Passo 3</div>
                 <div class="card-title" id="slots-titulo">Escolhe uma hora</div>
                 <div id="slots-container"></div>
-                <button class="btn-voltar" style="margin-top:12px;" onclick="avancarPasso(2)">&#8249; Voltar</button>
+                <button class="btn-voltar" style="margin-top:16px;" onclick="avancarPasso(2)">‹ Voltar</button>
             </div>
         </div>
 
-        <!-- PASSO 4: Dados -->
+        <!-- PASSO 4 -->
         <div id="passo-4" style="display:none;">
             <div class="card">
+                <div class="card-eyebrow">Passo 4</div>
                 <div class="card-title">Os teus dados</div>
                 <div class="form-group">
                     <label class="form-label">Nome <span class="req">*</span></label>
@@ -208,12 +643,12 @@
                 </div>
                 <div class="form-group">
                     <label class="form-label">Telefone <span class="req">*</span></label>
-                    <input type="tel" id="input-telefone" class="form-input" placeholder="Para confirma&#231;&#227;o da marca&#231;&#227;o" autocomplete="tel">
+                    <input type="tel" id="input-telefone" class="form-input" placeholder="Para confirmação da marcação" autocomplete="tel">
                     <div class="inline-err" id="err-telefone"></div>
                 </div>
                 <div class="form-group">
                     <label class="form-label">Email <span class="req">*</span></label>
-                    <input type="email" id="input-email" class="form-input" placeholder="Para receberes confirma&#231;&#227;o" autocomplete="email">
+                    <input type="email" id="input-email" class="form-input" placeholder="Para receberes confirmação" autocomplete="email">
                     <div class="inline-err" id="err-email"></div>
                 </div>
                 <div class="form-group">
@@ -222,39 +657,40 @@
                     <div class="inline-err" id="err-pretende"></div>
                 </div>
                 <div class="form-group">
-                    <label class="form-label">Hor&#225;rio preferencial <span class="req">*</span></label>
-                    <input type="text" id="input-horario-pref" class="form-input" placeholder="Ex: ap&#243;s as 14h, ou só posso terças-feiras de manhã.">
-                    <div class="form-hint">Caso o hor&#225;rio escolhido n&#227;o seja poss&#237;vel, ser&#225;s contactada por email OU telefone.</div>
+                    <label class="form-label">Horário preferencial <span class="req">*</span></label>
+                    <input type="text" id="input-horario-pref" class="form-input" placeholder="Ex: após as 14h, ou só posso terças de manhã.">
+                    <div class="form-hint">Caso o horário escolhido não seja possível, serás contactada por email ou telefone.</div>
                     <div class="inline-err" id="err-horario"></div>
                 </div>
-                <button class="btn-voltar" onclick="avancarPasso(3)">&#8249; Voltar</button>
-                <button class="btn-primary" style="margin-top:12px;" onclick="avancarPasso4()">Continuar &#8250;</button>
+                <button class="btn-voltar" onclick="avancarPasso(3)">‹ Voltar</button>
+                <button class="btn-primary" style="margin-top:12px;" onclick="avancarPasso4()">Continuar →</button>
             </div>
         </div>
 
-        <!-- PASSO 5: Confirmar -->
+        <!-- PASSO 5 -->
         <div id="passo-5" style="display:none;">
             <div class="card">
-                <div class="card-title">Confirma a tua marca&#231;&#227;o</div>
+                <div class="card-eyebrow">Passo 5</div>
+                <div class="card-title">Confirma a tua marcação</div>
                 <div class="resumo" id="resumo"></div>
                 <div class="erro-msg" id="erro-submit"></div>
-                <button class="btn-primary" id="btn-confirmar" onclick="submeterMarcacao()">&#10003; Confirmar Marca&#231;&#227;o</button>
-                <button class="btn-voltar" onclick="avancarPasso(4)">&#8249; Voltar</button>
+                <button class="btn-primary" id="btn-confirmar" onclick="submeterMarcacao()">✓ Confirmar Marcação</button>
+                <button class="btn-voltar" onclick="avancarPasso(4)">‹ Voltar</button>
             </div>
         </div>
     </div>
 
-    <!-- Sucesso -->
+    <!-- SUCESSO -->
     <div id="view-sucesso" style="display:none;">
         <div class="card sucesso">
-            <div class="sucesso-circle">&#10003;</div>
+            <div class="sucesso-ring">✓</div>
             <div class="sucesso-titulo">Pedido enviado!</div>
             <div class="sucesso-sub">
                 O profissional vai confirmar em breve.<br>
-                Receber&#225;s um email de confirma&#231;&#227;o.<br>
-                Ser&#225;s contactada pelo email ou telefone indicado.
+                Receberás um email de confirmação.<br>
+                Serás contactada pelo email ou telefone indicado.
             </div>
-            <div class="sucesso-detalhe" id="sucesso-detalhe"></div>
+            <div class="sucesso-pill" id="sucesso-detalhe"></div>
         </div>
     </div>
 
@@ -264,18 +700,18 @@
 
 <script>
 var BASE='https://us-central1-agenda-pontual-a1402.cloudfunctions.net';
-var MESES=['Janeiro','Fevereiro','Marco','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'];
+var MESES=['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'];
 var slug='',prof=null,dataSelec=null,slotSelec=null,servicoSelec=null;
 var mesAtual=new Date(); mesAtual.setDate(1);
 
 async function init(){
     var p=new URLSearchParams(window.location.search);
     slug=p.get('s')||p.get('slug')||window.location.pathname.split('/').filter(Boolean).pop();
-    if(!slug||slug==='agendar.html'||slug==='agendar'){mostrarErro('Link invalido.');return;}
+    if(!slug||slug==='agendar.html'||slug==='agendar'){mostrarErro('Link inválido.');return;}
     try{
         var tz=Intl.DateTimeFormat().resolvedOptions().timeZone||'UTC';
         var r=await fetch(BASE+'/obterDisponibilidade?slug='+encodeURIComponent(slug)+'&tz='+encodeURIComponent(tz));
-        if(!r.ok){var e=await r.json();mostrarErro(e.erro||'Agendamento nao disponivel.');return;}
+        if(!r.ok){var e=await r.json();mostrarErro(e.erro||'Agendamento não disponível.');return;}
         prof=await r.json();
         document.getElementById('header-nome').textContent=prof.nome;
         document.title='Agendar — '+prof.nome;
@@ -346,7 +782,7 @@ function renderCal(){
         var ok=disp.has(ds)&&dt>hoje;
         var b=document.createElement('button');
         b.className='dia-btn'+(ok?' disponivel':'');
-        if(!ok)b.style.opacity='0.3';
+        if(!ok)b.style.opacity='0.25';
         var n=document.createElement('span');n.textContent=d;b.appendChild(n);
         if(ok){
             var dot=document.createElement('div');dot.className='dia-dot';b.appendChild(dot);
@@ -369,15 +805,15 @@ function selData(ds,btn){
 function renderSlots(){
     var c=document.getElementById('slots-container');c.innerHTML='';
     var dia=prof.dias.find(function(d){return d.data===dataSelec;});
-    if(!dia||!dia.slots.length){c.innerHTML='<div class="sem-slots">Sem hor&#225;rios dispon&#237;veis neste dia.</div>';return;}
+    if(!dia||!dia.slots.length){c.innerHTML='<div class="sem-slots">Sem horários disponíveis neste dia.</div>';return;}
     var pts=dataSelec.split('-').map(Number);
-    var DIAS=['Domingo','Segunda','Terca','Quarta','Quinta','Sexta','Sabado'];
+    var DIAS=['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado'];
     document.getElementById('slots-titulo').textContent=DIAS[new Date(pts[0],pts[1]-1,pts[2]).getDay()]+', '+pts[2]+' de '+MESES[pts[1]-1];
     var g=document.createElement('div');g.className='slots-grid';
     dia.slots.forEach(function(s){
         var b=document.createElement('button');
         b.className='slot-btn'+(slotSelec&&slotSelec.inicio===s.inicio?' selected':'');
-        b.innerHTML=s.inicio+'<span class="slot-fim">ate '+s.fim+'</span>';
+        b.innerHTML=s.inicio+'<span class="slot-fim">até '+s.fim+'</span>';
         b.onclick=(function(slot,btn){return function(){selSlot(slot,btn);};})(s,b);
         g.appendChild(b);
     });
@@ -405,10 +841,10 @@ function avancarPasso4(){
     var pret=document.getElementById('input-pretende').value.trim();
     var hor=document.getElementById('input-horario-pref').value.trim();
     if(!nome||nome.length<2){erroInline('input-nome','err-nome','Indica o teu nome completo.');return;}
-    if(!tel||tel.replace(/\D/g,'').length<9){erroInline('input-telefone','err-telefone','Indica um numero valido.');return;}
-    if(!email||!/^[^@]+@[^@]+\.[^@]+$/.test(email)){erroInline('input-email','err-email','Indica um email valido.');return;}
+    if(!tel||tel.replace(/\D/g,'').length<9){erroInline('input-telefone','err-telefone','Indica um número válido.');return;}
+    if(!email||!/^[^@]+@[^@]+\.[^@]+$/.test(email)){erroInline('input-email','err-email','Indica um email válido.');return;}
     if(!pret||pret.length<5){erroInline('input-pretende','err-pretende','Descreve o que pretendes.');return;}
-    if(!hor){erroInline('input-horario-pref','err-horario','Indica o teu horario preferencial.');return;}
+    if(!hor){erroInline('input-horario-pref','err-horario','Indica o teu horário preferencial.');return;}
     avancarPasso(5);
 }
 
@@ -422,21 +858,25 @@ function avancarPasso(n){
 }
 
 function updateSteps(n){
-    for(var i=1;i<=5;i++){var s=document.getElementById('step-'+i);if(!s)continue;s.className='step'+(i<n?' done':i===n?' active':'');}
+    for(var i=1;i<=5;i++){
+        var s=document.getElementById('step-'+i);
+        if(!s)continue;
+        s.className='step-item'+(i<n?' done':i===n?' active':'');
+    }
     for(var i=1;i<=4;i++){var l=document.getElementById('line-'+i);if(l)l.className='step-line'+(i<n?' done':'');}
 }
 
 function renderResumo(){
     var pts=dataSelec.split('-').map(Number);
-    var DIAS=['Domingo','Segunda','Terca','Quarta','Quinta','Sexta','Sabado'];
+    var DIAS=['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado'];
     var df=DIAS[new Date(pts[0],pts[1]-1,pts[2]).getDay()]+', '+pts[2]+' de '+MESES[pts[1]-1]+' de '+pts[0];
     var nome=document.getElementById('input-nome').value.trim();
     var tel=document.getElementById('input-telefone').value.trim();
     var email=document.getElementById('input-email').value.trim();
     var pret=document.getElementById('input-pretende').value.trim();
     var hor=document.getElementById('input-horario-pref').value.trim();
-    var h='<div class="resumo-title">Resumo da marca&#231;&#227;o</div>';
-    if(servicoSelec)h+='<div class="resumo-row"><span class="resumo-label">Servi&#231;o</span><span class="resumo-val">'+esc(servicoSelec.nome)+'</span></div>';
+    var h='<div class="resumo-title">Resumo da marcação</div>';
+    if(servicoSelec)h+='<div class="resumo-row"><span class="resumo-label">Serviço</span><span class="resumo-val">'+esc(servicoSelec.nome)+'</span></div>';
     h+='<div class="resumo-row"><span class="resumo-label">Data</span><span class="resumo-val">'+esc(df)+'</span></div>';
     h+='<div class="resumo-row"><span class="resumo-label">Hora</span><span class="resumo-val">'+slotSelec.inicio+' — '+slotSelec.fim+'</span></div>';
     h+='<hr class="resumo-divider">';
@@ -445,7 +885,7 @@ function renderResumo(){
     h+='<div class="resumo-row"><span class="resumo-label">Email</span><span class="resumo-val" style="font-size:0.8rem;">'+esc(email)+'</span></div>';
     h+='<div class="resumo-row resumo-pretende"><span class="resumo-label">O que pretendo</span><span class="resumo-val">'+esc(pret)+'</span></div>';
     h+='<div class="resumo-row"><span class="resumo-label">Hor. preferencial</span><span class="resumo-val">'+esc(hor)+'</span></div>';
-    h+='<div style="margin-top:10px;font-size:0.73rem;color:var(--text-3);text-align:center;">Aguarda confirma&#231;&#227;o — ser&#225;s contactada em breve.</div>';
+    h+='<div style="margin-top:12px;font-size:0.72rem;color:var(--ink-3);text-align:center;">Aguarda confirmação — serás contactada em breve.</div>';
     document.getElementById('resumo').innerHTML=h;
 }
 
@@ -468,11 +908,11 @@ async function submeterMarcacao(){
             })
         });
         var d=await r.json();
-        if(!r.ok){errEl.textContent=d.erro||'Erro ao enviar.';errEl.style.display='block';btn.disabled=false;btn.innerHTML='&#10003; Confirmar Marca&#231;&#227;o';return;}
+        if(!r.ok){errEl.textContent=d.erro||'Erro ao enviar.';errEl.style.display='block';btn.disabled=false;btn.innerHTML='✓ Confirmar Marcação';return;}
         var p=dataSelec.split('-').map(Number);
-        document.getElementById('sucesso-detalhe').textContent=p[2]+'/'+p[1]+'/'+p[0]+' as '+slotSelec.inicio;
+        document.getElementById('sucesso-detalhe').textContent=p[2]+'/'+p[1]+'/'+p[0]+' às '+slotSelec.inicio;
         mostrarView('sucesso');
-    }catch(e){errEl.textContent='Sem ligacao. Tenta novamente.';errEl.style.display='block';btn.disabled=false;btn.innerHTML='&#10003; Confirmar Marca&#231;&#227;o';}
+    }catch(e){errEl.textContent='Sem ligação. Tenta novamente.';errEl.style.display='block';btn.disabled=false;btn.innerHTML='✓ Confirmar Marcação';}
 }
 
 function mostrarView(v){
