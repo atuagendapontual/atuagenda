@@ -65,13 +65,13 @@ Disponível na Google Play Store.
 
 | | Gratuito | Premium Mensal | Premium Anual |
 |---|---|---|---|
-| Compromissos | 20 (total) | Ilimitados | Ilimitados |
+| Compromissos | 20 por mês | Ilimitados | Ilimitados |
 | Agendamento Online | ❌ | ✅ | ✅ |
-| Clientes | — | Histórico completo | Histórico completo |
+| Clientes | Histórico completo | Histórico completo | Histórico completo |
 | Balanço anual | ❌ | ✅ | ✅ |
 | Exportação PDF/Excel | ❌ | ✅ | ✅ |
 | Estatísticas | ❌ | ✅ | ✅ |
-| Lembretes | ❌ | ✅ | ✅ |
+| Lembretes | ✅ | ✅ | ✅ |
 | Backup | ❌ | ✅ | ✅ |
 | **Preço** | **Grátis** | **5,00€/mês** | **48,00€/ano** |
 
