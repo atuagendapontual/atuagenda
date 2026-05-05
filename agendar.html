@@ -60,6 +60,13 @@
             font-size: 1.3rem;
             flex-shrink: 0;
             box-shadow: 0 4px 16px var(--accent-glow);
+            overflow: hidden;
+        }
+        .header-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 14px;
         }
         .header-info { flex: 1; min-width: 0; }
         .header-brand {
@@ -557,7 +564,10 @@
 
 <div class="header">
     <div class="header-inner">
-        <div class="header-avatar">📅</div>
+        <div class="header-avatar" id="header-avatar">
+            <img id="header-logo" src="" alt="" style="display:none;">
+            <span id="header-avatar-emoji">📅</span>
+        </div>
         <div class="header-info">
             <div class="header-brand">AtuAgenda</div>
             <div class="header-nome" id="header-nome">A carregar...</div>
@@ -735,6 +745,13 @@ async function init(){
         if(!r.ok){var e=await r.json();mostrarErro(e.erro||'Agendamento não disponível.');return;}
         prof=await r.json();
         document.getElementById('header-nome').textContent=prof.nome;
+        // Mostrar logo se existir
+        if (prof.logoUrl) {
+            var logoImg = document.getElementById('header-logo');
+            var logoEmoji = document.getElementById('header-avatar-emoji');
+            if (logoImg) { logoImg.src = prof.logoUrl; logoImg.style.display = 'block'; }
+            if (logoEmoji) logoEmoji.style.display = 'none';
+        }
         document.title='Agendar — '+prof.nome;
         mostrarView('form');
         renderServicos();
