@@ -2,7 +2,7 @@
 
 **A agenda para profissionais independentes** — cabeleireiros, esteticistas, barbeiros, técnicas de unhas e muito mais.
 
-Disponível na Google Play Store.
+Disponível na Google Play Store e no browser (iOS/PC) — sem instalação necessária.
 
 ---
 
@@ -50,6 +50,7 @@ Disponível na Google Play Store.
 ### Lembretes
 - Lembrete personalizável por compromisso (minutos ou dias antes)
 - Notificações nativas Android
+- Web Push no browser (Chrome, Edge, Firefox)
 
 ### Geral
 - Sincronização em tempo real (Firebase Firestore)
@@ -58,6 +59,7 @@ Disponível na Google Play Store.
 - Modo escuro
 - 6 temas de cor (Roxo, Rosa, Verde, Petróleo, Dourado, Grafite)
 - Notas rápidas
+- Multi-idioma (PT, EN, ES, FR)
 
 ---
 
@@ -78,15 +80,31 @@ Disponível na Google Play Store.
 **Premium Mensal:** 5,00€/mês  
 **Premium Anual:** 48,00€/ano (equivalente a 4,00€/mês — poupa 12€ por ano)
 
+### Como subscrever
+
+**Android:** subscrição directamente na Google Play Store, com renovação automática e cancelamento a qualquer momento.
+
+**iOS / PC (browser):** envia um email para [atuagendapontual@gmail.com](mailto:atuagendapontual@gmail.com) com o teu email de conta Google e o plano pretendido. Activamos em menos de 24 horas.
+
+---
+
+## 🌐 Acesso
+
+| Plataforma | Como aceder |
+|---|---|
+| **Android** | [Google Play Store](https://play.google.com/store/apps/details?id=pt.atuagenda&hl=pt_PT) |
+| **iPhone / iPad** | [agenda-pontual-a1402.web.app](https://agenda-pontual-a1402.web.app) no Safari |
+| **PC / Mac** | [agenda-pontual-a1402.web.app](https://agenda-pontual-a1402.web.app) em qualquer browser |
+
 ---
 
 ## 🛠️ Tecnologias
 
-- **Frontend:** HTML, CSS, JavaScript (Capacitor)
+- **Frontend:** HTML, CSS, JavaScript (Capacitor Android + Web)
 - **Backend:** Firebase Authentication + Firestore + Cloud Functions (Node.js)
-- **Pagamentos:** Google Play Billing (In-App Subscriptions)
-- **Notificações:** FCM (Firebase Cloud Messaging) + Capacitor Push Notifications
-- **Email:** SendGrid via domínio atuagenda.pt
+- **Pagamentos:** Google Play Billing (Android) · Email manual (iOS/PC)
+- **Notificações:** FCM (Firebase Cloud Messaging) + Capacitor Push + Web Push
+- **Email:** SendGrid
 - **Exportação:** SheetJS (Excel), Print API (PDF)
 
 ---
@@ -94,12 +112,14 @@ Disponível na Google Play Store.
 ## 📁 Estrutura do Repositório
 
 **atuagenda/**
-- `index.html` — App principal (Capacitor WebView)
-- `agendar.html` — Página pública de agendamento online
+- `index.html` — Site institucional (landing page)
+- `agendar.html` — Página pública de agendamento online para clientes
 - `privacy.html` — Política de privacidade
 - `terms.html` — Termos de utilização
 - `delete-account.html` — Página de eliminação de conta
 - `favicon.ico` — Ícone do site
+
+A app principal corre em Firebase Hosting: [agenda-pontual-a1402.web.app](https://agenda-pontual-a1402.web.app)
 
 ---
 
