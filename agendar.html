@@ -604,6 +604,8 @@
 
     <div id="view-form" style="display:none;">
 
+        <div id="msg-boas-vindas" style="display:none;max-width:520px;margin:12px auto 4px;padding:12px 16px;background:#f5f3ff;border:1px solid #ddd6fe;border-radius:12px;font-size:0.88rem;color:#4c1d95;line-height:1.5;white-space:pre-wrap;text-align:center;"></div>
+
         <div class="steps-bar">
             <div class="step-item active" id="step-1">
                 <div class="step-dot">1</div>
@@ -766,14 +768,7 @@ async function init(){
         // Mensagem de boas-vindas
         if (prof.msgBoasVindas) {
             var msgEl = document.getElementById('msg-boas-vindas');
-            if (!msgEl) {
-                msgEl = document.createElement('div');
-                msgEl.id = 'msg-boas-vindas';
-                msgEl.style.cssText = 'max-width:520px;margin:0 auto 16px;padding:12px 16px;background:#f5f3ff;border:1px solid #ddd6fe;border-radius:12px;font-size:0.88rem;color:#4c1d95;line-height:1.5;white-space:pre-wrap;text-align:center;';
-                var passos = document.getElementById('passos');
-                if (passos && passos.parentNode) passos.parentNode.insertBefore(msgEl, passos.nextSibling);
-            }
-            msgEl.textContent = prof.msgBoasVindas;
+            if (msgEl) { msgEl.textContent = prof.msgBoasVindas; msgEl.style.display = 'block'; }
         }
         document.title='Agendar — '+prof.nome;
         mostrarView('form');
