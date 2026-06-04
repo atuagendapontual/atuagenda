@@ -763,6 +763,18 @@ async function init(){
             if (logoImg) { logoImg.src = prof.logoUrl; logoImg.style.display = 'block'; }
             if (logoEmoji) logoEmoji.style.display = 'none';
         }
+        // Mensagem de boas-vindas
+        if (prof.msgBoasVindas) {
+            var msgEl = document.getElementById('msg-boas-vindas');
+            if (!msgEl) {
+                msgEl = document.createElement('div');
+                msgEl.id = 'msg-boas-vindas';
+                msgEl.style.cssText = 'max-width:520px;margin:0 auto 16px;padding:12px 16px;background:#f5f3ff;border:1px solid #ddd6fe;border-radius:12px;font-size:0.88rem;color:#4c1d95;line-height:1.5;white-space:pre-wrap;text-align:center;';
+                var passos = document.getElementById('passos');
+                if (passos && passos.parentNode) passos.parentNode.insertBefore(msgEl, passos.nextSibling);
+            }
+            msgEl.textContent = prof.msgBoasVindas;
+        }
         document.title='Agendar — '+prof.nome;
         mostrarView('form');
         renderServicos();
@@ -791,11 +803,15 @@ function renderServicos(){
     servicos.forEach(function(s){
         var nome=typeof s==='string'?s:(s.nome||s);
         var dur=(typeof s==='object'&&s.duracaoMin)?s.duracaoMin:0;
+        var preco=(typeof s==='object'&&s.preco)?s.preco:0;
         var btn=document.createElement('button');
         btn.className='servico-btn';
         var nEl=document.createElement('span');nEl.className='servico-nome';nEl.textContent=nome;
-        var dEl=document.createElement('span');dEl.className='servico-dur';dEl.textContent='⏱ '+formatDur(dur);
-        btn.appendChild(nEl);btn.appendChild(dEl);
+        var metaEl=document.createElement('span');metaEl.className='servico-dur';
+        var metaTxt = '⏱ '+formatDur(dur);
+        if (preco > 0) metaTxt += ' · ' + preco.toFixed(2).replace('.',',') + '€';
+        metaEl.textContent = metaTxt;
+        btn.appendChild(nEl);btn.appendChild(metaEl);
         btn.onclick=(function(sNome,sDur,b){return function(){selServico(sNome,sDur,b);};})(nome,dur,btn);
         lista.appendChild(btn);
     });
